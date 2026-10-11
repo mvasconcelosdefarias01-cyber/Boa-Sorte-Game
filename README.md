@@ -1,5 +1,9 @@
 # Boa Sorte — protótipo do cenário 01
 
+## Jogar no Windows 11
+
+Baixe `dist/BoaSorte-Windows11.zip`, escolha **Extrair Tudo** e abra `BoaSorte-Windows11/BoaSorte.exe`. O executável tem os dados do jogo incorporados e não exige a instalação do Godot. É uma versão para Windows de 64 bits sem assinatura digital; o Windows pode exibir um aviso de reputação. O pacote foi exportado com o modelo oficial do Godot 4.6.3 e testado em modo headless quanto a cenas, assets e regras. Ainda precisa de um teste visual em Windows.
+
 Projeto Godot 4.6.3 2D da Fazenda do Avô Olegário. Abra `project.godot` no Godot e execute a cena principal (F6/F5), ou rode:
 
 As decisões de implementação, a direção visual, o contrato dos assets e o plano de validação estão em `docs/`.
