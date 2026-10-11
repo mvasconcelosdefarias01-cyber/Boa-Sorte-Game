@@ -1,0 +1,4036 @@
+{
+  "version": 1,
+  "source": "Original prototype pixel art based on supplied Boa Sorte art direction",
+  "grid": [
+    32,
+    32
+  ],
+  "assets": {
+    "actors/actor_player": {
+      "path": "res://assets/sprites/actors/actor_player.png",
+      "size": [
+        64,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 2,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "columns_mean": [
+          "idle",
+          "walk"
+        ]
+      },
+      "frame_duration": [
+        0.15,
+        0.15
+      ],
+      "contact_frame": null
+    },
+    "actors/actor_lia": {
+      "path": "res://assets/sprites/actors/actor_lia.png",
+      "size": [
+        64,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 2,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "columns_mean": [
+          "idle",
+          "walk"
+        ]
+      },
+      "frame_duration": [
+        0.15,
+        0.15
+      ],
+      "contact_frame": null
+    },
+    "buildings/house_H01_old": {
+      "path": "res://assets/sprites/buildings/house_H01_old.png",
+      "size": [
+        384,
+        288
+      ],
+      "pivot": [
+        176,
+        288
+      ],
+      "footprint": [
+        12,
+        9
+      ],
+      "collider": [
+        0,
+        0,
+        384,
+        288
+      ],
+      "use_area": [
+        148,
+        256,
+        64,
+        32
+      ]
+    },
+    "buildings/house_H01_restored": {
+      "path": "res://assets/sprites/buildings/house_H01_restored.png",
+      "size": [
+        384,
+        288
+      ],
+      "pivot": [
+        176,
+        288
+      ],
+      "footprint": [
+        12,
+        9
+      ],
+      "collider": [
+        0,
+        0,
+        384,
+        288
+      ],
+      "use_area": [
+        148,
+        256,
+        64,
+        32
+      ]
+    },
+    "flora/object_tree_umbu_stage1": {
+      "path": "res://assets/sprites/flora/object_tree_umbu_stage1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        11,
+        19,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_umbu_stage2": {
+      "path": "res://assets/sprites/flora/object_tree_umbu_stage2.png",
+      "size": [
+        48,
+        48
+      ],
+      "pivot": [
+        24,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        19,
+        35,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_umbu_stage3": {
+      "path": "res://assets/sprites/flora/object_tree_umbu_stage3.png",
+      "size": [
+        64,
+        80
+      ],
+      "pivot": [
+        32,
+        80
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        27,
+        67,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_umbu_stage4": {
+      "path": "res://assets/sprites/flora/object_tree_umbu_stage4.png",
+      "size": [
+        96,
+        128
+      ],
+      "pivot": [
+        48,
+        128
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "collider": [
+        43,
+        115,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_umbu_stump": {
+      "path": "res://assets/sprites/flora/object_tree_umbu_stump.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        19,
+        18,
+        9
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_juazeiro_stage1": {
+      "path": "res://assets/sprites/flora/object_tree_juazeiro_stage1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        11,
+        19,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_juazeiro_stage2": {
+      "path": "res://assets/sprites/flora/object_tree_juazeiro_stage2.png",
+      "size": [
+        48,
+        48
+      ],
+      "pivot": [
+        24,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        19,
+        35,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_juazeiro_stage3": {
+      "path": "res://assets/sprites/flora/object_tree_juazeiro_stage3.png",
+      "size": [
+        64,
+        80
+      ],
+      "pivot": [
+        32,
+        80
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        27,
+        67,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_juazeiro_stage4": {
+      "path": "res://assets/sprites/flora/object_tree_juazeiro_stage4.png",
+      "size": [
+        96,
+        128
+      ],
+      "pivot": [
+        48,
+        128
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "collider": [
+        43,
+        115,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_juazeiro_stump": {
+      "path": "res://assets/sprites/flora/object_tree_juazeiro_stump.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        19,
+        18,
+        9
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_catingueira_stage1": {
+      "path": "res://assets/sprites/flora/object_tree_catingueira_stage1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        11,
+        19,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_catingueira_stage2": {
+      "path": "res://assets/sprites/flora/object_tree_catingueira_stage2.png",
+      "size": [
+        48,
+        48
+      ],
+      "pivot": [
+        24,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        19,
+        35,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_catingueira_stage3": {
+      "path": "res://assets/sprites/flora/object_tree_catingueira_stage3.png",
+      "size": [
+        64,
+        80
+      ],
+      "pivot": [
+        32,
+        80
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        27,
+        67,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_catingueira_stage4": {
+      "path": "res://assets/sprites/flora/object_tree_catingueira_stage4.png",
+      "size": [
+        96,
+        128
+      ],
+      "pivot": [
+        48,
+        128
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "collider": [
+        43,
+        115,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_catingueira_stump": {
+      "path": "res://assets/sprites/flora/object_tree_catingueira_stump.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        19,
+        18,
+        9
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_jurema_stage1": {
+      "path": "res://assets/sprites/flora/object_tree_jurema_stage1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        11,
+        19,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_jurema_stage2": {
+      "path": "res://assets/sprites/flora/object_tree_jurema_stage2.png",
+      "size": [
+        48,
+        48
+      ],
+      "pivot": [
+        24,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        19,
+        35,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_jurema_stage3": {
+      "path": "res://assets/sprites/flora/object_tree_jurema_stage3.png",
+      "size": [
+        64,
+        80
+      ],
+      "pivot": [
+        32,
+        80
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        27,
+        67,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_jurema_stage4": {
+      "path": "res://assets/sprites/flora/object_tree_jurema_stage4.png",
+      "size": [
+        96,
+        128
+      ],
+      "pivot": [
+        48,
+        128
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "collider": [
+        43,
+        115,
+        10,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "flora/object_tree_jurema_stump": {
+      "path": "res://assets/sprites/flora/object_tree_jurema_stump.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        19,
+        18,
+        9
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "props/bush_1": {
+      "path": "res://assets/sprites/props/bush_1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ]
+    },
+    "props/bush_2": {
+      "path": "res://assets/sprites/props/bush_2.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ]
+    },
+    "props/bush_3": {
+      "path": "res://assets/sprites/props/bush_3.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ]
+    },
+    "props/mandacaru": {
+      "path": "res://assets/sprites/props/mandacaru.png",
+      "size": [
+        48,
+        80
+      ],
+      "pivot": [
+        24,
+        80
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        12,
+        60,
+        24,
+        20
+      ],
+      "use_area": [
+        -16,
+        -16,
+        80,
+        112
+      ]
+    },
+    "props/palma": {
+      "path": "res://assets/sprites/props/palma.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        24,
+        32,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        64
+      ]
+    },
+    "props/rock_small_1": {
+      "path": "res://assets/sprites/props/rock_small_1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ]
+    },
+    "props/rock_small_2": {
+      "path": "res://assets/sprites/props/rock_small_2.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ]
+    },
+    "props/rock_medium_1": {
+      "path": "res://assets/sprites/props/rock_medium_1.png",
+      "size": [
+        64,
+        48
+      ],
+      "pivot": [
+        32,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        36,
+        32,
+        12
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        80
+      ]
+    },
+    "props/rock_medium_2": {
+      "path": "res://assets/sprites/props/rock_medium_2.png",
+      "size": [
+        64,
+        48
+      ],
+      "pivot": [
+        32,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        36,
+        32,
+        12
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        80
+      ]
+    },
+    "props/rock_large_1": {
+      "path": "res://assets/sprites/props/rock_large_1.png",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        64
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        48,
+        32,
+        16
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        96
+      ]
+    },
+    "props/rock_large_2": {
+      "path": "res://assets/sprites/props/rock_large_2.png",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        64
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        48,
+        32,
+        16
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        96
+      ]
+    },
+    "props/stick": {
+      "path": "res://assets/sprites/props/stick.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ]
+    },
+    "props/log": {
+      "path": "res://assets/sprites/props/log.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        24,
+        32,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        64
+      ]
+    },
+    "props/trash_can_1": {
+      "path": "res://assets/sprites/props/trash_can_1.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        6,
+        18,
+        12,
+        6
+      ],
+      "use_area": [
+        -16,
+        -16,
+        56,
+        56
+      ]
+    },
+    "props/trash_can_2": {
+      "path": "res://assets/sprites/props/trash_can_2.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        6,
+        18,
+        12,
+        6
+      ],
+      "use_area": [
+        -16,
+        -16,
+        56,
+        56
+      ]
+    },
+    "props/trash_bag_1": {
+      "path": "res://assets/sprites/props/trash_bag_1.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        6,
+        18,
+        12,
+        6
+      ],
+      "use_area": [
+        -16,
+        -16,
+        56,
+        56
+      ]
+    },
+    "props/trash_bag_2": {
+      "path": "res://assets/sprites/props/trash_bag_2.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        6,
+        18,
+        12,
+        6
+      ],
+      "use_area": [
+        -16,
+        -16,
+        56,
+        56
+      ]
+    },
+    "props/trash_metal_1": {
+      "path": "res://assets/sprites/props/trash_metal_1.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        6,
+        18,
+        12,
+        6
+      ],
+      "use_area": [
+        -16,
+        -16,
+        56,
+        56
+      ]
+    },
+    "props/trash_metal_2": {
+      "path": "res://assets/sprites/props/trash_metal_2.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        6,
+        18,
+        12,
+        6
+      ],
+      "use_area": [
+        -16,
+        -16,
+        56,
+        56
+      ]
+    },
+    "props/mailbox": {
+      "path": "res://assets/sprites/props/mailbox.png",
+      "size": [
+        32,
+        48
+      ],
+      "pivot": [
+        16,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        36,
+        16,
+        12
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        80
+      ]
+    },
+    "props/sales_chest": {
+      "path": "res://assets/sprites/props/sales_chest.png",
+      "size": [
+        48,
+        40
+      ],
+      "pivot": [
+        24,
+        40
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        12,
+        30,
+        24,
+        10
+      ],
+      "use_area": [
+        -16,
+        -16,
+        80,
+        72
+      ]
+    },
+    "props/ruin": {
+      "path": "res://assets/sprites/props/ruin.png",
+      "size": [
+        128,
+        96
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        32,
+        72,
+        64,
+        24
+      ],
+      "use_area": [
+        -16,
+        -16,
+        160,
+        128
+      ]
+    },
+    "ground/soil_untilled": {
+      "path": "res://assets/sprites/ground/soil_untilled.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/soil_tilled": {
+      "path": "res://assets/sprites/ground/soil_tilled.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/soil_wet": {
+      "path": "res://assets/sprites/ground/soil_wet.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "crops/crop_corn_stage1": {
+      "path": "res://assets/sprites/crops/crop_corn_stage1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "crops/crop_corn_stage2": {
+      "path": "res://assets/sprites/crops/crop_corn_stage2.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "crops/crop_corn_stage3": {
+      "path": "res://assets/sprites/crops/crop_corn_stage3.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "crops/crop_corn_stage4": {
+      "path": "res://assets/sprites/crops/crop_corn_stage4.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "crops/crop_corn_stage5": {
+      "path": "res://assets/sprites/crops/crop_corn_stage5.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/bed_broken": {
+      "path": "res://assets/sprites/furniture/bed_broken.png",
+      "size": [
+        64,
+        96
+      ],
+      "pivot": [
+        32,
+        96
+      ],
+      "footprint": [
+        2,
+        3
+      ],
+      "collider": [
+        3,
+        48,
+        58,
+        45
+      ],
+      "use_area": [
+        -32,
+        -32,
+        128,
+        160
+      ]
+    },
+    "furniture/bed_intact": {
+      "path": "res://assets/sprites/furniture/bed_intact.png",
+      "size": [
+        64,
+        96
+      ],
+      "pivot": [
+        32,
+        96
+      ],
+      "footprint": [
+        2,
+        3
+      ],
+      "collider": [
+        3,
+        48,
+        58,
+        45
+      ],
+      "use_area": [
+        -32,
+        -32,
+        128,
+        160
+      ]
+    },
+    "furniture/sofa_broken": {
+      "path": "res://assets/sprites/furniture/sofa_broken.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        90,
+        13
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ]
+    },
+    "furniture/sofa_intact": {
+      "path": "res://assets/sprites/furniture/sofa_intact.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        90,
+        13
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ]
+    },
+    "furniture/stove_broken": {
+      "path": "res://assets/sprites/furniture/stove_broken.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        26,
+        13
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ]
+    },
+    "furniture/stove_intact": {
+      "path": "res://assets/sprites/furniture/stove_intact.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        26,
+        13
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ]
+    },
+    "furniture/sink_broken": {
+      "path": "res://assets/sprites/furniture/sink_broken.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        90,
+        13
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ]
+    },
+    "furniture/sink_intact": {
+      "path": "res://assets/sprites/furniture/sink_intact.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        90,
+        13
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ]
+    },
+    "furniture/bench": {
+      "path": "res://assets/sprites/furniture/bench.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        26,
+        13
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/table": {
+      "path": "res://assets/sprites/furniture/table.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        58,
+        13
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/chair": {
+      "path": "res://assets/sprites/furniture/chair.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        26,
+        13
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/cabinet": {
+      "path": "res://assets/sprites/furniture/cabinet.png",
+      "size": [
+        32,
+        64
+      ],
+      "pivot": [
+        16,
+        64
+      ],
+      "footprint": [
+        1,
+        2
+      ],
+      "collider": [
+        3,
+        32,
+        26,
+        29
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/bookshelf": {
+      "path": "res://assets/sprites/furniture/bookshelf.png",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        64
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "collider": [
+        3,
+        32,
+        58,
+        29
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/low_table": {
+      "path": "res://assets/sprites/furniture/low_table.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        3,
+        16,
+        58,
+        13
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/wardrobe": {
+      "path": "res://assets/sprites/furniture/wardrobe.png",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        64
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "collider": [
+        3,
+        32,
+        58,
+        29
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "furniture/bed_intact_r0": {
+      "path": "res://assets/sprites/furniture/bed_intact_r0.png",
+      "size": [
+        64,
+        96
+      ],
+      "pivot": [
+        32,
+        96
+      ],
+      "footprint": [
+        2,
+        3
+      ],
+      "collider": [
+        2,
+        2,
+        60,
+        92
+      ],
+      "use_area": [
+        -32,
+        -32,
+        128,
+        160
+      ],
+      "orientation": 0
+    },
+    "furniture/bed_intact_r1": {
+      "path": "res://assets/sprites/furniture/bed_intact_r1.png",
+      "size": [
+        96,
+        64
+      ],
+      "pivot": [
+        48,
+        64
+      ],
+      "footprint": [
+        3,
+        2
+      ],
+      "collider": [
+        2,
+        2,
+        92,
+        60
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        128
+      ],
+      "orientation": 1
+    },
+    "furniture/bed_intact_r2": {
+      "path": "res://assets/sprites/furniture/bed_intact_r2.png",
+      "size": [
+        64,
+        96
+      ],
+      "pivot": [
+        32,
+        96
+      ],
+      "footprint": [
+        2,
+        3
+      ],
+      "collider": [
+        2,
+        2,
+        60,
+        92
+      ],
+      "use_area": [
+        -32,
+        -32,
+        128,
+        160
+      ],
+      "orientation": 2
+    },
+    "furniture/bed_intact_r3": {
+      "path": "res://assets/sprites/furniture/bed_intact_r3.png",
+      "size": [
+        96,
+        64
+      ],
+      "pivot": [
+        48,
+        64
+      ],
+      "footprint": [
+        3,
+        2
+      ],
+      "collider": [
+        2,
+        2,
+        92,
+        60
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        128
+      ],
+      "orientation": 3
+    },
+    "furniture/sofa_intact_r0": {
+      "path": "res://assets/sprites/furniture/sofa_intact_r0.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        92,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ],
+      "orientation": 0
+    },
+    "furniture/sofa_intact_r1": {
+      "path": "res://assets/sprites/furniture/sofa_intact_r1.png",
+      "size": [
+        32,
+        96
+      ],
+      "pivot": [
+        16,
+        96
+      ],
+      "footprint": [
+        1,
+        3
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        92
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        160
+      ],
+      "orientation": 1
+    },
+    "furniture/sofa_intact_r2": {
+      "path": "res://assets/sprites/furniture/sofa_intact_r2.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        92,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ],
+      "orientation": 2
+    },
+    "furniture/sofa_intact_r3": {
+      "path": "res://assets/sprites/furniture/sofa_intact_r3.png",
+      "size": [
+        32,
+        96
+      ],
+      "pivot": [
+        16,
+        96
+      ],
+      "footprint": [
+        1,
+        3
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        92
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        160
+      ],
+      "orientation": 3
+    },
+    "furniture/stove_intact_r0": {
+      "path": "res://assets/sprites/furniture/stove_intact_r0.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 0
+    },
+    "furniture/stove_intact_r1": {
+      "path": "res://assets/sprites/furniture/stove_intact_r1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 1
+    },
+    "furniture/stove_intact_r2": {
+      "path": "res://assets/sprites/furniture/stove_intact_r2.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 2
+    },
+    "furniture/stove_intact_r3": {
+      "path": "res://assets/sprites/furniture/stove_intact_r3.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 3
+    },
+    "furniture/sink_intact_r0": {
+      "path": "res://assets/sprites/furniture/sink_intact_r0.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        92,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ],
+      "orientation": 0
+    },
+    "furniture/sink_intact_r1": {
+      "path": "res://assets/sprites/furniture/sink_intact_r1.png",
+      "size": [
+        32,
+        96
+      ],
+      "pivot": [
+        16,
+        96
+      ],
+      "footprint": [
+        1,
+        3
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        92
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        160
+      ],
+      "orientation": 1
+    },
+    "furniture/sink_intact_r2": {
+      "path": "res://assets/sprites/furniture/sink_intact_r2.png",
+      "size": [
+        96,
+        32
+      ],
+      "pivot": [
+        48,
+        32
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        92,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        160,
+        96
+      ],
+      "orientation": 2
+    },
+    "furniture/sink_intact_r3": {
+      "path": "res://assets/sprites/furniture/sink_intact_r3.png",
+      "size": [
+        32,
+        96
+      ],
+      "pivot": [
+        16,
+        96
+      ],
+      "footprint": [
+        1,
+        3
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        92
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        160
+      ],
+      "orientation": 3
+    },
+    "furniture/bench_intact_r0": {
+      "path": "res://assets/sprites/furniture/bench_intact_r0.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 0
+    },
+    "furniture/bench_intact_r1": {
+      "path": "res://assets/sprites/furniture/bench_intact_r1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 1
+    },
+    "furniture/bench_intact_r2": {
+      "path": "res://assets/sprites/furniture/bench_intact_r2.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 2
+    },
+    "furniture/bench_intact_r3": {
+      "path": "res://assets/sprites/furniture/bench_intact_r3.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        2,
+        2,
+        28,
+        28
+      ],
+      "use_area": [
+        -32,
+        -32,
+        96,
+        96
+      ],
+      "orientation": 3
+    },
+    "dirt/dirt_01_web": {
+      "path": "res://assets/sprites/dirt/dirt_01_web.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dirt/dirt_02_dust": {
+      "path": "res://assets/sprites/dirt/dirt_02_dust.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dirt/dirt_03_papers": {
+      "path": "res://assets/sprites/dirt/dirt_03_papers.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dirt/dirt_04_rubble": {
+      "path": "res://assets/sprites/dirt/dirt_04_rubble.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dirt/dirt_05_rug": {
+      "path": "res://assets/sprites/dirt/dirt_05_rug.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dirt/dirt_06_utensils": {
+      "path": "res://assets/sprites/dirt/dirt_06_utensils.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/axe": {
+      "path": "res://assets/sprites/icons/axe.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/pick": {
+      "path": "res://assets/sprites/icons/pick.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/hoe": {
+      "path": "res://assets/sprites/icons/hoe.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/scythe": {
+      "path": "res://assets/sprites/icons/scythe.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/water": {
+      "path": "res://assets/sprites/icons/water.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/hammer": {
+      "path": "res://assets/sprites/icons/hammer.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/corn_seed": {
+      "path": "res://assets/sprites/icons/corn_seed.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/wood": {
+      "path": "res://assets/sprites/icons/wood.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/stone": {
+      "path": "res://assets/sprites/icons/stone.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/fiber": {
+      "path": "res://assets/sprites/icons/fiber.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/scrap": {
+      "path": "res://assets/sprites/icons/scrap.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/trash": {
+      "path": "res://assets/sprites/icons/trash.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/coffee": {
+      "path": "res://assets/sprites/icons/coffee.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/bar": {
+      "path": "res://assets/sprites/icons/bar.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/fruit": {
+      "path": "res://assets/sprites/icons/fruit.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/blocked": {
+      "path": "res://assets/sprites/icons/blocked.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/valid": {
+      "path": "res://assets/sprites/icons/valid.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/stamina": {
+      "path": "res://assets/sprites/icons/stamina.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "icons/heart": {
+      "path": "res://assets/sprites/icons/heart.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/grass": {
+      "path": "res://assets/sprites/ground/grass.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/path": {
+      "path": "res://assets/sprites/ground/path.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/water": {
+      "path": "res://assets/sprites/ground/water.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/water_edge": {
+      "path": "res://assets/sprites/ground/water_edge.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/floor_old": {
+      "path": "res://assets/sprites/ground/floor_old.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/floor_new": {
+      "path": "res://assets/sprites/ground/floor_new.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/wall_old": {
+      "path": "res://assets/sprites/ground/wall_old.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ground/wall_new": {
+      "path": "res://assets/sprites/ground/wall_new.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "buildings/repair_H03_window_boarded": {
+      "path": "res://assets/sprites/buildings/repair_H03_window_boarded.png",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        64
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        6,
+        5,
+        52,
+        53
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "buildings/repair_H03_window_open": {
+      "path": "res://assets/sprites/buildings/repair_H03_window_open.png",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        64
+      ],
+      "footprint": [
+        2,
+        1
+      ],
+      "collider": [
+        6,
+        5,
+        52,
+        53
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "actors/action_axe": {
+      "path": "res://assets/sprites/actors/action_axe.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_pick": {
+      "path": "res://assets/sprites/actors/action_pick.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_hoe": {
+      "path": "res://assets/sprites/actors/action_hoe.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_scythe": {
+      "path": "res://assets/sprites/actors/action_scythe.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_water": {
+      "path": "res://assets/sprites/actors/action_water.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_hammer": {
+      "path": "res://assets/sprites/actors/action_hammer.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_sow": {
+      "path": "res://assets/sprites/actors/action_sow.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_clean": {
+      "path": "res://assets/sprites/actors/action_clean.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/action_eat": {
+      "path": "res://assets/sprites/actors/action_eat.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.12,
+        0.12,
+        0.12,
+        0.12
+      ],
+      "contact_frame": 2
+    },
+    "actors/lia_deliver": {
+      "path": "res://assets/sprites/actors/lia_deliver.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.14,
+        0.14,
+        0.14,
+        0.14
+      ],
+      "contact_frame": 2
+    },
+    "actors/lia_talk": {
+      "path": "res://assets/sprites/actors/lia_talk.png",
+      "size": [
+        128,
+        256
+      ],
+      "pivot": [
+        16,
+        63
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        9,
+        52,
+        14,
+        11
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frames": {
+        "frame_size": [
+          32,
+          64
+        ],
+        "columns": 4,
+        "rows": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "frame_duration": [
+        0.14,
+        0.14,
+        0.14,
+        0.14
+      ],
+      "contact_frame": 2
+    }
+  },
+  "audio": {
+    "tool_axe": {
+      "path": "res://assets/audio/tool_axe.wav",
+      "duration_ms": 220,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "tool_pick": {
+      "path": "res://assets/audio/tool_pick.wav",
+      "duration_ms": 340,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "tool_hoe": {
+      "path": "res://assets/audio/tool_hoe.wav",
+      "duration_ms": 250,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "tool_scythe": {
+      "path": "res://assets/audio/tool_scythe.wav",
+      "duration_ms": 280,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "tool_water": {
+      "path": "res://assets/audio/tool_water.wav",
+      "duration_ms": 450,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "tool_hammer": {
+      "path": "res://assets/audio/tool_hammer.wav",
+      "duration_ms": 200,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "collect": {
+      "path": "res://assets/audio/collect.wav",
+      "duration_ms": 270,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "eat": {
+      "path": "res://assets/audio/eat.wav",
+      "duration_ms": 300,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "ui_confirm": {
+      "path": "res://assets/audio/ui_confirm.wav",
+      "duration_ms": 100,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    },
+    "step_sand": {
+      "path": "res://assets/audio/step_sand.wav",
+      "duration_ms": 120,
+      "sample_rate": 22050,
+      "channels": 1,
+      "format": "PCM16"
+    }
+  },
+  "aliases": {
+    "actor_player": "actors/actor_player",
+    "actor_lia": "actors/actor_lia",
+    "H01_old": "buildings/house_H01_old",
+    "H01_restored": "buildings/house_H01_restored",
+    "H02_old": "ground/floor_old",
+    "H02_restored": "ground/floor_new",
+    "H03_old": "buildings/repair_H03_window_boarded",
+    "H03_restored": "buildings/repair_H03_window_open",
+    "H04_old": "furniture/bed_broken",
+    "H04_restored": "furniture/bed_intact_r0",
+    "H05_old": "furniture/sofa_broken",
+    "H05_restored": "furniture/sofa_intact_r0",
+    "H06_old": "furniture/stove_broken",
+    "H06_restored": "furniture/stove_intact_r0",
+    "H07_old": "furniture/sink_broken",
+    "H07_restored": "furniture/sink_intact_r0",
+    "TOOL_AXE": "icons/axe",
+    "TOOL_PICK": "icons/pick",
+    "TOOL_HOE": "icons/hoe",
+    "TOOL_SCYTHE": "icons/scythe",
+    "TOOL_WATER": "icons/water",
+    "TOOL_HAMMER": "icons/hammer",
+    "SEED_CORN": "icons/corn_seed"
+  }
+}

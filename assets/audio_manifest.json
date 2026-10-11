@@ -1,0 +1,72 @@
+{
+  "tool_axe": {
+    "path": "res://assets/audio/tool_axe.wav",
+    "duration_ms": 220,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "tool_pick": {
+    "path": "res://assets/audio/tool_pick.wav",
+    "duration_ms": 340,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "tool_hoe": {
+    "path": "res://assets/audio/tool_hoe.wav",
+    "duration_ms": 250,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "tool_scythe": {
+    "path": "res://assets/audio/tool_scythe.wav",
+    "duration_ms": 280,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "tool_water": {
+    "path": "res://assets/audio/tool_water.wav",
+    "duration_ms": 450,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "tool_hammer": {
+    "path": "res://assets/audio/tool_hammer.wav",
+    "duration_ms": 200,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "collect": {
+    "path": "res://assets/audio/collect.wav",
+    "duration_ms": 270,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "eat": {
+    "path": "res://assets/audio/eat.wav",
+    "duration_ms": 300,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "ui_confirm": {
+    "path": "res://assets/audio/ui_confirm.wav",
+    "duration_ms": 100,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  },
+  "step_sand": {
+    "path": "res://assets/audio/step_sand.wav",
+    "duration_ms": 120,
+    "sample_rate": 22050,
+    "channels": 1,
+    "format": "PCM16"
+  }
+}
