@@ -61,6 +61,35 @@ func run() -> void:
  must(g.mode == "PLAY","continuar retorna ao jogo")
  g._unhandled_input(event(KEY_I)); await process_frame
  must(g.modal == "inventory" and find_button(g.ui.root_control,"Consumir") != null,"mochila tem ação clicável")
+ g.s.inventory.fiber = 100
+ g.s.stamina = 70
+ g.ui.refresh(true); await process_frame
+ must(g.ui.inventory_buttons.size() == 24,"mochila mostra 24 espaços clicáveis")
+ must(g.icon_id("SEED_CORN") != g.icon_id("corn") and g.asset_textures.has(g.icon_id("corn")),"sementes e espiga têm ícones distintos")
+ var fiber_slot := -1
+ for i in range(24):
+  if g.inventory_item_at(i) == "fiber": fiber_slot = i; break
+ must(fiber_slot >= 0,"pilha de fibra visível")
+ var stack_texts: Array[String] = []
+ for offset in [0,1]:
+  for child in g.ui.inventory_buttons[fiber_slot+offset].get_children():
+   if child is Label: stack_texts.append(child.text)
+ must(stack_texts.has("99") and stack_texts.has("1"),"duas pilhas exibem 99 e 1 nos ícones")
+ var fiber_button: Button = g.ui.inventory_buttons[fiber_slot]
+ fiber_button.grab_focus(); await process_frame
+ must(g.inventory_cursor == fiber_slot and g.ui.inventory_detail_label.text.contains("Fibra"),"foco mostra nome completo sem recriar grade")
+ must(is_instance_valid(fiber_button) and g.ui.inventory_detail_icon.texture != null,"seleção preserva botão e imagem do item")
+ var chosen_style: StyleBoxFlat = fiber_button.get_theme_stylebox("normal")
+ must(chosen_style.bg_color == g.ui.ochre,"seleção permanece visível")
+ var bar_slot := -1
+ for i in range(24):
+  if g.inventory_item_at(i) == "bar": bar_slot = i; break
+ g.ui.inventory_buttons[bar_slot].grab_focus(); await process_frame
+ must(g.ui.inventory_detail_label.text.contains("Barra de cereal") and g.ui.inventory_detail_label.text.contains("30 de estamina"),"alimento mostra recuperação efetiva")
+ g.s.stamina = g.s.staminaMax
+ g.ui.update_inventory_selection()
+ must(g.ui.inventory_detail_label.text.contains("estamina cheia"),"alimento informa bloqueio com estamina cheia")
+ g.s.stamina = 70
  var minutes = g.s.minutes
  g._process(21.0)
  must(g.s.minutes == minutes,"mochila pausa relógio")

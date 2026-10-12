@@ -3058,7 +3058,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/corn.png",
+      "source_sha256": "8de0d85bd16a191e917d7c1a0f33f42f7797dd2f0cab7ccb44c4ba10eceb2b15",
+      "sha256": "c8fcdf4f9e397a8dd54844dbc879ec812c42831bdfdad5539d8d75e9231f105a",
+      "source_bounds": [
+        620,
+        625,
+        865,
+        845
+      ]
     },
     "icons/wood": {
       "path": "res://assets/sprites/icons/wood.png",
@@ -3086,7 +3095,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/resources.png",
+      "source_sha256": "e1fabee1889034caaebf4fc857b7d8f4b3c24d7bae5ee49a7fe9d1725348794f",
+      "sha256": "323a7857beac53172fb7a64fb771cdfc661f9caf11fe6a4a00154d3f8be94993",
+      "source_bounds": [
+        55,
+        130,
+        525,
+        545
+      ]
     },
     "icons/stone": {
       "path": "res://assets/sprites/icons/stone.png",
@@ -3114,7 +3132,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/resources.png",
+      "source_sha256": "e1fabee1889034caaebf4fc857b7d8f4b3c24d7bae5ee49a7fe9d1725348794f",
+      "sha256": "3a0b26e82253f29da9bda08c368a37fd3b93a809d6bf40486d726f079b976741",
+      "source_bounds": [
+        570,
+        130,
+        1000,
+        545
+      ]
     },
     "icons/fiber": {
       "path": "res://assets/sprites/icons/fiber.png",
@@ -3142,7 +3169,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/resources.png",
+      "source_sha256": "e1fabee1889034caaebf4fc857b7d8f4b3c24d7bae5ee49a7fe9d1725348794f",
+      "sha256": "d8109db4442aea3ed27382a31b5bd7e08ac6da39f663c04000148623d6d2336a",
+      "source_bounds": [
+        1020,
+        115,
+        1510,
+        545
+      ]
     },
     "icons/scrap": {
       "path": "res://assets/sprites/icons/scrap.png",
@@ -3170,7 +3206,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/resources.png",
+      "source_sha256": "e1fabee1889034caaebf4fc857b7d8f4b3c24d7bae5ee49a7fe9d1725348794f",
+      "sha256": "db706c79bfd9b6e250e78ef59c4f078aedcf1f8bbf28fad9378200ff77a92070",
+      "source_bounds": [
+        800,
+        560,
+        1370,
+        980
+      ]
     },
     "icons/trash": {
       "path": "res://assets/sprites/icons/trash.png",
@@ -3198,7 +3243,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/resources.png",
+      "source_sha256": "e1fabee1889034caaebf4fc857b7d8f4b3c24d7bae5ee49a7fe9d1725348794f",
+      "sha256": "4688ab266212308fa51207e86d626afd891c61b1a4f47f7ee9b35517854ae848",
+      "source_bounds": [
+        220,
+        560,
+        770,
+        970
+      ]
     },
     "icons/coffee": {
       "path": "res://assets/sprites/icons/coffee.png",
@@ -3226,7 +3280,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/coffee.png",
+      "source_sha256": "3b1d6c91537696a308ffb7f7cb8cb8dabec6e4b0bc64d2f868981a737106236f",
+      "sha256": "3f437a7481c9081bebb991fb28d06f409a6d316bf27b56addea445d8a1a77bdd",
+      "source_bounds": [
+        1420,
+        55,
+        2120,
+        700
+      ]
     },
     "icons/bar": {
       "path": "res://assets/sprites/icons/bar.png",
@@ -3254,7 +3317,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/food.png",
+      "source_sha256": "f810c380f324309a993d10496569a3bc89867851bfa7a022a84508161dd985d8",
+      "sha256": "92ca395de979084b29af8f08b839a362988d2bc66f742d8f03e26b0895396f6f",
+      "source_bounds": [
+        930,
+        85,
+        1735,
+        850
+      ]
     },
     "icons/fruit": {
       "path": "res://assets/sprites/icons/fruit.png",
@@ -3282,7 +3354,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/food.png",
+      "source_sha256": "f810c380f324309a993d10496569a3bc89867851bfa7a022a84508161dd985d8",
+      "sha256": "b664e8b2346c96caa06579c1bc414a4333f92b5601b1555b8ec1012e17f41f6b",
+      "source_bounds": [
+        160,
+        90,
+        795,
+        835
+      ]
     },
     "icons/blocked": {
       "path": "res://assets/sprites/icons/blocked.png",
@@ -4229,6 +4310,43 @@
       ],
       "contact_frame": 2,
       "status": "placeholder_action"
+    },
+    "icons/corn": {
+      "path": "res://assets/sprites/icons/corn.png",
+      "size": [
+        24,
+        24
+      ],
+      "pivot": [
+        12,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/corn.png",
+      "source_sha256": "8de0d85bd16a191e917d7c1a0f33f42f7797dd2f0cab7ccb44c4ba10eceb2b15",
+      "sha256": "f1874715536da4cf2b98162121035957c6a2f3ba1687bdac53b8c186f53f0068",
+      "source_bounds": [
+        980,
+        595,
+        1280,
+        845
+      ]
     }
   },
   "audio": {
@@ -4326,6 +4444,7 @@
     "TOOL_SCYTHE": "icons/scythe",
     "TOOL_WATER": "icons/water",
     "TOOL_HAMMER": "icons/hammer",
-    "SEED_CORN": "icons/corn_seed"
+    "SEED_CORN": "icons/corn_seed",
+    "ITEM_CORN": "icons/corn"
   }
 }

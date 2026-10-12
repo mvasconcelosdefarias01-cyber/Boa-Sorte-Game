@@ -91,6 +91,13 @@ func run() -> void:
  must(game.modal == "options" and game.s.stamina == stamina,"clique de menu não usa ferramenta")
  await key(KEY_ESCAPE)
  must(game.modal == "pause","Esc de opções retorna à pausa")
+ await click(find_button(game.ui.root_control,"Continuar"))
+ await key(KEY_I)
+ must(game.modal == "inventory","tecla I abre mochila")
+ await click(game.ui.inventory_buttons[6])
+ must(game.inventory_cursor == 6 and game.ui.inventory_detail_label.text.contains("Sementes de milho"),"clique real escolhe ícone da semente")
+ await key(KEY_RIGHT)
+ must(game.inventory_cursor == 7 and game.ui.inventory_detail_label.text.contains("Café"),"seta muda foco e detalhe sem recriar mochila")
  game.audio_player.stop(); game.audio_player.stream = null; game.sounds.clear(); game.asset_textures.clear()
  game.queue_free(); game = null
  await process_frame

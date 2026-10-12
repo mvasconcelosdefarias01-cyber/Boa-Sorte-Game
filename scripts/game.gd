@@ -316,6 +316,7 @@ func _unhandled_input(event: InputEvent) -> void:
    elif modal == "inventory" and event.keycode in [KEY_LEFT,KEY_RIGHT,KEY_UP,KEY_DOWN]:
     var step = -1 if event.keycode == KEY_LEFT else 1 if event.keycode == KEY_RIGHT else -6 if event.keycode == KEY_UP else 6
     inventory_cursor = clampi(inventory_cursor+step,0,23)
+    ui.update_inventory_selection()
    elif modal == "inventory" and event.keycode == KEY_ENTER:
     var item = inventory_item_at(inventory_cursor)
     if FOOD.has(item): eat(item)
@@ -1065,8 +1066,8 @@ func draw_prop(ob: Dictionary,pos: Vector2) -> void:
   "stone_medium": id = "props/rock_medium_1"
   "stone_large": id = "props/rock_large_1"
   "stick","log": id = "props/%s" % kind
-  "trash_metal": id = "props/trash_metal_1"
-  "trash_plastic": id = "props/trash_bag_1"
+  "trash_metal": id = "icons/scrap"
+  "trash_plastic": id = "icons/trash"
  if id != "" and asset(id,pos+Vector2(16,32)):
   if ob.hits < ob.maxHits: draw_line(pos+Vector2(6,5),pos+Vector2(25,24),Color("f1dfb1"),2)
   return
@@ -1133,12 +1134,21 @@ func draw_home() -> void:
    world_label("!",pos+Vector2(3,30),16,Color("e6b539"))
 
 func draw_drops() -> void:
+ var positions: Dictionary = {}
  for id in s.drops:
   var d = s.drops[id]
   if d.mapId != s.mapId: continue
-  var pos = Vector2(d.at[0],d.at[1])*TILE+Vector2(16,16)
-  draw_circle(pos,6,Color("e6b539"))
-  world_label(str(d.amount),pos+Vector2(5,3),10)
+  var tile_key = key(tile_of(d.at))
+  var index = int(positions.get(tile_key,0))
+  positions[tile_key] = index+1
+  var pos = Vector2(d.at[0],d.at[1])*TILE+Vector2(16+(index%3-1)*7,17+int(index/3)*5)
+  draw_circle(pos+Vector2(0,7),9,Color("243348",0.3))
+  var icon = icon_id(str(d.item))
+  if asset_textures.has(icon):
+   var texture: Texture2D = asset_textures[icon]
+   draw_texture(texture,pos-texture.get_size()*0.5)
+  else: draw_circle(pos,6,Color("e6b539"))
+  if int(d.amount) > 1: world_label(str(d.amount),pos+Vector2(7,11),10,Color("f1dfb1"))
 
 func draw_actor(pos: Vector2) -> void:
  if food_timer > 0 and reference_action_ready("actors/action_eat") and draw_food_sheet(pos,tile_of(s.facing)): return
@@ -1246,7 +1256,7 @@ func format_items(items: Dictionary) -> String:
  return " • ".join(parts) if not parts.is_empty() else "vazio"
 
 func icon_id(id: String) -> String:
- var names = {"TOOL_AXE":"axe","TOOL_PICK":"pick","TOOL_HOE":"hoe","TOOL_SCYTHE":"scythe","TOOL_WATER":"water","TOOL_HAMMER":"hammer","SEED_CORN":"corn_seed","HAND":"valid","wood":"wood","stone":"stone","fiber":"fiber","scrap":"scrap","waste":"trash","corn":"corn_seed","coffee":"coffee","bar":"bar","fruit":"fruit"}
+ var names = {"TOOL_AXE":"axe","TOOL_PICK":"pick","TOOL_HOE":"hoe","TOOL_SCYTHE":"scythe","TOOL_WATER":"water","TOOL_HAMMER":"hammer","SEED_CORN":"corn_seed","HAND":"valid","wood":"wood","stone":"stone","fiber":"fiber","scrap":"scrap","waste":"trash","corn":"corn","coffee":"coffee","bar":"bar","fruit":"fruit"}
  return "icons/"+str(names.get(id,"valid"))
 func world_label(t: String,p: Vector2,size: int = 14,c: Color = Color("243348")) -> void:
  draw_string(font,p,t,HORIZONTAL_ALIGNMENT_LEFT,-1,size,c)

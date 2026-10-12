@@ -17,6 +17,10 @@ var message_label: Label
 var hotbar_buttons: Array[Button] = []
 var hotbar_icons: Array[TextureRect] = []
 var hotbar_counts: Array[Label] = []
+var inventory_buttons: Array[Button] = []
+var inventory_detail_icon: TextureRect
+var inventory_detail_label: Label
+var inventory_rendered_cursor := -1
 var name_field: LineEdit
 var name_error_label: Label
 var name_draft := ""
@@ -60,7 +64,7 @@ func style(panel: PanelContainer) -> void:
  panel.add_theme_stylebox_override("panel",box(Color.WHITE if prefs.get("highContrast",false) else cream))
  panel.mouse_filter = Control.MOUSE_FILTER_STOP
 
-func button(label_text: String,action: Callable) -> Button:
+func button(label_text: String,action: Callable,rebuild := true) -> Button:
  var b = Button.new()
  b.text = label_text
  b.focus_mode = Control.FOCUS_ALL
@@ -74,7 +78,7 @@ func button(label_text: String,action: Callable) -> Button:
  b.add_theme_font_size_override("font_size",maxi(10,int(12.0*ui_scale())))
  b.pressed.connect(func():
   action.call()
-  refresh(true)
+  if rebuild: refresh(true)
  )
  return b
 
@@ -151,6 +155,7 @@ func refresh(force := false) -> void:
    "TRANSITION","NIGHT_CLOSE": make_hud()
  update_hud()
  update_build_status()
+ if game.mode == "MODAL" and game.modal == "inventory": update_inventory_selection()
 
 func make_title() -> void:
  var panel = build_panel(120,8,400,344)
@@ -422,7 +427,7 @@ func update_hud() -> void:
 
 func display_name(id: String) -> String:
  var tools = {"TOOL_AXE":"Machado","TOOL_PICK":"Picareta","TOOL_HOE":"Enxada","TOOL_SCYTHE":"Foice","TOOL_WATER":"Regador","TOOL_HAMMER":"Martelo","SEED_CORN":"Sementes de milho","HAND":"Mão livre"}
- var other = {"coffee":"Café","bar":"Barra de cereal","fruit":"Umbu"}
+ var other = {"coffee":"Café","bar":"Barra de cereal","fruit":"Umbu","wood":"Madeira","stone":"Pedra","fiber":"Fibra","scrap":"Sucata","waste":"Resíduo","corn":"Espiga de milho","bench":"Banco"}
  return str(tools.get(id,other.get(id,game.short_name(id))))
 
 func make_modal() -> void:
@@ -525,20 +530,51 @@ func make_modal() -> void:
    v.add_child(button("Voltar",func(): game.mode = "PLAY"; game.modal = ""))
  var close = button("Fechar",func(): game.mode = "PLAY"; game.modal = "")
  v.add_child(close)
- if v.get_child_count() > 1 and v.get_child(1) is Button: v.get_child(1).grab_focus.call_deferred()
+ if game.modal == "inventory" and inventory_buttons.size() == 24: inventory_buttons[clampi(game.inventory_cursor,0,23)].grab_focus.call_deferred()
+ elif v.get_child_count() > 1 and v.get_child(1) is Button: v.get_child(1).grab_focus.call_deferred()
  else: close.grab_focus.call_deferred()
 
 func make_inventory(v: VBoxContainer) -> void:
  v.add_child(text("Mochila — %d/24 espaços • peso %.1f/40" % [game.occupied_slots(),game.carried_weight()],16))
  var grid = GridContainer.new(); grid.columns = 6; v.add_child(grid)
+ inventory_buttons.clear()
+ inventory_rendered_cursor = -1
  for i in range(24):
   var index = i
   var item = game.inventory_item_at(i)
-  var caption = "—" if item == "" else game.short_name(item)+(" %d" % game.inventory_quantity_at(i) if game.inventory_quantity_at(i)>0 else "")
-  var b = button(caption,func(): game.inventory_cursor = index)
-  b.custom_minimum_size = Vector2(72,24)
-  b.focus_entered.connect(func(): game.inventory_cursor = index)
+  var b = button("—" if item == "" else "",func(): select_inventory_slot(index),false)
+  b.custom_minimum_size = Vector2(75,31)
+  b.tooltip_text = "Espaço %d: %s" % [i+1,"vazio" if item == "" else display_name(item)]
+  if item != "":
+   var item_icon = TextureRect.new()
+   item_icon.texture = game.asset_textures.get(game.icon_id(item),null)
+   item_icon.position = Vector2(23,3)
+   item_icon.size = Vector2(24,24)
+   item_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+   item_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+   item_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+   b.add_child(item_icon)
+   var quantity = game.inventory_quantity_at(i)
+   if quantity > 0:
+    var count = text(str(quantity),10)
+    count.position = Vector2(50,16)
+    count.size = Vector2(22,15)
+    count.autowrap_mode = TextServer.AUTOWRAP_OFF
+    b.add_child(count)
+  b.focus_entered.connect(func(): select_inventory_slot(index))
   grid.add_child(b)
+  inventory_buttons.append(b)
+ var detail = hbox(v,8)
+ inventory_detail_icon = TextureRect.new()
+ inventory_detail_icon.custom_minimum_size = Vector2(24,24)
+ inventory_detail_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+ inventory_detail_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+ inventory_detail_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ detail.add_child(inventory_detail_icon)
+ inventory_detail_label = text("",11)
+ inventory_detail_label.custom_minimum_size.x = 430
+ inventory_detail_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+ detail.add_child(inventory_detail_label)
  var row = hbox(v)
  row.add_child(button("Consumir",func():
   var id = game.inventory_item_at(game.inventory_cursor)
@@ -546,13 +582,32 @@ func make_inventory(v: VBoxContainer) -> void:
   else: game.say("Escolha um alimento.")
  ))
  row.add_child(button("Atalho selecionado",func(): game.assign_hotbar(game.selected,game.inventory_item_at(game.inventory_cursor))))
- var selected_item = game.inventory_item_at(game.inventory_cursor)
- var detail = "Escolha um espaço."
- if selected_item != "":
-  detail = game.short_name(selected_item)+" • "+str(game.inventory_quantity_at(game.inventory_cursor))
-  if game.FOOD.has(selected_item): detail += " • recupera %d de estamina" % mini(int(game.FOOD[selected_item]),game.s.staminaMax-game.s.stamina)
- v.add_child(text(detail,11))
- v.add_child(text("Clique num espaço; 1–8 escolhe atalho, 0 repõe mão livre.",11))
+ v.add_child(text("Clique ou use setas; 1–8 atribui atalho, 0 repõe mão livre.",10))
+ update_inventory_selection()
+
+func select_inventory_slot(index: int) -> void:
+ game.inventory_cursor = clampi(index,0,23)
+ update_inventory_selection()
+
+func update_inventory_selection() -> void:
+ if game.mode != "MODAL" or game.modal != "inventory" or not is_instance_valid(inventory_detail_label): return
+ var index: int = clampi(game.inventory_cursor,0,23)
+ var item: String = game.inventory_item_at(index)
+ var quantity: int = game.inventory_quantity_at(index)
+ var recovery := mini(int(game.FOOD.get(item,0)),game.s.staminaMax-game.s.stamina)
+ var description := "Espaço %d vazio" % (index+1)
+ if item != "":
+  description = display_name(item)
+  if quantity > 0: description += " · %d" % quantity
+  if game.FOOD.has(item):
+   description += " · estamina cheia" if recovery <= 0 else " · recupera %d de estamina" % recovery
+ if inventory_rendered_cursor == index and inventory_detail_label.text == description: return
+ inventory_rendered_cursor = index
+ inventory_detail_label.text = description
+ inventory_detail_icon.texture = game.asset_textures.get(game.icon_id(item),null) if item != "" else null
+ for i in range(inventory_buttons.size()):
+  var b = inventory_buttons[i]
+  if is_instance_valid(b): b.add_theme_stylebox_override("normal",box(ochre if i == index else cream,ink if i == index else wood))
 
 func journal_text() -> String:
  if journal_page == 1: return "Carta do prefeito Jair\n\n"+game.LETTER.replace("{name}",game.s.name)

@@ -1,8 +1,8 @@
-# Boa Sorte — amostra da revisão visual do cenário 01
+# Boa Sorte — etapa 1: inventário e ícones
 
 ## Jogar no Windows 11
 
-Nesta branch, baixe `dist/BoaSorte-Amostra-Visual-Windows11.zip`, escolha **Extrair Tudo** e abra `BoaSorte-Amostra-Visual/BoaSorte.exe`. Esta é uma amostra em revisão, com validação gráfica pendente; o ZIP `BoaSorte-Windows11.zip` preserva a versão anterior. O executável tem os dados do jogo incorporados e não exige a instalação do Godot. É uma versão para Windows de 64 bits sem assinatura digital; o Windows pode exibir um aviso de reputação. O pacote foi exportado com o modelo oficial do Godot 4.6.3 e testado em modo headless quanto a cenas, assets e regras. Ainda precisa de um teste visual em Windows.
+Baixe [BoaSorte-Etapa01-Windows11.zip](https://raw.githubusercontent.com/mvasconcelosdefarias01-cyber/Boa-Sorte-Game/visual-ui-sample/dist/BoaSorte-Etapa01-Windows11.zip), escolha **Extrair Tudo** e abra `BoaSorte-Etapa01/BoaSorte.exe`. Não precisa instalar Godot. Esta etapa adiciona imagens e seleção ao inventário e aos recursos coletáveis, preservando os elementos aprovados. Veja a sequência em [ETAPAS_AJUSTES.md](docs/ETAPAS_AJUSTES.md). Os pacotes anteriores continuam em `dist/`. O pacote foi exportado com Godot 4.6.3; testes headless passaram, mas a execução e a apresentação no Windows precisam do teste do jogador.
 
 Projeto Godot 4.6.3 2D da Fazenda do Avô Olegário. Abra `project.godot` no Godot e execute a cena principal (F6/F5), ou rode:
 
@@ -44,4 +44,4 @@ Limites atuais do protótipo: a mochila organiza pilhas automaticamente, sem arr
 
 Com execução gráfica permitida, `tests/visual_capture.gd` captura a amostra em 720p e 1080p. A saída padrão é `user://visual_review`, ou passe `-- --capture-output=CAMINHO`. Ele usa um espaço de teste separado dos três saves do jogador. As capturas ainda precisam ser abertas e comparadas às referências; gerar PNGs não equivale a aprovação visual.
 
-O pacote da amostra inclui `Gerar-capturas.bat`: ele executa o capturador em tela e grava a pasta `Capturas` ao lado do executável. Esse comando não foi executado em Windows neste ambiente. O capturador monta estados de teste; não equivale a percorrer manualmente a abertura até a manhã seguinte.
+O pacote anterior `BoaSorte-Amostra-Visual-Windows11.zip` inclui `Gerar-capturas.bat`: ele executa o capturador em tela e grava a pasta `Capturas` ao lado do executável. Esse comando não foi executado em Windows neste ambiente. O capturador monta estados de teste; não equivale a percorrer manualmente a abertura até a manhã seguinte.

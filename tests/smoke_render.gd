@@ -4,11 +4,18 @@ func run() -> void:
  var g = load("res://main.tscn").instantiate()
  root.add_child(g)
  await process_frame
- if g.asset_textures.size() < 135:
+ if g.asset_textures.size() < 136:
   push_error("Poucos sprites carregados: %d" % g.asset_textures.size())
   quit(1); return
  if g.sounds.size() < 10:
   push_error("Áudio ausente: %d" % g.sounds.size())
+  quit(1); return
+ for item in ["fruit","bar","coffee","wood","stone","fiber","waste","scrap","SEED_CORN","corn"]:
+  if not g.asset_textures.has(g.icon_id(item)):
+   push_error("Ícone ausente: "+item)
+   quit(1); return
+ if g.icon_id("SEED_CORN") == g.icon_id("corn"):
+  push_error("Semente e espiga precisam de ícones distintos")
   quit(1); return
  for id in ["bed","sofa","stove","sink","bench"]:
   for rotation in range(4):
