@@ -1,0 +1,39 @@
+# Boa Sorte — contrato de UI/UX, cenário 01
+
+Contrato para os controles Godot e os sprites de interface. Canvas lógico 640×360; escala de exibição inicial 2× em 1280×720; UI adaptável a 720p e 1080p sem tornar o texto menor. Controles Godot em containers ancorados e margens, sem posicionar texto por coordenadas fixas de desenho. Textura pixelada mantém nearest; painéis podem ser gerados por 9-slice ou StyleBox, mas devem manter a linguagem de madeira escura, creme e terracota. Texto e estado funcional têm precedência sobre ornamentação.
+
+## Hierarquia e layout
+
+| Modo | Ordem de leitura e ações |
+| --- | --- |
+| Título | Marca `Boa Sorte`, subtítulo `Fazenda do Avô Olegário`, botão primário Continuar quando houver save; Nova partida, Carregar (três slots), Opções, Sair. Save ausente desabilita Continuar com motivo curto. |
+| Nome | Título `Como vamos chamar você?`, campo com 2–20 caracteres, preview fiel do protagonista, confirmação `Começar`, retorno. Erro de nome aparece junto ao campo, preservando o texto digitado. |
+| Abertura | Retrato à esquerda, nome de Lia, fala em caixa creme e ação Avançar; Pular discreto mas claro. Carta abre como documento com rolagem/páginas se preciso, assinatura de Jair visível e ação Fechar. Entrega única independe de pular. |
+| Exploração | Topo esquerdo missão recolhível `Um novo começo`: `Casa x/20`, `Milho x/20`, `Dormir` pendente/pronto; o diário explica os 7 consertos, 7 móveis e 6 limpezas. Topo direito dia/hora/período/moedas. Vida/estamina com números atuais/máximos. Rodapé 8 atalhos, slot ativo e contador quando necessário. Peso numérico junto ao atalho da mochila. |
+| Inventário | Grade 24 slots, oito conectados à barra, nome e quantidade do item focado, peso `atual/40` (e aviso até 48), ações Usar/Atribuir/Guardar quando válidas. Comida mostra recuperação efetiva e bloqueio com estamina cheia. |
+| Diário | Checklist dos sete consertos com nomes em português (`Telhado e fachada`, `Paredes e piso` etc.), sete móveis, seis limpezas, 20 milhos distintos e sono. Carta relível por aba; progresso não reduzido a uma porcentagem vaga. IDs como H01 ficam só nos dados internos. |
+| Correio | Abas Carta, Encomenda e Apoio. Estoque reservado para reforma destacado e sem ação Vender; itens livres e compra de café/barra ou fruta de segurança identificados. |
+| Venda | Itens elegíveis, quantidade, receita prevista, retirar antes de dormir e texto `Pagamento ao amanhecer`; resíduo tem ação de coleta separada, sem moedas. |
+| Reparo | Título descritivo do serviço, materiais exigidos/disponíveis, golpes restantes, confirmação/cancelamento. Depois do primeiro golpe, indicar que materiais já foram consumidos e progresso salvo. IDs de serviço não aparecem ao jogador. |
+| Editor | Lista lateral de móveis íntegros, grade do interior visível, silhueta de preview, direção/footprint, check ou bloqueio com motivo, comandos Girar/Confirmar/Cancelar no rodapé. Pausa relógio; confirmação cobra 1 estamina. |
+| Noite | Confirmação na cama, resumo de vendas, dia seguinte e marco M01. Estamina exibida antes/depois com mesmo valor se não houve alimento. |
+
+No HUD 640×360, deixar margem de 8 px nas bordas; painel de missão até aproximadamente 190×70 no alto esquerdo e bloco de tempo/recursos até 190×75 no alto direito. Dentro do bloco direito, relógio/moedas e vida/estamina têm linhas ou placas separadas. A área central superior fica livre para ação. Barra de oito slots no rodapé, centralizada, com ícone 24×24 e contorno ativo maior que 1 px. Se a descrição da missão for longa, recolher e abrir no diário; avisos temporários usam uma área acima da barra ou perto do alvo, mas não tapam o alvo ou a barra de estamina. Em modais, usar painel de largura suficiente para o texto em vez de reduzir fonte até caber. Escala UI 100%, 125%, 150% é requisito do GDD; em 640×360, 150% pode exigir rolagem em modais, mantendo botões de confirmação sempre acessíveis. Verificar também janela redimensionada entre 720p e 1080p, sem corte ou sobreposição.
+
+## Linguagem e legibilidade
+
+Usar tipografia com acentos PT-BR testados em `Estamina`, `Encomenda`, `Amanhã` e nome personalizado. Preferir 16–18 px físicos para corpo em 720p, com títulos e números-chave maiores; se render lógica for 640×360 com escala 2×, fonte lógica 8–9 px precisa ter desenho pixelado de qualidade e não perder acentos. Uma fonte padrão Godot pequena só é aceitável se a captura em 720p provar legibilidade. Fundo de texto creme opaco `#F1DFB1` com texto muito escuro `#243348`; madeira `#70482F` nas molduras; estado ativo terracota/ocre. Evitar texto claro sobre areia ou folhagem sem placa opaca. Testar escala de cinza e modo alto contraste.
+
+Estados não dependem só de cor: válido = check + `Livre`; inválido = símbolo de bloqueio + motivo; faltou estamina = número do custo e falta; ação em progresso = barra/contador. Erros iguais têm intervalo de 2 s para não pulsar a cada frame ao segurar clique. Ícones de ferramenta/consumível usam silhuetas do pacote de referência após normalização a 24×24 e limpeza de halo; até a entrega, placeholder fica explicitamente marcado no manifest. Tooltip curto liga entrada ao efeito (`E Interagir`, `R Girar`, `Esc Cancelar`). Controles alternativos e foco de teclado devem percorrer menus e editor. Nenhum ID técnico (`H04`, `TOOL_AXE`, `HOME01`) nem palavra inglesa de implementação aparece nas telas.
+
+## Contrato de estado com o jogo
+
+UI lê `PlayerState`, `ClockState`, `QuestState`, `RepairState`, `SoilState`, containers e seleção da hotbar; não mantém contadores paralelos. Atualização imediata no frame de contato ou commit de modal. Missão só muda para concluída na manhã após sono válido. Relógio congela em INTRO, MODAL, BUILD, TRANSITION e NIGHT_CLOSE. Em BUILD, preview não consome nada; confirmar desconta 1 estamina em commit. Ferramenta errada, alcance inválido, água vazia e estamina insuficiente não alteram barra, objeto nem XP. O HUD mostra vida mesmo sem dano normal no cenário 01. Estamina não se recupera ao dormir, trocar mapa, aumentar nível ou abrir tela.
+
+Validação mínima de UI: captura título, nome, Lia/carta, PLAY exterior e interior, inventário, diário, correio, venda, reparo, editor válido/inválido, noite e manhã. Verificar mouse e teclado, escala normal e ampliada, resolução 720p e 1080p, acentos, foco, abertura de um modal por vez e persistência de valores após salvar/carregar.
+
+As sete capturas anteriores enviadas pelo usuário mostram o problema que esta revisão deve resolver: tela de título e pausa sem botões visuais, faixa superior/inferior ocupando toda a janela, vida/estamina desalinhadas, aviso que atravessa personagem e IDs técnicos no interior. A implementação nova pode passar testes de geometria estática e ainda falhar na percepção; aceite visual requer captura posterior e interação real. A autorização de GUI Godot foi negada duas vezes pelo controle de permissões no ambiente atual, portanto não contornar nem declarar essa prova concluída.
+
+## Estado da amostra e aceite ainda necessário
+
+O código atual substituiu o desenho de menus/HUD por `Control` e seus containers, removeu tags técnicas permanentes dos móveis e usa hotbar compacta. A suíte de layout cobre título, opções, nome, fala longa, HUD, mochila, diário, correio, vendas e editor em 100%, 125% e 150%; isso é evidência estrutural, não aprovação da composição vista por um jogador. O contrato visual fica **provisório** até capturas posteriores em 720p/1080p e uso real de mouse/teclado. A cada escala, conferir sobretudo fonte/acento, barras de HP e estamina em suas placas, avisos temporários fora do alvo, foco navegável, carta integral, preview de móvel válido/inválido e pausa com botões claros. O editor precisa mostrar as quatro rotações do mesmo estilo de arte e conservar a altura visual dos móveis acima do footprint sem cortar sprite pelo collider.

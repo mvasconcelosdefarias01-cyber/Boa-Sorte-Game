@@ -21,9 +21,9 @@
         1
       ],
       "collider": [
-        9,
+        10,
         52,
-        14,
+        12,
         11
       ],
       "use_area": [
@@ -50,10 +50,21 @@
         ]
       },
       "frame_duration": [
-        0.15,
-        0.15
+        0.16,
+        0.16
       ],
-      "contact_frame": null
+      "contact_frame": null,
+      "status": "prototype_reference_derived",
+      "source": [
+        "sources/imagegen/actor_player_idle_source.png",
+        "sources/imagegen/actor_player_walk_source.png"
+      ],
+      "source_sha256": [
+        "7bbd0b32be627d3a9517905f7cebbcc7587566c40356486b94160b0681a4da8c",
+        "7f75eab5482e813638f4bf39f79bf88e40972f0a48a4ee2b6bda7e3c9fdeacce"
+      ],
+      "sha256": "713bb9d01975b67a80710ae7c4f54e11ca6a3ed86fbd757fa13d533d0ccc0fe9",
+      "visual_note": "Four faithful directions; one idle plus one distinct walk pose per direction. Human review pending."
     },
     "actors/actor_lia": {
       "path": "res://assets/sprites/actors/actor_lia.png",
@@ -70,9 +81,9 @@
         1
       ],
       "collider": [
-        9,
+        10,
         52,
-        14,
+        12,
         11
       ],
       "use_area": [
@@ -99,10 +110,21 @@
         ]
       },
       "frame_duration": [
-        0.15,
-        0.15
+        0.16,
+        0.16
       ],
-      "contact_frame": null
+      "contact_frame": null,
+      "status": "prototype_reference_derived",
+      "source": [
+        "sources/imagegen/actor_lia_idle_source.png",
+        "sources/imagegen/actor_lia_walk_source.png"
+      ],
+      "source_sha256": [
+        "dde05578b205560e7f66b2562f86a1667b661e2f95be78124f56ef83904b691b",
+        "3900809e22ad0dd04743fa202a0ac06d9d17a860702cca87d4ad342b9bc04722"
+      ],
+      "sha256": "64df93d1b5642846f36c51c00dbe4da8423e807b051aa48c446ea233dc0c7b41",
+      "visual_note": "Four faithful directions; one idle plus one distinct walk pose per direction. Human review pending."
     },
     "buildings/house_H01_old": {
       "path": "res://assets/sprites/buildings/house_H01_old.png",
@@ -119,17 +141,30 @@
         9
       ],
       "collider": [
-        0,
-        0,
-        384,
-        288
+        8,
+        80,
+        368,
+        208
       ],
       "use_area": [
-        148,
-        256,
+        144,
+        252,
         64,
-        32
-      ]
+        36
+      ],
+      "doorAnchor": [
+        176,
+        288
+      ],
+      "doorWorldTile": [
+        49,
+        16
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/house_old_restored_source.png",
+      "source_sha256": "076305489340baf257a0d3e81ef2cab0aafc38bd5331e2300314cf985dd7214d",
+      "sha256": "519c47b3aea10c759d9165af59132c53a0b2b2388c0b9556917813c5507565db",
+      "visual_note": "Facades match supplied old/restored references; H03 window composition requires independent state integration. Human review pending."
     },
     "buildings/house_H01_restored": {
       "path": "res://assets/sprites/buildings/house_H01_restored.png",
@@ -146,17 +181,30 @@
         9
       ],
       "collider": [
-        0,
-        0,
-        384,
-        288
+        8,
+        80,
+        368,
+        208
       ],
       "use_area": [
-        148,
-        256,
+        144,
+        252,
         64,
-        32
-      ]
+        36
+      ],
+      "doorAnchor": [
+        176,
+        288
+      ],
+      "doorWorldTile": [
+        49,
+        16
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/house_old_restored_source.png",
+      "source_sha256": "076305489340baf257a0d3e81ef2cab0aafc38bd5331e2300314cf985dd7214d",
+      "sha256": "4d9cc6582adabebe1e44bdd029607142691d1da20a188aa31383f0b4036e2f2c",
+      "visual_note": "Facades match supplied old/restored references; H03 window composition requires independent state integration. Human review pending."
     },
     "flora/object_tree_umbu_stage1": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stage1.png",
@@ -183,7 +231,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_umbu_stage2": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stage2.png",
@@ -210,7 +259,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_umbu_stage3": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stage3.png",
@@ -237,7 +287,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_umbu_stage4": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stage4.png",
@@ -264,7 +315,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_umbu_stump": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stump.png",
@@ -291,7 +343,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_juazeiro_stage1": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage1.png",
@@ -318,7 +371,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_juazeiro_stage2": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage2.png",
@@ -345,7 +399,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_juazeiro_stage3": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage3.png",
@@ -372,7 +427,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_juazeiro_stage4": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage4.png",
@@ -399,7 +455,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_juazeiro_stump": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stump.png",
@@ -426,7 +483,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_catingueira_stage1": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage1.png",
@@ -453,7 +511,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_catingueira_stage2": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage2.png",
@@ -480,7 +539,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_catingueira_stage3": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage3.png",
@@ -507,7 +567,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_catingueira_stage4": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage4.png",
@@ -534,7 +595,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_catingueira_stump": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stump.png",
@@ -561,7 +623,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_jurema_stage1": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage1.png",
@@ -588,7 +651,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_jurema_stage2": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage2.png",
@@ -615,7 +679,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_jurema_stage3": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage3.png",
@@ -642,7 +707,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_jurema_stage4": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage4.png",
@@ -669,7 +735,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "flora/object_tree_jurema_stump": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stump.png",
@@ -696,7 +763,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/bush_1": {
       "path": "res://assets/sprites/props/bush_1.png",
@@ -723,7 +791,8 @@
         -16,
         64,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/bush_2": {
       "path": "res://assets/sprites/props/bush_2.png",
@@ -750,7 +819,8 @@
         -16,
         64,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/bush_3": {
       "path": "res://assets/sprites/props/bush_3.png",
@@ -777,7 +847,8 @@
         -16,
         64,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/mandacaru": {
       "path": "res://assets/sprites/props/mandacaru.png",
@@ -804,7 +875,8 @@
         -16,
         80,
         112
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/palma": {
       "path": "res://assets/sprites/props/palma.png",
@@ -831,7 +903,8 @@
         -16,
         96,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/rock_small_1": {
       "path": "res://assets/sprites/props/rock_small_1.png",
@@ -858,7 +931,8 @@
         -16,
         64,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/rock_small_2": {
       "path": "res://assets/sprites/props/rock_small_2.png",
@@ -885,7 +959,8 @@
         -16,
         64,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/rock_medium_1": {
       "path": "res://assets/sprites/props/rock_medium_1.png",
@@ -912,7 +987,8 @@
         -16,
         96,
         80
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/rock_medium_2": {
       "path": "res://assets/sprites/props/rock_medium_2.png",
@@ -939,7 +1015,8 @@
         -16,
         96,
         80
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/rock_large_1": {
       "path": "res://assets/sprites/props/rock_large_1.png",
@@ -966,7 +1043,8 @@
         -16,
         96,
         96
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/rock_large_2": {
       "path": "res://assets/sprites/props/rock_large_2.png",
@@ -993,7 +1071,8 @@
         -16,
         96,
         96
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/stick": {
       "path": "res://assets/sprites/props/stick.png",
@@ -1020,7 +1099,8 @@
         -16,
         64,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/log": {
       "path": "res://assets/sprites/props/log.png",
@@ -1047,7 +1127,8 @@
         -16,
         96,
         64
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/trash_can_1": {
       "path": "res://assets/sprites/props/trash_can_1.png",
@@ -1074,7 +1155,8 @@
         -16,
         56,
         56
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/trash_can_2": {
       "path": "res://assets/sprites/props/trash_can_2.png",
@@ -1101,7 +1183,8 @@
         -16,
         56,
         56
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/trash_bag_1": {
       "path": "res://assets/sprites/props/trash_bag_1.png",
@@ -1128,7 +1211,8 @@
         -16,
         56,
         56
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/trash_bag_2": {
       "path": "res://assets/sprites/props/trash_bag_2.png",
@@ -1155,7 +1239,8 @@
         -16,
         56,
         56
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/trash_metal_1": {
       "path": "res://assets/sprites/props/trash_metal_1.png",
@@ -1182,7 +1267,8 @@
         -16,
         56,
         56
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/trash_metal_2": {
       "path": "res://assets/sprites/props/trash_metal_2.png",
@@ -1209,7 +1295,8 @@
         -16,
         56,
         56
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/mailbox": {
       "path": "res://assets/sprites/props/mailbox.png",
@@ -1236,7 +1323,8 @@
         -16,
         64,
         80
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/sales_chest": {
       "path": "res://assets/sprites/props/sales_chest.png",
@@ -1263,7 +1351,8 @@
         -16,
         80,
         72
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "props/ruin": {
       "path": "res://assets/sprites/props/ruin.png",
@@ -1290,7 +1379,8 @@
         -16,
         160,
         128
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/soil_untilled": {
       "path": "res://assets/sprites/ground/soil_untilled.png",
@@ -1317,7 +1407,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/soil_tilled": {
       "path": "res://assets/sprites/ground/soil_tilled.png",
@@ -1344,7 +1435,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/soil_wet": {
       "path": "res://assets/sprites/ground/soil_wet.png",
@@ -1371,7 +1463,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "crops/crop_corn_stage1": {
       "path": "res://assets/sprites/crops/crop_corn_stage1.png",
@@ -1398,7 +1491,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "crops/crop_corn_stage2": {
       "path": "res://assets/sprites/crops/crop_corn_stage2.png",
@@ -1425,7 +1519,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "crops/crop_corn_stage3": {
       "path": "res://assets/sprites/crops/crop_corn_stage3.png",
@@ -1452,7 +1547,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "crops/crop_corn_stage4": {
       "path": "res://assets/sprites/crops/crop_corn_stage4.png",
@@ -1479,7 +1575,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "crops/crop_corn_stage5": {
       "path": "res://assets/sprites/crops/crop_corn_stage5.png",
@@ -1506,7 +1603,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/bed_broken": {
       "path": "res://assets/sprites/furniture/bed_broken.png",
@@ -1533,7 +1631,11 @@
         -32,
         128,
         160
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "5f8760d0e5448301981ba17a5cec6ff70af9d3a94e9ef1b3472c7af27ae9dc38"
     },
     "furniture/bed_intact": {
       "path": "res://assets/sprites/furniture/bed_intact.png",
@@ -1560,17 +1662,21 @@
         -32,
         128,
         160
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "f52ca19070f914547cf983650368ddd486ef0712727735613ebb236c349c6473"
     },
     "furniture/sofa_broken": {
       "path": "res://assets/sprites/furniture/sofa_broken.png",
       "size": [
         96,
-        32
+        64
       ],
       "pivot": [
         48,
-        32
+        64
       ],
       "footprint": [
         3,
@@ -1587,17 +1693,21 @@
         -32,
         160,
         96
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "4f89d7c5eac8af7eead4fe4ac9aa747220b8944cbf909a3d22696cd61f8c8cb3"
     },
     "furniture/sofa_intact": {
       "path": "res://assets/sprites/furniture/sofa_intact.png",
       "size": [
         96,
-        32
+        64
       ],
       "pivot": [
         48,
-        32
+        64
       ],
       "footprint": [
         3,
@@ -1614,17 +1724,21 @@
         -32,
         160,
         96
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "b5b67acee5bc52c39265523cc0ed00a6033d78afd29566f8c3cb7ff5d5f0f863"
     },
     "furniture/stove_broken": {
       "path": "res://assets/sprites/furniture/stove_broken.png",
       "size": [
         32,
-        32
+        48
       ],
       "pivot": [
         16,
-        32
+        48
       ],
       "footprint": [
         1,
@@ -1641,17 +1755,21 @@
         -32,
         96,
         96
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "67075b125914b2073f1955946211fd267c006c0bbc8b4f38468f279dc7e1b498"
     },
     "furniture/stove_intact": {
       "path": "res://assets/sprites/furniture/stove_intact.png",
       "size": [
         32,
-        32
+        48
       ],
       "pivot": [
         16,
-        32
+        48
       ],
       "footprint": [
         1,
@@ -1668,17 +1786,21 @@
         -32,
         96,
         96
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "7d21df33bfd2d9cc3a1ac9a2b7cf430b47e32929dc07db820dde4271744db550"
     },
     "furniture/sink_broken": {
       "path": "res://assets/sprites/furniture/sink_broken.png",
       "size": [
         96,
-        32
+        64
       ],
       "pivot": [
         48,
-        32
+        64
       ],
       "footprint": [
         3,
@@ -1695,17 +1817,21 @@
         -32,
         160,
         96
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "19e0fd1b49fe924d06baa4a2810f70a03cbd42d7efae040f31025621da6a409b"
     },
     "furniture/sink_intact": {
       "path": "res://assets/sprites/furniture/sink_intact.png",
       "size": [
         96,
-        32
+        64
       ],
       "pivot": [
         48,
-        32
+        64
       ],
       "footprint": [
         3,
@@ -1722,7 +1848,11 @@
         -32,
         160,
         96
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "eff37b0e0d791784f6223eb07157dfdde32c4a849f5b64fc2de194e826e9636b"
     },
     "furniture/bench": {
       "path": "res://assets/sprites/furniture/bench.png",
@@ -1749,7 +1879,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/table": {
       "path": "res://assets/sprites/furniture/table.png",
@@ -1776,7 +1907,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/chair": {
       "path": "res://assets/sprites/furniture/chair.png",
@@ -1803,7 +1935,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/cabinet": {
       "path": "res://assets/sprites/furniture/cabinet.png",
@@ -1830,7 +1963,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/bookshelf": {
       "path": "res://assets/sprites/furniture/bookshelf.png",
@@ -1857,7 +1991,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/low_table": {
       "path": "res://assets/sprites/furniture/low_table.png",
@@ -1884,7 +2019,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/wardrobe": {
       "path": "res://assets/sprites/furniture/wardrobe.png",
@@ -1911,7 +2047,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "furniture/bed_intact_r0": {
       "path": "res://assets/sprites/furniture/bed_intact_r0.png",
@@ -1939,7 +2076,11 @@
         128,
         160
       ],
-      "orientation": 0
+      "orientation": 0,
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "f52ca19070f914547cf983650368ddd486ef0712727735613ebb236c349c6473"
     },
     "furniture/bed_intact_r1": {
       "path": "res://assets/sprites/furniture/bed_intact_r1.png",
@@ -1967,7 +2108,11 @@
         160,
         128
       ],
-      "orientation": 1
+      "orientation": 1,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "f81440bd91629509242e7e3b11f8a4b5bf62f3fa725f677a2acf895058e31288"
     },
     "furniture/bed_intact_r2": {
       "path": "res://assets/sprites/furniture/bed_intact_r2.png",
@@ -1995,7 +2140,11 @@
         128,
         160
       ],
-      "orientation": 2
+      "orientation": 2,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "06bc669e17e62156e68a7a99292ea226697b74ad68e7afebe7033c212a6c6701"
     },
     "furniture/bed_intact_r3": {
       "path": "res://assets/sprites/furniture/bed_intact_r3.png",
@@ -2023,17 +2172,21 @@
         160,
         128
       ],
-      "orientation": 3
+      "orientation": 3,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "87939d56d0224326991c080456301e64d7c2b84b009bc2430d601fa7160ea9a7"
     },
     "furniture/sofa_intact_r0": {
       "path": "res://assets/sprites/furniture/sofa_intact_r0.png",
       "size": [
         96,
-        32
+        64
       ],
       "pivot": [
         48,
-        32
+        64
       ],
       "footprint": [
         3,
@@ -2051,7 +2204,11 @@
         160,
         96
       ],
-      "orientation": 0
+      "orientation": 0,
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "b5b67acee5bc52c39265523cc0ed00a6033d78afd29566f8c3cb7ff5d5f0f863"
     },
     "furniture/sofa_intact_r1": {
       "path": "res://assets/sprites/furniture/sofa_intact_r1.png",
@@ -2079,7 +2236,11 @@
         96,
         160
       ],
-      "orientation": 1
+      "orientation": 1,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "ba8f1a78f7a2d3db4775243622194676166414c7a14287ba9cfbc0226204e554"
     },
     "furniture/sofa_intact_r2": {
       "path": "res://assets/sprites/furniture/sofa_intact_r2.png",
@@ -2107,7 +2268,11 @@
         160,
         96
       ],
-      "orientation": 2
+      "orientation": 2,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "d292f2da39ab25fe72ede4475770d4d5881cb0a8e08c42dae870c0672b969d62"
     },
     "furniture/sofa_intact_r3": {
       "path": "res://assets/sprites/furniture/sofa_intact_r3.png",
@@ -2135,17 +2300,21 @@
         96,
         160
       ],
-      "orientation": 3
+      "orientation": 3,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "f15aa65cd6fc618ad06811b5fce2a492eefda97921043ca011c51f83c4245979"
     },
     "furniture/stove_intact_r0": {
       "path": "res://assets/sprites/furniture/stove_intact_r0.png",
       "size": [
         32,
-        32
+        48
       ],
       "pivot": [
         16,
-        32
+        48
       ],
       "footprint": [
         1,
@@ -2163,17 +2332,21 @@
         96,
         96
       ],
-      "orientation": 0
+      "orientation": 0,
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "7d21df33bfd2d9cc3a1ac9a2b7cf430b47e32929dc07db820dde4271744db550"
     },
     "furniture/stove_intact_r1": {
       "path": "res://assets/sprites/furniture/stove_intact_r1.png",
       "size": [
         32,
-        32
+        48
       ],
       "pivot": [
         16,
-        32
+        48
       ],
       "footprint": [
         1,
@@ -2191,17 +2364,21 @@
         96,
         96
       ],
-      "orientation": 1
+      "orientation": 1,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "881a5966ffa104118cc5ce98a553606afd8b9bcbe7eae59ca4bc28dee1ef3ca8"
     },
     "furniture/stove_intact_r2": {
       "path": "res://assets/sprites/furniture/stove_intact_r2.png",
       "size": [
         32,
-        32
+        48
       ],
       "pivot": [
         16,
-        32
+        48
       ],
       "footprint": [
         1,
@@ -2219,17 +2396,21 @@
         96,
         96
       ],
-      "orientation": 2
+      "orientation": 2,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "525b3ef49cd83ed421ce191dfb2507b86eb7969004f0525db7d24566c410b71e"
     },
     "furniture/stove_intact_r3": {
       "path": "res://assets/sprites/furniture/stove_intact_r3.png",
       "size": [
         32,
-        32
+        48
       ],
       "pivot": [
         16,
-        32
+        48
       ],
       "footprint": [
         1,
@@ -2247,17 +2428,21 @@
         96,
         96
       ],
-      "orientation": 3
+      "orientation": 3,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "4f55afea21c18f6244bacf5e875decc195d8fc5b993529fa24bb225da804e57a"
     },
     "furniture/sink_intact_r0": {
       "path": "res://assets/sprites/furniture/sink_intact_r0.png",
       "size": [
         96,
-        32
+        64
       ],
       "pivot": [
         48,
-        32
+        64
       ],
       "footprint": [
         3,
@@ -2275,7 +2460,11 @@
         160,
         96
       ],
-      "orientation": 0
+      "orientation": 0,
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "eff37b0e0d791784f6223eb07157dfdde32c4a849f5b64fc2de194e826e9636b"
     },
     "furniture/sink_intact_r1": {
       "path": "res://assets/sprites/furniture/sink_intact_r1.png",
@@ -2303,7 +2492,11 @@
         96,
         160
       ],
-      "orientation": 1
+      "orientation": 1,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "c6be1c43751d365f3fb21883f357381caaf8d17c7a7aaa0311b78dce642c353c"
     },
     "furniture/sink_intact_r2": {
       "path": "res://assets/sprites/furniture/sink_intact_r2.png",
@@ -2331,7 +2524,11 @@
         160,
         96
       ],
-      "orientation": 2
+      "orientation": 2,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "2c84e2739a175c61c3ae8afb76333b487b039853551a4ce6ce9d7835b2302323"
     },
     "furniture/sink_intact_r3": {
       "path": "res://assets/sprites/furniture/sink_intact_r3.png",
@@ -2359,7 +2556,11 @@
         96,
         160
       ],
-      "orientation": 3
+      "orientation": 3,
+      "status": "prototype_reference_derived_rotated",
+      "source": "sources/imagegen/interior_furniture_source.png",
+      "source_sha256": "4027aa4ac42ae76e3495dfb86e38015a026c51c7b08b053f9ded08ce2d6bc76f",
+      "sha256": "e30764fae1434118ed9b4eaabc2fb8f828a6aeb3f05aa7024fb310a461f7b78f"
     },
     "furniture/bench_intact_r0": {
       "path": "res://assets/sprites/furniture/bench_intact_r0.png",
@@ -2387,7 +2588,8 @@
         96,
         96
       ],
-      "orientation": 0
+      "orientation": 0,
+      "status": "prototype_procedural"
     },
     "furniture/bench_intact_r1": {
       "path": "res://assets/sprites/furniture/bench_intact_r1.png",
@@ -2415,7 +2617,8 @@
         96,
         96
       ],
-      "orientation": 1
+      "orientation": 1,
+      "status": "prototype_procedural"
     },
     "furniture/bench_intact_r2": {
       "path": "res://assets/sprites/furniture/bench_intact_r2.png",
@@ -2443,7 +2646,8 @@
         96,
         96
       ],
-      "orientation": 2
+      "orientation": 2,
+      "status": "prototype_procedural"
     },
     "furniture/bench_intact_r3": {
       "path": "res://assets/sprites/furniture/bench_intact_r3.png",
@@ -2471,7 +2675,8 @@
         96,
         96
       ],
-      "orientation": 3
+      "orientation": 3,
+      "status": "prototype_procedural"
     },
     "dirt/dirt_01_web": {
       "path": "res://assets/sprites/dirt/dirt_01_web.png",
@@ -2498,7 +2703,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "dirt/dirt_02_dust": {
       "path": "res://assets/sprites/dirt/dirt_02_dust.png",
@@ -2525,7 +2731,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "dirt/dirt_03_papers": {
       "path": "res://assets/sprites/dirt/dirt_03_papers.png",
@@ -2552,7 +2759,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "dirt/dirt_04_rubble": {
       "path": "res://assets/sprites/dirt/dirt_04_rubble.png",
@@ -2579,7 +2787,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "dirt/dirt_05_rug": {
       "path": "res://assets/sprites/dirt/dirt_05_rug.png",
@@ -2606,7 +2815,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "dirt/dirt_06_utensils": {
       "path": "res://assets/sprites/dirt/dirt_06_utensils.png",
@@ -2633,7 +2843,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/axe": {
       "path": "res://assets/sprites/icons/axe.png",
@@ -2660,7 +2871,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/tools_source.png",
+      "source_sha256": "e058f5e4a1deab47fec0b4d9234b7761cb87d63cd0b2f1e2beb7c09df2621b18",
+      "sha256": "f03ceaa8f7d245340f4026e15201bdf20d0ac2bc751066b692a6ffee834606ff"
     },
     "icons/pick": {
       "path": "res://assets/sprites/icons/pick.png",
@@ -2687,7 +2902,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/tools_source.png",
+      "source_sha256": "e058f5e4a1deab47fec0b4d9234b7761cb87d63cd0b2f1e2beb7c09df2621b18",
+      "sha256": "75f1a9fc07c781766f37cbe001318d5601b52c6225fe3763a26e922ff9e1c373"
     },
     "icons/hoe": {
       "path": "res://assets/sprites/icons/hoe.png",
@@ -2714,7 +2933,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/tools_source.png",
+      "source_sha256": "e058f5e4a1deab47fec0b4d9234b7761cb87d63cd0b2f1e2beb7c09df2621b18",
+      "sha256": "9a8093689aa96f7c7102fe9fc0cb9fceb7e7938054be50be123676c01c2c440c"
     },
     "icons/scythe": {
       "path": "res://assets/sprites/icons/scythe.png",
@@ -2741,7 +2964,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/tools_source.png",
+      "source_sha256": "e058f5e4a1deab47fec0b4d9234b7761cb87d63cd0b2f1e2beb7c09df2621b18",
+      "sha256": "38c7edb50bcd74321e39e8dcdd2e8cd519057b50ca642b0b2e0e954e554f8373"
     },
     "icons/water": {
       "path": "res://assets/sprites/icons/water.png",
@@ -2768,7 +2995,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/tools_source.png",
+      "source_sha256": "e058f5e4a1deab47fec0b4d9234b7761cb87d63cd0b2f1e2beb7c09df2621b18",
+      "sha256": "1cb642df78c0a947242ce93c8e363e73268b3047f77798b82545b97eb75771cc"
     },
     "icons/hammer": {
       "path": "res://assets/sprites/icons/hammer.png",
@@ -2795,7 +3026,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/tools_source.png",
+      "source_sha256": "e058f5e4a1deab47fec0b4d9234b7761cb87d63cd0b2f1e2beb7c09df2621b18",
+      "sha256": "aacc72bc9dedaee80293525b9d1a33c76654c024c28dc6ac207676abf2ed6c77"
     },
     "icons/corn_seed": {
       "path": "res://assets/sprites/icons/corn_seed.png",
@@ -2822,7 +3057,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/wood": {
       "path": "res://assets/sprites/icons/wood.png",
@@ -2849,7 +3085,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/stone": {
       "path": "res://assets/sprites/icons/stone.png",
@@ -2876,7 +3113,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/fiber": {
       "path": "res://assets/sprites/icons/fiber.png",
@@ -2903,7 +3141,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/scrap": {
       "path": "res://assets/sprites/icons/scrap.png",
@@ -2930,7 +3169,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/trash": {
       "path": "res://assets/sprites/icons/trash.png",
@@ -2957,7 +3197,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/coffee": {
       "path": "res://assets/sprites/icons/coffee.png",
@@ -2984,7 +3225,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/bar": {
       "path": "res://assets/sprites/icons/bar.png",
@@ -3011,7 +3253,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/fruit": {
       "path": "res://assets/sprites/icons/fruit.png",
@@ -3038,7 +3281,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/blocked": {
       "path": "res://assets/sprites/icons/blocked.png",
@@ -3065,7 +3309,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/valid": {
       "path": "res://assets/sprites/icons/valid.png",
@@ -3092,7 +3337,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/stamina": {
       "path": "res://assets/sprites/icons/stamina.png",
@@ -3119,7 +3365,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "icons/heart": {
       "path": "res://assets/sprites/icons/heart.png",
@@ -3146,7 +3393,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/grass": {
       "path": "res://assets/sprites/ground/grass.png",
@@ -3173,7 +3421,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/path": {
       "path": "res://assets/sprites/ground/path.png",
@@ -3200,7 +3449,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/water": {
       "path": "res://assets/sprites/ground/water.png",
@@ -3227,7 +3477,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/water_edge": {
       "path": "res://assets/sprites/ground/water_edge.png",
@@ -3254,7 +3505,8 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_procedural"
     },
     "ground/floor_old": {
       "path": "res://assets/sprites/ground/floor_old.png",
@@ -3281,7 +3533,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "/workspace/shared/visual_revision/Arquivos-para-o-jogo/CENÁRIO INTERNO CASA/ABANDONADA/Interior de fazenda abandonada em pixel art.png",
+      "source_sha256": "2e4c437145705252bf570b9f87ec82c5d5cfadc7383585c6cb28a751eacc905c",
+      "sha256": "12c0fbbcfddb0286265905b299ea07943e3af58c73afd126fb8709b44c175d6c"
     },
     "ground/floor_new": {
       "path": "res://assets/sprites/ground/floor_new.png",
@@ -3308,7 +3564,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "/workspace/shared/visual_revision/Arquivos-para-o-jogo/CENÁRIO INTERNO CASA/REFORMADA/Casa rural restaurada, pronta para jogar.png",
+      "source_sha256": "7bc64eb0b2ab872385d187553bfdcc93088c3f3165526ed5fa1e22b34e679b8f",
+      "sha256": "72c236dc676112ce6f4f809f5c46e67c6aa169068a3f83aabac19ec9e5a4bd30"
     },
     "ground/wall_old": {
       "path": "res://assets/sprites/ground/wall_old.png",
@@ -3335,7 +3595,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "/workspace/shared/visual_revision/Arquivos-para-o-jogo/CENÁRIO INTERNO CASA/ABANDONADA/Interior de fazenda abandonada em pixel art.png",
+      "source_sha256": "2e4c437145705252bf570b9f87ec82c5d5cfadc7383585c6cb28a751eacc905c",
+      "sha256": "886017b2605171ffd65654052e03663f59265ecd579bc6a86bab15de1a2bdde2"
     },
     "ground/wall_new": {
       "path": "res://assets/sprites/ground/wall_new.png",
@@ -3362,7 +3626,11 @@
         0,
         0,
         0
-      ]
+      ],
+      "status": "prototype_reference_derived",
+      "source": "/workspace/shared/visual_revision/Arquivos-para-o-jogo/CENÁRIO INTERNO CASA/REFORMADA/Casa rural restaurada, pronta para jogar.png",
+      "source_sha256": "7bc64eb0b2ab872385d187553bfdcc93088c3f3165526ed5fa1e22b34e679b8f",
+      "sha256": "dfb5cb39a9d1f7e516011b0568087f627acf3622446a5bafc1a1f273f3f28a28"
     },
     "buildings/repair_H03_window_boarded": {
       "path": "res://assets/sprites/buildings/repair_H03_window_boarded.png",
@@ -3379,17 +3647,25 @@
         1
       ],
       "collider": [
-        6,
-        5,
-        52,
-        53
-      ],
-      "use_area": [
         0,
         0,
         0,
         0
-      ]
+      ],
+      "use_area": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "worldAnchor": [
+        53,
+        14
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/house_windows_source.png",
+      "source_sha256": "845d2ccafef5e3d1548eace36017958ecdb4e6b850d711f9a9cf8651dfe71bdd",
+      "sha256": "22381eb16900bc6dd2c628c276446c83368294aa9be138e12c826893ed8ff624"
     },
     "buildings/repair_H03_window_open": {
       "path": "res://assets/sprites/buildings/repair_H03_window_open.png",
@@ -3406,17 +3682,25 @@
         1
       ],
       "collider": [
-        6,
-        5,
-        52,
-        53
-      ],
-      "use_area": [
         0,
         0,
         0,
         0
-      ]
+      ],
+      "use_area": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "worldAnchor": [
+        53,
+        14
+      ],
+      "status": "prototype_reference_derived",
+      "source": "sources/imagegen/house_windows_source.png",
+      "source_sha256": "845d2ccafef5e3d1548eace36017958ecdb4e6b850d711f9a9cf8651dfe71bdd",
+      "sha256": "500e3f823f3f9ce7aeefc9b16303632b85c4aea637f8961cb148b38cd16a7274"
     },
     "actors/action_axe": {
       "path": "res://assets/sprites/actors/action_axe.png",
@@ -3463,7 +3747,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_pick": {
       "path": "res://assets/sprites/actors/action_pick.png",
@@ -3510,7 +3795,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_hoe": {
       "path": "res://assets/sprites/actors/action_hoe.png",
@@ -3557,7 +3843,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_scythe": {
       "path": "res://assets/sprites/actors/action_scythe.png",
@@ -3604,7 +3891,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_water": {
       "path": "res://assets/sprites/actors/action_water.png",
@@ -3651,7 +3939,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_hammer": {
       "path": "res://assets/sprites/actors/action_hammer.png",
@@ -3698,7 +3987,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_sow": {
       "path": "res://assets/sprites/actors/action_sow.png",
@@ -3745,7 +4035,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_clean": {
       "path": "res://assets/sprites/actors/action_clean.png",
@@ -3792,7 +4083,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/action_eat": {
       "path": "res://assets/sprites/actors/action_eat.png",
@@ -3839,7 +4131,8 @@
         0.12,
         0.12
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     },
     "actors/lia_deliver": {
       "path": "res://assets/sprites/actors/lia_deliver.png",
@@ -3886,7 +4179,8 @@
         0.14,
         0.14
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "prototype_procedural"
     },
     "actors/lia_talk": {
       "path": "res://assets/sprites/actors/lia_talk.png",
@@ -3933,7 +4227,8 @@
         0.14,
         0.14
       ],
-      "contact_frame": 2
+      "contact_frame": 2,
+      "status": "placeholder_action"
     }
   },
   "audio": {

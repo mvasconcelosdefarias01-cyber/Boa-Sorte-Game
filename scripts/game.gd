@@ -52,9 +52,12 @@ var lia_arriving := false
 var lia_leaving := false
 var camera_origin := Vector2.ZERO
 var selected := 0
+var menu_preferences := {"uiScale":1.0,"effectsVolume":0.75,"highContrast":false,"repeatAction":true}
 var inventory_cursor := 0
 var editor_item := ""
 var editor_rotation := 0
+var build_preview_tile := Vector2i(11,11)
+var build_keyboard_preview := false
 var repair_target := Vector2i.ZERO
 var name_edit: LineEdit
 var font: Font
@@ -62,7 +65,11 @@ var asset_manifest: Dictionary = {}
 var asset_textures: Dictionary = {}
 var sounds: Dictionary = {}
 var audio_player: AudioStreamPlayer
+var ui: CanvasLayer
 var elapsed := 0.0
+var moving_this_frame := false
+var world_mouse_held := false
+var pointer_over_ui := false
 
 func _ready() -> void:
  font = ThemeDB.fallback_font
@@ -70,20 +77,16 @@ func _ready() -> void:
  audio_player = AudioStreamPlayer.new()
  audio_player.volume_db = -9.0
  add_child(audio_player)
- name_edit = LineEdit.new()
- name_edit.position = Vector2(205, 157)
- name_edit.size = Vector2(230, 30)
- name_edit.placeholder_text = "Seu nome (2–20 caracteres)"
- name_edit.max_length = 20
- add_child(name_edit)
- name_edit.text_submitted.connect(func(value: String): new_game(value))
- name_edit.hide()
+ ui = load("res://scripts/ui.gd").new()
+ add_child(ui)
+ ui.setup(self)
  if OS.has_feature("headless"):
   get_viewport().set_update_mode(SubViewport.UPDATE_ALWAYS)
  queue_redraw()
 
 func reset_pending_actions() -> void:
  action_timer = 0.0
+ world_mouse_held = false
  pending = {}
  queued = false
  food_timer = 0.0
@@ -97,7 +100,7 @@ func new_game(player_name: String) -> bool:
   say("Nome: use de 2 a 20 caracteres.")
   return false
  reset_pending_actions()
- s = {"schemaVersion":SAVE_SCHEMA,"name":player_name,"mapId":"FARM01","position":[59.5,12.9],"facing":[-1,0],"day":1,"minutes":480,"hp":100,"hpMax":100,"stamina":100,"staminaMax":100,"level":1,"xp":0,"coins":0,"inventory":{},"hotbar":TOOLS.duplicate(),"water":20,"repairs":{},"dirt":{},"condemned":{},"objects":{},"soil":{},"drops":{},"furniture":{},"mail":{"wood":20,"stone":12,"fiber":3,"scrap":3,"bench":1},"storage":{},"shipment":{},"fruitTaken":0,"arrivalGranted":false,"liaExited":false,"validSleepDay":0,"completed":false,"lateNoted":false,"nightTransactionId":0,"morningSeen":false,"preferences":{"uiScale":1.0,"effectsVolume":0.75,"highContrast":false,"repeatAction":true}}
+ s = {"schemaVersion":SAVE_SCHEMA,"name":player_name,"mapId":"FARM01","position":[59.5,12.9],"facing":[-1,0],"day":1,"minutes":480,"hp":100,"hpMax":100,"stamina":100,"staminaMax":100,"level":1,"xp":0,"coins":0,"inventory":{},"hotbar":TOOLS.duplicate(),"water":20,"repairs":{},"dirt":{},"condemned":{},"objects":{},"soil":{},"drops":{},"furniture":{},"mail":{"wood":20,"stone":12,"fiber":3,"scrap":3,"bench":1},"storage":{},"shipment":{},"fruitTaken":0,"arrivalGranted":false,"liaExited":false,"validSleepDay":0,"completed":false,"lateNoted":false,"nightTransactionId":0,"morningSeen":false,"preferences":menu_preferences.duplicate(true)}
  for id in REPAIRS: s.repairs[id] = {"hitsDone":0,"paid":false,"completed":false}
  for id in DIRT: s.dirt[id] = false
  for id in CONDEMNED: s.condemned[id] = 2
@@ -112,7 +115,7 @@ func new_game(player_name: String) -> bool:
  lia_x = 63.0
  lia_arriving = true
  lia_leaving = false
- name_edit.hide()
+ if name_edit: name_edit.hide()
  queue_redraw()
  return true
 
@@ -156,9 +159,17 @@ func is_clear_spawn(p: Vector2i) -> bool:
   if tile_of(s.objects[id].at) == p: return false
  return true
 
+func _input(event: InputEvent) -> void:
+ if event is InputEventMouseMotion or event is InputEventMouseButton:
+  if ui: pointer_over_ui = ui.blocks_world_at(event.position)
+  if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+   world_mouse_held = false
+
 func _process(delta: float) -> void:
  elapsed += delta
+ if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT): world_mouse_held = false
  transition_cooldown = maxf(0.0,transition_cooldown-delta)
+ if mode != "PLAY": moving_this_frame = false
  if mode == "PLAY":
   process_movement(delta)
   clock_accumulator += delta
@@ -182,7 +193,7 @@ func _process(delta: float) -> void:
     if queued:
      queued = false
      begin_action()
-    elif s.preferences.get("repeatAction",true) and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+    elif s.preferences.get("repeatAction",true) and world_mouse_held and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not pointer_over_ui:
      begin_action()
   if food_timer > 0:
    food_timer -= delta
@@ -203,10 +214,15 @@ func _process(delta: float) -> void:
     mode = "PLAY"
     save_game(slot)
     say("Um novo começo: restaure a casa e plante 20 milhos.")
+ elif mode == "BUILD":
+  var mouse = get_viewport().get_mouse_position()
+  if not build_keyboard_preview and mouse.x > 175 and mouse.y > 80 and mouse.y < 308: build_preview_tile = screen_tile(mouse)
  if message_timer > 0: message_timer -= delta
+ if ui: ui.refresh()
  queue_redraw()
 
 func process_movement(delta: float) -> void:
+ moving_this_frame = false
  if action_timer > 0 or food_timer > 0: return
  var v = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
  v += Vector2(float(Input.is_key_pressed(KEY_D))-float(Input.is_key_pressed(KEY_A)),float(Input.is_key_pressed(KEY_S))-float(Input.is_key_pressed(KEY_W)))
@@ -222,6 +238,7 @@ func process_movement(delta: float) -> void:
  var candidate = old + v * 120.0 * factor * delta / TILE
  if can_walk(Vector2i(floori(candidate.x),floori(candidate.y))):
   s.position = [candidate.x,candidate.y]
+  moving_this_frame = candidate.distance_squared_to(old) > 0.000001
   if weight >= 32:
    move_weight_accumulator += delta
    if move_weight_accumulator >= 10:
@@ -261,14 +278,23 @@ func furniture_covers(id: String, p: Vector2i) -> bool:
 func _unhandled_input(event: InputEvent) -> void:
  if event is InputEventKey and event.pressed and not event.echo:
   if mode == "TITLE":
+   if event.keycode == KEY_ESCAPE and (ui.title_options or ui.new_slot_select or ui.overwrite_slot != 0):
+    ui.title_options = false; ui.new_slot_select = false; ui.overwrite_slot = 0; ui.refresh(true); return
+   if ui.title_options:
+    change_option(event.keycode)
+    ui.refresh(true)
+    return
+   if ui.overwrite_slot != 0: return
    if event.keycode >= KEY_1 and event.keycode <= KEY_3:
     slot = event.keycode - KEY_0
-    if FileAccess.file_exists(save_path(slot)): load_game(slot)
-    else: mode = "NAME"; name_edit.show(); name_edit.grab_focus()
-   elif event.keycode == KEY_N: mode = "NAME"; name_edit.show(); name_edit.grab_focus()
+    if ui.new_slot_select: ui.choose_new_slot(slot); ui.refresh(true)
+    elif ui.overwrite_slot == 0:
+     if FileAccess.file_exists(save_path(slot)): load_game(slot)
+     else: ui.start_new_game_in_slot(slot); ui.refresh(true)
+   elif event.keycode == KEY_N: ui.request_new_game(); ui.refresh(true)
   elif mode == "NAME":
    if event.keycode == KEY_ENTER: new_game(name_edit.text)
-   elif event.keycode == KEY_ESCAPE: mode = "TITLE"; name_edit.hide()
+   elif event.keycode == KEY_ESCAPE: mode = "TITLE"; ui.refresh(true)
   elif mode == "INTRO":
    if event.keycode == KEY_SPACE or event.keycode == KEY_ENTER: advance_intro()
    elif event.keycode == KEY_ESCAPE: skip_intro()
@@ -277,12 +303,16 @@ func _unhandled_input(event: InputEvent) -> void:
    elif event.keycode == KEY_E: interact()
    elif event.keycode == KEY_I: mode = "MODAL"; modal = "inventory"; inventory_cursor = 0
    elif event.keycode == KEY_J: mode = "MODAL"; modal = "journal"
-   elif event.keycode == KEY_B and s.mapId == "HOME01": mode = "BUILD"; editor_item = ""; editor_rotation = 0
+   elif event.keycode == KEY_B and s.mapId == "HOME01": mode = "BUILD"; editor_item = ""; editor_rotation = 0; build_keyboard_preview = false
    elif event.keycode == KEY_ESCAPE: mode = "MODAL"; modal = "pause"
    elif event.keycode == KEY_F5: save_game(slot); say("Partida salva.")
    elif event.keycode == KEY_F9: load_game(slot)
   elif mode == "MODAL":
-   if event.keycode == KEY_ESCAPE or event.keycode == KEY_I or event.keycode == KEY_J: mode = "PLAY"; modal = ""
+   if event.keycode == KEY_ESCAPE:
+    if modal == "options": modal = "pause"
+    elif modal == "waste_confirm": modal = "sales"
+    else: mode = "PLAY"; modal = ""
+   elif event.keycode == KEY_I or event.keycode == KEY_J: mode = "PLAY"; modal = ""
    elif modal == "inventory" and event.keycode in [KEY_LEFT,KEY_RIGHT,KEY_UP,KEY_DOWN]:
     var step = -1 if event.keycode == KEY_LEFT else 1 if event.keycode == KEY_RIGHT else -6 if event.keycode == KEY_UP else 6
     inventory_cursor = clampi(inventory_cursor+step,0,23)
@@ -309,28 +339,38 @@ func _unhandled_input(event: InputEvent) -> void:
      else: ship_one(item)
    elif event.keycode == KEY_SPACE and modal == "sleep": mode = "PLAY"; close_night()
    elif event.keycode == KEY_SPACE and modal == "repair":
-    mode = "PLAY"; modal = ""
-    if action_check("TOOL_HAMMER",repair_target) == "":
-     pending = {"tool":"TOOL_HAMMER","target":[repair_target.x,repair_target.y]}
-     action_timer = 0.55
+    confirm_repair()
    elif event.keycode == KEY_S and modal == "pause": save_game(slot); say("Partida salva.")
    elif modal == "inventory" and event.keycode >= KEY_6 and event.keycode <= KEY_8:
     assign_hotbar(event.keycode-KEY_1,inventory_item_at(inventory_cursor))
   elif mode == "BUILD":
    if event.keycode == KEY_ESCAPE: editor_item = ""; mode = "PLAY"
    elif event.keycode == KEY_R: editor_rotation = (editor_rotation+1)%4
+   elif event.keycode in [KEY_W,KEY_A,KEY_S,KEY_D,KEY_UP,KEY_LEFT,KEY_DOWN,KEY_RIGHT]:
+    var offset = Vector2i.ZERO
+    if event.keycode in [KEY_W,KEY_UP]: offset = Vector2i.UP
+    elif event.keycode in [KEY_S,KEY_DOWN]: offset = Vector2i.DOWN
+    elif event.keycode in [KEY_A,KEY_LEFT]: offset = Vector2i.LEFT
+    else: offset = Vector2i.RIGHT
+    build_preview_tile = Vector2i(clampi(build_preview_tile.x+offset.x,0,23),clampi(build_preview_tile.y+offset.y,0,17))
+    build_keyboard_preview = true
+   elif event.keycode == KEY_ENTER and editor_item != "": place_furniture(editor_item,build_preview_tile,editor_rotation)
    elif event.keycode >= KEY_1 and event.keycode <= KEY_5:
     editor_item = ["bed","sofa","stove","sink","bench"][event.keycode-KEY_1]
     editor_rotation = s.furniture[editor_item].rotation
+ if event is InputEventMouseMotion and mode == "BUILD":
+  if event.position.x > 175 and event.position.y > 80 and event.position.y < 308: build_keyboard_preview = false
  if event is InputEventMouseButton and event.pressed:
   if mode == "PLAY":
-   if event.button_index == MOUSE_BUTTON_LEFT: begin_action()
+   if event.button_index == MOUSE_BUTTON_LEFT: world_mouse_held = true; begin_action()
    elif event.button_index == MOUSE_BUTTON_RIGHT: interact()
    elif event.button_index == MOUSE_BUTTON_WHEEL_UP: selected = (selected+7)%8
    elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN: selected = (selected+1)%8
   elif mode == "BUILD" and event.button_index == MOUSE_BUTTON_LEFT and editor_item != "":
    place_furniture(editor_item, screen_tile(event.position), editor_rotation)
   elif mode == "INTRO" and event.button_index == MOUSE_BUTTON_LEFT: advance_intro()
+ elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+  world_mouse_held = false
 
 func advance_intro() -> void:
  if lia_leaving or lia_arriving: return
@@ -390,6 +430,15 @@ func begin_action() -> void:
    return
  pending = {"tool":tool,"target":[target.x,target.y]}
  action_timer = {"TOOL_AXE":0.70,"TOOL_PICK":0.70,"TOOL_HOE":0.55,"TOOL_SCYTHE":0.65,"TOOL_WATER":0.55,"TOOL_HAMMER":0.55,"SEED_CORN":0.45,"HAND":0.45}[tool]
+
+func confirm_repair() -> void:
+ mode = "PLAY"; modal = ""
+ if action_check("TOOL_HAMMER",repair_target) == "":
+  pending = {"tool":"TOOL_HAMMER","target":[repair_target.x,repair_target.y]}
+  action_timer = 0.55
+
+func furniture_name(id: String) -> String:
+ return str({"bed":"Cama","sofa":"Sofá","stove":"Fogão","sink":"Pia","bench":"Banco"}.get(id,id))
 
 func action_check(tool: String, p: Vector2i) -> String:
  if abs(p.x-floori(s.position[0]))+abs(p.y-floori(s.position[1])) != 1: return "Alvo fora de alcance."
@@ -586,7 +635,7 @@ func assign_hotbar(index: int,item: String) -> bool:
  if not (TOOLS.has(item) or FOOD.has(item)): say("Só ferramentas, sementes e alimentos vão aos atalhos."); return false
  s.hotbar[index] = item
  save_game(slot)
- say("Atalho %d: %s" % [index+1,item])
+ say("Atalho %d: %s" % [index+1,short_name(item)])
  return true
 
 func deposit_storage(item: String) -> bool:
@@ -595,7 +644,7 @@ func deposit_storage(item: String) -> bool:
  s.inventory[item] -= 1
  s.storage[item] = int(s.storage.get(item,0))+1
  save_game(slot)
- say("1 %s guardado na encomenda." % item)
+ say("1 %s guardado na encomenda." % short_name(item))
  return true
 
 func withdraw_storage(item: String) -> bool:
@@ -604,20 +653,21 @@ func withdraw_storage(item: String) -> bool:
  s.storage[item] -= 1
  s.inventory[item] = int(s.inventory.get(item,0))+1
  save_game(slot)
- say("1 %s retirado do estoque." % item)
+ say("1 %s retirado do estoque." % short_name(item))
  return true
 
 func change_option(code: int) -> void:
+ var preferences: Dictionary = s.preferences if not s.is_empty() else menu_preferences
  if code == KEY_1:
   var scales = [1.0,1.25,1.5]
-  var index = scales.find(float(s.preferences.uiScale))
-  s.preferences.uiScale = scales[(index+1)%3]
- elif code == KEY_2: s.preferences.highContrast = not s.preferences.highContrast
- elif code == KEY_3: s.preferences.repeatAction = not s.preferences.repeatAction
- elif code == KEY_4: s.preferences.effectsVolume = maxf(0.0,float(s.preferences.effectsVolume)-0.25)
- elif code == KEY_5: s.preferences.effectsVolume = minf(1.0,float(s.preferences.effectsVolume)+0.25)
- if audio_player: audio_player.volume_db = linear_to_db(maxf(0.001,float(s.preferences.effectsVolume)))
- save_game(slot)
+  var index = scales.find(float(preferences.uiScale))
+  preferences.uiScale = scales[(index+1)%3]
+ elif code == KEY_2: preferences.highContrast = not preferences.highContrast
+ elif code == KEY_3: preferences.repeatAction = not preferences.repeatAction
+ elif code == KEY_4: preferences.effectsVolume = maxf(0.0,float(preferences.effectsVolume)-0.25)
+ elif code == KEY_5: preferences.effectsVolume = minf(1.0,float(preferences.effectsVolume)+0.25)
+ if audio_player: audio_player.volume_db = linear_to_db(maxf(0.001,float(preferences.effectsVolume)))
+ if not s.is_empty(): save_game(slot)
 
 func carried_weight() -> float:
  var total := 0.0
@@ -753,6 +803,13 @@ func withdraw_one(item: String) -> bool:
  save_game(slot)
  return true
 
+func collect_waste() -> bool:
+ if int(s.inventory.get("waste",0)) <= 0: say("Não há resíduo na mochila."); return false
+ s.inventory.waste -= 1
+ save_game(slot)
+ say("Resíduo encaminhado para coleta, sem moedas.")
+ return true
+
 func house_ready() -> bool:
  for id in s.repairs:
   if not s.repairs[id].completed: return false
@@ -862,7 +919,7 @@ func save_game(n: int) -> bool:
 func load_game(n: int) -> bool:
  if not FileAccess.file_exists(save_path(n)): return false
  var parsed = JSON.parse_string(FileAccess.get_file_as_string(save_path(n)))
- if not parsed is Dictionary or int(parsed.get("schemaVersion",-1)) != SAVE_SCHEMA: say("Save incompatível."); return false
+ if not parsed is Dictionary or int(parsed.get("schemaVersion",-1)) != SAVE_SCHEMA: say("Partida salva incompatível."); return false
  reset_pending_actions()
  s = parsed
  if not s.has("hotbar") or not s.hotbar is Array or s.hotbar.size() != 8: s.hotbar = TOOLS.duplicate()
@@ -875,7 +932,7 @@ func load_game(n: int) -> bool:
  if audio_player: audio_player.volume_db = linear_to_db(maxf(0.001,float(s.preferences.effectsVolume)))
  slot = n
  clock_accumulator = float(s.get("clockAccumulator",0))
- name_edit.hide()
+ if name_edit: name_edit.hide()
  mode = "PLAY" if s.liaExited else "INTRO"
  if mode == "INTRO":
   dialog_index = 0
@@ -918,19 +975,7 @@ func asset(id: String, ground: Vector2) -> bool:
 # Temporary vector art. Gameplay uses IDs and footprints; PNG exports can replace drawing.
 func _draw() -> void:
  draw_rect(Rect2(Vector2.ZERO,Vector2(SIZE)),Color("243348"))
- if mode == "TITLE" or mode == "NAME":
-  draw_panel(Rect2(130,47,380,270))
-  label("BOA SORTE",Vector2(246,87),25,Color("70482f"))
-  label("A fazenda do avô Olegário",Vector2(197,113),15)
-  if mode == "TITLE":
-   label("N — Nova partida",Vector2(205,162),17)
-   label("1 / 2 / 3 — Continuar ou criar slot",Vector2(170,195),14)
-   label("Enter avança diálogos • Esc pula abertura",Vector2(153,263),12)
-  else:
-   label("Escolha seu nome",Vector2(225,142),16)
-   label("Enter — chegar à fazenda",Vector2(207,218),14)
-   label("Esc — voltar",Vector2(260,247),12)
-  return
+ if mode == "TITLE" or mode == "NAME": return
  if s.is_empty(): return
  var player = Vector2(s.position[0],s.position[1])*TILE
  camera_origin = (player-Vector2(SIZE)*0.5).round()
@@ -943,8 +988,9 @@ func _draw() -> void:
  draw_drops()
  if mode == "INTRO" and not s.liaExited: draw_lia(Vector2(lia_x+0.5,12.9)*TILE)
  draw_actor(player)
+ if s.mapId == "FARM01": draw_farm_props(false,player.y)
  if mode == "PLAY" or mode == "BUILD":
-  var t = target_tile() if mode == "PLAY" else screen_tile(get_viewport().get_mouse_position())
+  var t = target_tile() if mode == "PLAY" else build_preview_tile
   var valid = action_check(selected_item(),t) == "" if mode == "PLAY" and TOOLS.has(selected_item()) else editor_item != "" and placement_error(editor_item,t,editor_rotation) == "" if mode == "BUILD" else false
   var color = Color("f1dfb1") if valid else Color("b85d43")
   draw_rect(Rect2(Vector2(t)*TILE,Vector2(TILE,TILE)),color,false,2)
@@ -952,27 +998,6 @@ func _draw() -> void:
    var footprint = furniture_size(editor_item,editor_rotation)
    draw_rect(Rect2(Vector2(t)*TILE,Vector2(footprint)*TILE),Color(color,0.35),true)
  draw_set_transform(Vector2.ZERO)
- draw_hud()
- if mode == "INTRO":
-  if lia_arriving:
-   draw_panel(Rect2(32,260,576,70))
-   label("Lia se aproxima pela estrada do leste...",Vector2(49,291),15)
-  elif dialog_index == 1 and not intro_letter_seen:
-   draw_panel(Rect2(36,48,568,264))
-   label("CARTA DO PREFEITO JAIR",Vector2(56,77),17)
-   wrap_text(LETTER.replace("{name}",s.name),Vector2(56,103),525,13,20)
-   label("Enter / clique: continuar     Esc: pular",Vector2(329,301),11)
-  else:
-   draw_panel(Rect2(32,218,576,122))
-  if not lia_arriving and dialog_index < DIALOGUE.size() and (dialog_index != 1 or intro_letter_seen):
-   wrap_text(DIALOGUE[dialog_index].replace("{name}",s.name),Vector2(49,242),540,14,18)
-   label("Enter / clique: continuar     Esc: pular",Vector2(330,329),11)
-  elif dialog_index >= DIALOGUE.size(): label("Lia segue pela estrada à direita...",Vector2(55,262),15)
- elif mode == "MODAL": draw_modal()
- elif mode == "BUILD": draw_build_ui()
- if message_timer > 0:
-  draw_rect(Rect2(46,181,548,26),Color("243348"))
-  label(message,Vector2(53,199),13,Color("f1dfb1"))
 
 func draw_farm() -> void:
  var first = Vector2i(floori(camera_origin.x/TILE),floori(camera_origin.y/TILE))
@@ -1000,21 +1025,24 @@ func draw_farm() -> void:
  # Lake rim and ruins
  draw_rect(Rect2(8*TILE,8*TILE,10*TILE,8*TILE),Color("70482f"),false,7)
  if not asset("props/ruin",Vector2(13,15)*TILE): world_label("RUÍNAS",Vector2(10,10)*TILE,18,Color("f1dfb1"))
- draw_rect(Rect2(44*TILE,7*TILE,12*TILE,9*TILE),Color("f1dfb1") if s.repairs.H01.completed else Color("b7a276"))
- asset("buildings/house_H01_restored" if s.repairs.H01.completed else "buildings/house_H01_old",Vector2(49.5,16)*TILE)
- for window_x in [47,52]:
-  asset("buildings/repair_H03_window_open" if s.repairs.H03.completed else "buildings/repair_H03_window_boarded",Vector2(window_x,13)*TILE)
+ if not asset("buildings/house_H01_restored" if s.repairs.H01.completed else "buildings/house_H01_old",Vector2(49.5,16)*TILE):
+  draw_rect(Rect2(44*TILE,7*TILE,12*TILE,9*TILE),Color("f1dfb1") if s.repairs.H01.completed else Color("b7a276"))
+ asset("buildings/repair_H03_window_open" if s.repairs.H03.completed else "buildings/repair_H03_window_boarded",Vector2(53,14)*TILE)
  if not asset("props/sales_chest",Vector2(57.5,15)*TILE): draw_rect(Rect2(57*TILE,14*TILE,30,29),Color("70482f"))
  if not asset("props/mailbox",Vector2(60.5,15)*TILE): draw_rect(Rect2(60*TILE,14*TILE,29,29),Color("e6b539"))
- draw_rect(Rect2(60*TILE,15*TILE,28,23),Color("4f7838"))
+ draw_farm_props(true,Vector2(s.position[0],s.position[1]).y*TILE)
+ for p in [Vector2i(31,0),Vector2i(63,10),Vector2i(38,47)]:
+  draw_rect(Rect2(Vector2(p)*TILE,Vector2(30,30)),Color("b85d43"),false,3)
+
+func draw_farm_props(behind_actor: bool,actor_feet_y: float) -> void:
  for id in s.objects:
   var ob = s.objects[id]
   if ob.removed: continue
+  var behind = (float(ob.at[1])+1.0)*TILE <= actor_feet_y
+  if behind != behind_actor: continue
   var pos = Vector2(ob.at[0],ob.at[1])*TILE
   if pos.x < camera_origin.x-96 or pos.x > camera_origin.x+SIZE.x+96 or pos.y < camera_origin.y-128 or pos.y > camera_origin.y+SIZE.y+96: continue
   draw_prop(ob,pos)
- for p in [Vector2i(31,0),Vector2i(63,10),Vector2i(38,47)]:
-  draw_rect(Rect2(Vector2(p)*TILE,Vector2(30,30)),Color("b85d43"),false,3)
 
 func draw_crop(p: Vector2i,age: int) -> void:
  if asset("crops/crop_corn_stage%d" % (age+1),Vector2(p)*TILE+Vector2(16,32)): return
@@ -1070,6 +1098,14 @@ func draw_home() -> void:
    var ground_id = "ground/wall_new" if wall and s.repairs.H02.completed else "ground/wall_old" if wall else "ground/floor_new" if s.repairs.H02.completed else "ground/floor_old"
    asset(ground_id,Vector2(x*TILE+16,y*TILE+32))
    if x > 0 and x < 23 and y > 0 and y < 17 and c != Color("f1dfb1"): draw_rect(Rect2(x*TILE,y*TILE,TILE,TILE),Color("70482f",0.2),false,1)
+ # H03 muda as duas janelas internas sem trocar o piso ou os móveis.
+ for window_x in [10,19]:
+  var glass = Rect2(Vector2(window_x,2)*TILE,Vector2(40,36))
+  draw_rect(glass,Color("70482f"))
+  draw_rect(glass.grow(-4),Color("287fbd") if s.repairs.H03.completed else Color("65727c"))
+  if not s.repairs.H03.completed:
+   draw_line(glass.position+Vector2(5,5),glass.end-Vector2(5,5),Color("70482f"),4)
+   draw_line(glass.position+Vector2(5,glass.size.y-5),glass.position+Vector2(glass.size.x-5,5),Color("70482f"),4)
  for id in DIRT:
   if not s.dirt[id]:
    var pos = Vector2(tile_of(DIRT[id]))*TILE
@@ -1081,7 +1117,6 @@ func draw_home() -> void:
    var pos = Vector2(tile_of(CONDEMNED[id]))*TILE
    var kind = ["table","chair","chair","cabinet","bookshelf","low_table","wardrobe"][CONDEMNED.keys().find(id)]
    if not asset("furniture/"+kind,pos+Vector2(16,32)): draw_rect(Rect2(pos+Vector2(2,4),Vector2(28,25)),Color("70482f"))
-   world_label("X",pos+Vector2(9,24),14,Color("f1dfb1"))
  for id in s.furniture:
   if not s.furniture[id].placed: continue
   var f = s.furniture[id]
@@ -1091,11 +1126,11 @@ func draw_home() -> void:
   var furniture_sprite = "furniture/%s_intact_r%d" % [id,int(f.rotation)] if repaired else "furniture/%s_broken" % id
   if not asset(furniture_sprite,pos+Vector2(size.x/2,size.y)) and not asset("furniture/"+id+("" if id == "bench" else "_intact" if repaired else "_broken"),pos+Vector2(size.x/2,size.y)):
    draw_rect(Rect2(pos+Vector2(2,2),size-Vector2(4,4)),Color("4f7838") if repaired else Color("70482f"))
-  world_label(id.to_upper(),pos+Vector2(3,20),11,Color("f1dfb1"))
  for id in REPAIRS:
   if id == "H01" or s.repairs[id].completed: continue
   var pos = Vector2(tile_of(REPAIRS[id].at))*TILE
-  world_label(id,pos+Vector2(3,30),11,Color("e6b539"))
+  if Vector2(s.position[0],s.position[1]).distance_to(Vector2(tile_of(REPAIRS[id].at))) < 3.0:
+   world_label("!",pos+Vector2(3,30),16,Color("e6b539"))
 
 func draw_drops() -> void:
  for id in s.drops:
@@ -1106,11 +1141,13 @@ func draw_drops() -> void:
   world_label(str(d.amount),pos+Vector2(5,3),10)
 
 func draw_actor(pos: Vector2) -> void:
- if food_timer > 0 and draw_food_sheet(pos,tile_of(s.facing)): return
+ if food_timer > 0 and reference_action_ready("actors/action_eat") and draw_food_sheet(pos,tile_of(s.facing)): return
  if action_timer > 0 and not pending.is_empty():
   var action_id = {"TOOL_AXE":"axe","TOOL_PICK":"pick","TOOL_HOE":"hoe","TOOL_SCYTHE":"scythe","TOOL_WATER":"water","TOOL_HAMMER":"hammer","SEED_CORN":"sow","HAND":"clean"}.get(pending.tool,"")
-  if action_id != "" and draw_action_sheet("actors/action_"+action_id,pos,tile_of(s.facing)): return
- if draw_actor_sheet("actors/actor_player",pos,tile_of(s.facing),action_timer > 0): return
+  if action_id != "" and reference_action_ready("actors/action_"+action_id) and draw_action_sheet("actors/action_"+action_id,pos,tile_of(s.facing)): return
+ if draw_actor_sheet("actors/actor_player",pos,tile_of(s.facing),moving_this_frame):
+  draw_actor_action_overlay(pos)
+  return
  # Feet align to bottom of 32×64 canvas; clear hat, terracotta shirt and blue jeans.
  draw_ellipse_shadow(pos)
  draw_rect(Rect2(pos+Vector2(-6,-30),Vector2(12,18)),Color("304868"))
@@ -1122,8 +1159,30 @@ func draw_actor(pos: Vector2) -> void:
  draw_rect(Rect2(pos+Vector2(2,-11),Vector2(7,10)),Color("70482f"))
  if action_timer > 0:
   draw_line(pos+Vector2(8,-40),pos+Vector2(23,-13),Color("f1dfb1"),4)
+
+func reference_action_ready(id: String) -> bool:
+ return asset_textures.has(id) and asset_manifest.get(id,{}).get("status","") == "prototype_reference_derived"
+
+func draw_actor_action_overlay(pos: Vector2) -> void:
+ if food_timer <= 0 and (action_timer <= 0 or pending.is_empty()): return
+ var direction = Vector2(s.facing[0],s.facing[1])
+ if direction == Vector2.ZERO: direction = Vector2.DOWN
+ var hand = pos+Vector2(direction.x*9,-37+direction.y*5)
+ if food_timer > 0:
+  var icon = icon_id(food_pending)
+  if asset_textures.has(icon): asset(icon,hand+Vector2(0,13))
+  else: draw_circle(hand,4,Color("dfae55"))
+  return
+ var contact = action_timer < 0.4 and action_timer > 0.18
+ var tip = hand+direction*(23 if contact else 13)
+ draw_line(hand,tip,Color("dfae55"),3)
+ if contact: draw_circle(tip,5,Color("f1dfb1",0.75))
+ var tool_icon = icon_id(str(pending.tool))
+ if asset_textures.has(tool_icon):
+  var texture: Texture2D = asset_textures[tool_icon]
+  draw_texture(texture,tip-texture.get_size()*0.5)
 func draw_lia(pos: Vector2) -> void:
- if draw_actor_sheet("actors/actor_lia",pos,Vector2i(1,0),lia_leaving): return
+ if draw_actor_sheet("actors/actor_lia",pos,Vector2i.RIGHT if lia_leaving else Vector2i.LEFT,lia_arriving or lia_leaving): return
  draw_ellipse_shadow(pos)
  draw_rect(Rect2(pos+Vector2(-6,-30),Vector2(12,18)),Color("294f8f"))
  draw_rect(Rect2(pos+Vector2(-10,-47),Vector2(20,20)),Color("e6b539"))
@@ -1164,28 +1223,6 @@ func draw_food_sheet(pos: Vector2,direction: Vector2i) -> bool:
  draw_texture_rect_region(asset_textures[id],Rect2(pos+Vector2(-16,-64),Vector2(32,64)),Rect2(frame*32,row*64,32,64))
  return true
 
-func draw_hud() -> void:
- draw_rect(Rect2(0,0,640,48),Color("243348",0.94))
- label("M01 • Um novo começo",Vector2(8,15),13,Color("f1dfb1"))
- label("Casa %d/20  Milho %d/20  Dormir %s" % [house_count(),watered_corn_count(),"✓" if s.completed else "○"],Vector2(8,32),12,Color("f1dfb1"))
- var period = "Manhã" if s.minutes < 720 else "Tarde" if s.minutes < 1080 else "Noite"
- label("D%d %02d:%02d %s  $%d" % [s.day,int(s.minutes/60),int(s.minutes)%60,period,s.coins],Vector2(399,17),13,Color("f1dfb1"))
- label("Vida %d/%d" % [s.hp,s.hpMax],Vector2(407,33),10,Color("f1dfb1"))
- draw_rect(Rect2(501,25,48,6),Color("b85d43"))
- draw_rect(Rect2(501,25,48*float(s.hp)/s.hpMax,6),Color("e6b539"))
- label("Est. %d/%d" % [s.stamina,s.staminaMax],Vector2(551,33),10,Color("f1dfb1"))
- draw_rect(Rect2(550,38,80,5),Color("70482f"))
- draw_rect(Rect2(550,38,80*float(s.stamina)/s.staminaMax,5),Color("4f7838"))
- draw_rect(Rect2(0,316,640,44),Color("243348",0.94))
- for i in range(8):
-  var x = 9+i*77
-  var hot = str(s.hotbar[i])
-  draw_rect(Rect2(x,321,72,34),Color("a36c3b") if i == selected else Color("70482f"),false,2)
-  asset(icon_id(hot),Vector2(x+17,349))
-  label(str(i+1)+" "+short_name(hot),Vector2(x+30,339),10,Color("f1dfb1"))
-  if hot == "TOOL_WATER": label(str(s.water),Vector2(x+48,353),10,Color("f1dfb1"))
-  elif hot == "SEED_CORN" or FOOD.has(hot): label(str(s.inventory.get(hot,0)),Vector2(x+48,353),10,Color("f1dfb1"))
- label("Peso %.1f/40" % carried_weight(),Vector2(7,310),11,Color("243348"))
 func house_count() -> int:
  var n := 0
  for id in s.repairs: if s.repairs[id].completed: n += 1
@@ -1193,108 +1230,23 @@ func house_count() -> int:
  for id in s.condemned: if s.condemned[id] <= 0: n += 1
  return n
 
-func draw_modal() -> void:
- draw_rect(Rect2(0,0,640,360),Color("243348",0.55))
- draw_panel(Rect2(74,56,492,260))
- match modal:
-  "inventory":
-   label("MOCHILA — 24 espaços",Vector2(93,81),16)
-   for i in range(24):
-    var x = 95+(i%6)*75
-    var y = 91+(i/6)*43
-    draw_rect(Rect2(x,y,69,39),Color("e6b539") if i == inventory_cursor else Color("a36c3b"),false,2)
-    var item = inventory_item_at(i)
-    if item != "":
-     asset(icon_id(item),Vector2(x+15,y+29))
-     label(short_name(item),Vector2(x+28,y+17),10)
-     if inventory_quantity_at(i) > 0: label(str(inventory_quantity_at(i)),Vector2(x+40,y+32),10)
-   label("Setas escolhem • Enter come • 1–8 atalho • 0 mão livre",Vector2(93,282),11)
-   label("Peso %.1f/40 • %d/24 usados" % [carried_weight(),occupied_slots()],Vector2(93,301),12)
-  "journal":
-   label("DIÁRIO • Um novo começo",Vector2(93,83),17)
-   label("Casa %d/20 • Reparos 7, limpezas 6, móveis 7" % house_count(),Vector2(93,108),13)
-   label("Milho plantado e regado %d/20" % watered_corn_count(),Vector2(93,127),13)
-   label("Durma na cama após concluir ambos.",Vector2(93,147),13)
-   label("Carta de Jair:",Vector2(93,173),14)
-   wrap_text(LETTER.replace("{name}",s.name),Vector2(93,194),450,11,14)
-  "mail":
-   label("CORREIO • Carta, encomenda e apoio",Vector2(93,83),16)
-   label("Carta de Jair disponível no diário (J).",Vector2(93,109),13)
-   label("Reserva: madeira %d, pedra %d, fibra %d, sucata %d" % [s.mail.wood,s.mail.stone,s.mail.fiber,s.mail.scrap],Vector2(93,132),12)
-   label("Banco complementar: %d" % s.mail.bench,Vector2(93,153),12)
-   label("Estoque livre: %s" % str(s.storage),Vector2(93,173),11)
-   label("1 umbu • 2 café $25 • 3 barra $15",Vector2(93,199),12)
-   label("4–9 guarda madeira/pedra/fibra/sucata/milho/resíduo",Vector2(93,219),11)
-   label("Shift+4–9 retira estoque livre da encomenda",Vector2(93,238),11)
-   label("A visita ao prefeito ficará disponível depois.",Vector2(93,278),11)
-  "sales":
-   label("BAÚ DE VENDAS",Vector2(93,83),17)
-   label("Envios: %s" % str(s.shipment),Vector2(93,117),13)
-   label("Receita prevista: $%d" % shipment_value(),Vector2(93,143),13)
-   label("Enviar: 1 madeira  2 pedra  3 fibra  4 sucata  5 milho",Vector2(93,187),12)
-   label("Shift + número retira. Liquidação ao dormir.",Vector2(93,213),13)
-  "sleep":
-   label("DORMIR ATÉ AMANHÃ?",Vector2(93,98),18)
-   label("Espaço confirma • Esc cancela",Vector2(93,139),15)
-   label("Estamina atual: %d. Dormir não recupera estamina." % s.stamina,Vector2(93,175),13)
-   label("Missão %s" % ("pronta para terminar" if house_ready() and watered_corn_count() >= 20 else "continua amanhã"),Vector2(93,204),13)
-  "repair":
-   var id = repair_at(repair_target)
-   label("REPARO %s — %s" % [id,REPAIRS[id].name],Vector2(93,98),17)
-   label("Materiais: %s" % str(REPAIRS[id].cost),Vector2(93,134),14)
-   label("Na encomenda: %s" % str(s.mail),Vector2(93,162),12)
-   label("Golpes: %d • Estamina: 2 por golpe" % REPAIRS[id].hits,Vector2(93,194),13)
-   label("Espaço confirma o primeiro golpe • Esc cancela",Vector2(93,239),13)
-  "pause":
-   label("PAUSA",Vector2(93,98),18)
-   label("Esc volta • S salva • F5 salva durante o jogo",Vector2(93,145),14)
-   label("WASD/setas mover • clique esquerdo usar • E interagir",Vector2(93,176),12)
-   label("I mochila • J diário • B móveis • 1–8 ferramentas",Vector2(93,200),12)
-   label("O opções",Vector2(93,229),13)
-  "options":
-   label("OPÇÕES — Esc fecha",Vector2(93,90),17)
-   label("1 Escala de texto: %d%%" % int(float(s.preferences.uiScale)*100),Vector2(93,125),13)
-   label("2 Contraste alto: %s" % ("sim" if s.preferences.highContrast else "não"),Vector2(93,151),13)
-   label("3 Repetir ação ao segurar: %s" % ("sim" if s.preferences.repeatAction else "não"),Vector2(93,177),13)
-   label("4/5 Volume dos efeitos: %d%%" % int(float(s.preferences.effectsVolume)*100),Vector2(93,203),13)
-   label("As escolhas ficam no save deste slot.",Vector2(93,263),12)
 func shipment_value() -> int:
  var value := 0
  for item in s.shipment: value += int(s.shipment[item])*int(PRICES.get(item,0))
  return value
-func draw_build_ui() -> void:
- draw_rect(Rect2(0,48,640,35),Color("243348",0.9))
- label("MÓVEIS: 1 cama  2 sofá  3 fogão  4 pia  5 banco • R gira • clique coloca • Esc sai",Vector2(8,67),11,Color("f1dfb1"))
- if editor_item != "":
-  var p = screen_tile(get_viewport().get_mouse_position())
-  var err = placement_error(editor_item,p,editor_rotation)
-  draw_rect(Rect2(30,278,580,34),Color("243348",0.95))
-  label("%s %d° • %s" % [editor_item,editor_rotation*90,"Livre — 1 estamina" if err == "" else err],Vector2(40,300),13,Color("f1dfb1"))
-func draw_panel(rect: Rect2) -> void:
- var high = not s.is_empty() and s.get("preferences",{}).get("highContrast",false)
- draw_rect(rect,Color.WHITE if high else Color("f1dfb1"))
- draw_rect(rect,Color.BLACK if high else Color("70482f"),false,5)
-func label(t: String,p: Vector2,size: int = 14,c: Color = Color("243348")) -> void:
- var scale = float(s.get("preferences",{}).get("uiScale",1.0)) if not s.is_empty() else 1.0
- draw_string(font,p,t,HORIZONTAL_ALIGNMENT_LEFT,-1,maxi(9,int(size*scale)),c)
-
 func short_name(id: String) -> String:
- var names = {"TOOL_AXE":"Mach.","TOOL_PICK":"Pic.","TOOL_HOE":"Enx.","TOOL_SCYTHE":"Foice","TOOL_WATER":"Água","TOOL_HAMMER":"Mart.","SEED_CORN":"Milho","HAND":"Mão","coffee":"Café","bar":"Barra","fruit":"Umbu","wood":"Mad.","stone":"Ped.","fiber":"Fibra","scrap":"Suc.","waste":"Res.","corn":"Milho"}
- return str(names.get(id,id.substr(0,5)))
+ var names = {"TOOL_AXE":"Mach.","TOOL_PICK":"Pic.","TOOL_HOE":"Enx.","TOOL_SCYTHE":"Foice","TOOL_WATER":"Água","TOOL_HAMMER":"Mart.","SEED_CORN":"Milho","HAND":"Mão","coffee":"Café","bar":"Barra","fruit":"Umbu","wood":"Mad.","stone":"Ped.","fiber":"Fibra","scrap":"Suc.","waste":"Res.","corn":"Milho","bench":"Banco"}
+ return str(names.get(id,"Item"))
+
+func format_items(items: Dictionary) -> String:
+ var names = {"wood":"Madeira","stone":"Pedra","fiber":"Fibra","scrap":"Sucata","waste":"Resíduo","corn":"Milho","coffee":"Café","bar":"Barra","fruit":"Umbu","bench":"Banco"}
+ var parts: Array[String] = []
+ for id in items:
+  if int(items[id]) > 0: parts.append("%s %d" % [names.get(id,"Item"),int(items[id])])
+ return " • ".join(parts) if not parts.is_empty() else "vazio"
 
 func icon_id(id: String) -> String:
  var names = {"TOOL_AXE":"axe","TOOL_PICK":"pick","TOOL_HOE":"hoe","TOOL_SCYTHE":"scythe","TOOL_WATER":"water","TOOL_HAMMER":"hammer","SEED_CORN":"corn_seed","HAND":"valid","wood":"wood","stone":"stone","fiber":"fiber","scrap":"scrap","waste":"trash","corn":"corn_seed","coffee":"coffee","bar":"bar","fruit":"fruit"}
  return "icons/"+str(names.get(id,"valid"))
 func world_label(t: String,p: Vector2,size: int = 14,c: Color = Color("243348")) -> void:
  draw_string(font,p,t,HORIZONTAL_ALIGNMENT_LEFT,-1,size,c)
-func wrap_text(t: String,p: Vector2,width: float,size: int = 14,line_h: int = 18) -> void:
- var line := ""
- var y = p.y
- for word in t.split(" "):
-  var trial = word if line == "" else line+" "+word
-  if font.get_string_size(trial,HORIZONTAL_ALIGNMENT_LEFT,-1,size).x > width and line != "":
-   label(line,Vector2(p.x,y),size)
-   y += line_h
-   line = word
-  else: line = trial
- if line != "": label(line,Vector2(p.x,y),size)

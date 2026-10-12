@@ -26,7 +26,11 @@ for kind, base in {"bed": (2, 3), "sofa": (3, 1), "stove": (1, 1),
         entry = assets[key]
         footprint = list(base[::-1] if rot % 2 else base)
         assert entry["orientation"] == rot and entry["footprint"] == footprint, key
-        assert entry["size"] == [32 * v for v in footprint], key
+        # Tall furniture art may rise above its floor footprint. The floor
+        # footprint remains the placement/collision contract.
+        assert entry["size"][0] == 32 * footprint[0], key
+        assert 32 * footprint[1] <= entry["size"][1] <= 32 * (footprint[1] + 1), key
+        assert entry["pivot"] == [entry["size"][0] // 2, entry["size"][1]], key
         variants.append((root / entry["path"].removeprefix("res://assets/")).read_bytes())
     assert len(set(variants)) == 4, f"Orientations are not visually distinct: {kind}"
 for key, entry in assets.items():

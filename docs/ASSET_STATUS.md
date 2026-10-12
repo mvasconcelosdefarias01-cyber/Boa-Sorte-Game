@@ -1,3 +1,5 @@
+> Revisão visual posterior: veja [ASSET_MAPPING.md](ASSET_MAPPING.md) e [VISUAL_FIXES.md](VISUAL_FIXES.md) para a amostra derivada das referências e suas pendências. O registro abaixo descreve a base anterior.
+
 # Boa Sorte — pacote de assets do cenário 01
 
 ## Entrega
