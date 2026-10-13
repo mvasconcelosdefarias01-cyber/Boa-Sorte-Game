@@ -4,6 +4,8 @@ var game: Node
 var root_control: Control
 var content: Control
 var hud: Control
+var home_top_band: Control
+var home_bottom_band: Control
 var title_label: Label
 var status_label: Label
 var health_label: Label
@@ -140,7 +142,7 @@ func hbox(parent: Node,spacing := 6) -> HBoxContainer:
 
 func refresh(force := false) -> void:
  if game == null or root_control == null: return
- var key = "%s|%s|%d|%s|%s|%s|%s|%s|%s" % [game.mode,game.modal,game.dialog_index,str(game.intro_letter_seen),str(game.lia_arriving),str(game.lia_leaving),game.editor_item,str(title_options),str(new_slot_select)+":"+str(overwrite_slot)]
+ var key = "%s|%s|%d|%s|%s|%s|%s|%s|%s|%s" % [game.mode,game.modal,game.dialog_index,str(game.intro_letter_seen),str(game.lia_arriving),str(game.lia_leaving),game.editor_item,str(title_options),str(new_slot_select)+":"+str(overwrite_slot),str(game.s.get("mapId",""))]
  if force or stamp != key:
   stamp = key
   for child in root_control.get_children(): child.queue_free()
@@ -149,10 +151,16 @@ func refresh(force := false) -> void:
    "TITLE": make_title()
    "NAME": make_name()
    "INTRO": make_intro()
-   "PLAY": make_hud()
-   "MODAL": make_hud(); make_modal()
-   "BUILD": make_hud(); make_build()
-   "TRANSITION","NIGHT_CLOSE": make_hud()
+   "PLAY": make_home_hud() if game.s.mapId == "HOME01" else make_hud()
+   "MODAL":
+    if game.s.mapId == "HOME01": make_home_hud()
+    else: make_hud()
+    make_modal()
+   "BUILD":
+    if game.s.mapId == "HOME01": make_home_hud()
+    else: make_hud()
+    make_build()
+   "TRANSITION","NIGHT_CLOSE": make_home_hud() if game.s.mapId == "HOME01" else make_hud()
  update_hud()
  update_build_status()
  if game.mode == "MODAL" and game.modal == "inventory": update_inventory_selection()
@@ -392,6 +400,91 @@ func make_hud() -> void:
  notice.add_child(message_label)
  notice.visible = false
 
+func make_home_hud() -> void:
+ hud = Control.new()
+ hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ root_control.add_child(hud)
+ home_top_band = Control.new()
+ home_top_band.position = Vector2.ZERO
+ home_top_band.size = Vector2(640,20)
+ home_top_band.clip_contents = true
+ home_top_band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ hud.add_child(home_top_band)
+ home_bottom_band = Control.new()
+ home_bottom_band.position = Vector2(0,340)
+ home_bottom_band.size = Vector2(640,20)
+ home_bottom_band.clip_contents = true
+ home_bottom_band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ hud.add_child(home_bottom_band)
+ title_label = text("",10)
+ title_label.visible = false
+ hud.add_child(title_label)
+ status_label = text("",9)
+ status_label.position = Vector2(54,0)
+ status_label.size = Vector2(581,18)
+ status_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ status_label.add_theme_color_override("font_color",cream)
+ home_bottom_band.add_child(status_label)
+ clock_label = home_stat_label(52,120)
+ coins_label = home_stat_label(174,104)
+ health_label = home_stat_label(282,151)
+ stamina_label = home_stat_label(438,198)
+ health_bar = progress()
+ health_bar.visible = false
+ hud.add_child(health_bar)
+ stamina_bar = progress()
+ stamina_bar.visible = false
+ hud.add_child(stamina_bar)
+ weight_label = text("",10)
+ weight_label.visible = false
+ hud.add_child(weight_label)
+ hotbar_buttons.clear()
+ hotbar_icons.clear()
+ hotbar_counts.clear()
+ for i in range(8):
+  var index = i
+  var b = button("",func(): game.selected = index)
+  b.position = Vector2(4,25+i*35)
+  b.size = Vector2(40,34)
+  b.tooltip_text = "Ferramenta %d" % (i+1)
+  hud.add_child(b)
+  var number = text(str(i+1),9)
+  number.position = Vector2(0,0)
+  number.size = Vector2(11,14)
+  number.autowrap_mode = TextServer.AUTOWRAP_OFF
+  b.add_child(number)
+  var icon = TextureRect.new()
+  icon.position = Vector2(9,5)
+  icon.size = Vector2(24,24)
+  icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+  icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+  icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  b.add_child(icon)
+  var count = text("",9)
+  count.position = Vector2(24,20)
+  count.size = Vector2(16,13)
+  count.autowrap_mode = TextServer.AUTOWRAP_OFF
+  b.add_child(count)
+  hotbar_buttons.append(b)
+  hotbar_icons.append(icon)
+  hotbar_counts.append(count)
+ message_label = text("",9)
+ message_label.position = Vector2(54,0)
+ message_label.size = Vector2(581,18)
+ message_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ message_label.add_theme_color_override("font_color",cream)
+ home_bottom_band.add_child(message_label)
+
+func home_stat_label(x: float,w: float) -> Label:
+ var label = text("",10)
+ label.position = Vector2(x,-2)
+ label.size = Vector2(w,18)
+ label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ label.add_theme_color_override("font_color",cream)
+ home_top_band.add_child(label)
+ return label
+
 func progress() -> ProgressBar:
  var p = ProgressBar.new()
  p.show_percentage = false
@@ -403,9 +496,9 @@ func update_hud() -> void:
  if hud == null or game.s.is_empty(): return
  title_label.text = "Missão concluída" if game.s.completed else "Um novo começo"
  var sleep_status = "concluído" if game.s.completed else "pronto" if game.house_ready() and game.watered_corn_count() >= 20 else "pendente"
- status_label.text = "Casa %d/20  Milho %d/20\nDormir: %s" % [game.house_count(),game.watered_corn_count(),sleep_status]
+ status_label.text = "Casa %d/20 · Milho %d/20 · Dormir: %s" % [game.house_count(),game.watered_corn_count(),sleep_status] if game.s.mapId == "HOME01" else "Casa %d/20  Milho %d/20\nDormir: %s" % [game.house_count(),game.watered_corn_count(),sleep_status]
  var period = "manhã" if game.s.minutes < 720 else "tarde" if game.s.minutes < 1080 else "noite"
- clock_label.text = "Dia %d · %02d:%02d · %s" % [game.s.day,int(game.s.minutes/60),int(game.s.minutes)%60,period]
+ clock_label.text = "Dia %d · %02d:%02d" % [game.s.day,int(game.s.minutes/60),int(game.s.minutes)%60] if game.s.mapId == "HOME01" else "Dia %d · %02d:%02d · %s" % [game.s.day,int(game.s.minutes/60),int(game.s.minutes)%60,period]
  coins_label.text = "%d moedas" % game.s.coins
  weight_label.text = "Peso %.1f/40" % game.carried_weight()
  health_label.text = "Vida %d/%d" % [game.s.hp,game.s.hpMax]
@@ -423,7 +516,10 @@ func update_hud() -> void:
   hotbar_buttons[i].modulate = Color.WHITE if i == game.selected else Color("d3c0a1")
  if message_label:
   message_label.text = game.message
-  message_label.get_parent().visible = game.message_timer > 0
+  if game.s.mapId == "HOME01":
+   message_label.visible = game.message_timer > 0
+   status_label.visible = game.message_timer <= 0
+  else: message_label.get_parent().visible = game.message_timer > 0
 
 func display_name(id: String) -> String:
  var tools = {"TOOL_AXE":"Machado","TOOL_PICK":"Picareta","TOOL_HOE":"Enxada","TOOL_SCYTHE":"Foice","TOOL_WATER":"Regador","TOOL_HAMMER":"Martelo","SEED_CORN":"Sementes de milho","HAND":"Mão livre"}

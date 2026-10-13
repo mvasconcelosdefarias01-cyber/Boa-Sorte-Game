@@ -5,8 +5,8 @@ Elementos aprovados: protagonista, Lia, seis ferramentas, móveis preservados e 
 | Etapa | Entrega | Estado |
 | --- | --- | --- |
 | 1 | Ícones de itens na mochila, quantidades/seleção e imagens dos recursos coletáveis | Aprovada pelo jogador |
-| 2 | Fases visuais do milho e ruína oeste do ZIP | Implementada; aguardando teste no Windows |
-| 3 | Interior mais compacto, margem preta, paredes e janelas elevadas | Pendente |
+| 2 | Fases visuais do milho e ruína oeste do ZIP | Aprovada pelo jogador |
+| 3 | Interior mais compacto, margem preta, paredes e janelas elevadas | Implementada; aguardando teste no Windows |
 | 4 | Pedras, madeira, cactos, árvores, arbustos, capim e terreno coerentes | Pendente |
 | 5 | Lago irregular com bordas, transição para solo e vegetação marginal | Pendente |
 
@@ -27,3 +27,11 @@ Etapa 1 aprovada pelo jogador. Escopo seguinte: substituir somente as cinco fase
 Entrega: `dist/BoaSorte-Etapa02-Windows11.zip`. Cinco fases recortadas da folha original, ruína sem halo e com interior transparente, dimensão 320×256 para a área reservada de 10×8 tiles. Milho alto ordenado por linha e profundidade relativa ao jogador. Correspondências e hashes no manifest; reprodução por `assets/import_corn_ruin.py`.
 
 Validados: importação Godot 4.6.3, 136 PNGs/10 WAVs, ciclo lógico até manhã seguinte, save/reload, carregamento do pacote exportado e integridade ZIP. Todos os sprites fora de milho/ruína mantêm os hashes anteriores. Apresentação em execução no Windows permanece para teste do jogador.
+
+## Entrega da etapa 3
+
+Interior HOME01 reduzido de 24×18 para 17×10 tiles, centralizado sobre fundo preto. Cozinha/sala à esquerda, quarto à direita e porta inferior; duas janelas na parede norte de dois tiles de altura. H02 e H03 continuam independentes. HUD interno nas margens; móveis aprovados mantêm suas imagens. Contrato detalhado em `docs/INTERIOR_ETAPA03.md`.
+
+Saves anteriores recebem versão de layout e adaptação de posições; móveis e drops são preservados, buscando posições livres e acesso à cama. Quando necessário, o móvel fica disponível para recolocação no editor (banco no correio). Estamina continua recuperando somente por alimentos.
+
+Pacote: `dist/BoaSorte-Etapa03-Windows11.zip`. Verificados por testes: ciclo de reforma/cultivo/sono, migração de save real da etapa 2, cama girada, banco sem duplicação, recursos no chão, caminhos aos reparos e ao quarto, entrada/saída e despertar sem recuperar estamina, UI e layouts em 100/125/150%, carregamento de 140 PNGs e 10 WAVs. Apresentação em execução no Windows permanece para teste do jogador.

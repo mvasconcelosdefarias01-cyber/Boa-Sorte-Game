@@ -3,6 +3,10 @@ extends Node2D
 const TILE := 32
 const SIZE := Vector2i(640, 360)
 const SAVE_SCHEMA := 1
+const HOME_LAYOUT_VERSION := 2
+const HOME_SIZE := Vector2i(17,10)
+const HOME_ENTRY := Vector2i(8,8)
+const HOME_WAKE := Vector2i(13,5)
 const TOOLS := ["TOOL_AXE", "TOOL_PICK", "TOOL_HOE", "TOOL_SCYTHE", "TOOL_WATER", "TOOL_HAMMER", "SEED_CORN", "HAND"]
 const TOOL_NAMES := ["Machado", "Picareta", "Enxada", "Foice", "Regador", "Martelo", "Milho", "Mão"]
 const FOOD := {"coffee":60, "bar":40, "fruit":20}
@@ -10,15 +14,16 @@ const WEIGHTS := {"wood":0.5,"stone":0.75,"fiber":0.1,"scrap":0.25,"waste":0.05,
 const PRICES := {"wood":2,"stone":2,"fiber":1,"scrap":3,"corn":10}
 const REPAIRS := {
  "H01":{"name":"Telhado e fachada","hits":6,"cost":{"wood":8,"stone":6},"at":[49,16]},
- "H02":{"name":"Paredes e piso","hits":4,"cost":{"wood":2,"stone":4},"at":[5,5]},
- "H03":{"name":"Janelas","hits":3,"cost":{"wood":4},"at":[10,3]},
- "H04":{"name":"Cama","hits":2,"cost":{"wood":2,"fiber":2},"at":[19,7]},
- "H05":{"name":"Sofá","hits":2,"cost":{"wood":2,"fiber":1},"at":[8,10]},
- "H06":{"name":"Fogão","hits":2,"cost":{"stone":2,"scrap":2},"at":[3,3]},
- "H07":{"name":"Pia","hits":2,"cost":{"wood":2,"scrap":1},"at":[6,3]}}
-const DIRT := {"dirt_web":[3,8],"dirt_dust":[6,11],"dirt_papers":[12,10],"dirt_rubble":[17,11],"dirt_rug":[10,13],"dirt_utensils":[4,6]}
-const CONDEMNED := {"old_table":[11,6],"old_chair_a":[12,6],"old_chair_b":[11,7],"old_cabinet":[2,5],"old_shelf":[13,4],"old_low_table":[7,12],"old_wardrobe":[21,11]}
-const FURNITURE := {"bed":{"at":[19,7],"size":[2,3],"repair":"H04"},"sofa":{"at":[8,10],"size":[3,1],"repair":"H05"},"stove":{"at":[3,3],"size":[1,1],"repair":"H06"},"sink":{"at":[6,3],"size":[3,1],"repair":"H07"},"bench":{"at":[0,0],"size":[1,1],"repair":""}}
+ "H02":{"name":"Paredes e piso","hits":4,"cost":{"wood":2,"stone":4},"at":[4,4]},
+ "H03":{"name":"Janelas","hits":3,"cost":{"wood":4},"at":[12,1]},
+ "H04":{"name":"Cama","hits":2,"cost":{"wood":2,"fiber":2},"at":[13,3]},
+ "H05":{"name":"Sofá","hits":2,"cost":{"wood":2,"fiber":1},"at":[4,6]},
+ "H06":{"name":"Fogão","hits":2,"cost":{"stone":2,"scrap":2},"at":[2,2]},
+ "H07":{"name":"Pia","hits":2,"cost":{"wood":2,"scrap":1},"at":[5,2]}}
+const DIRT := {"dirt_web":[2,3],"dirt_dust":[6,4],"dirt_papers":[9,5],"dirt_rubble":[13,6],"dirt_rug":[13,7],"dirt_utensils":[5,3]}
+const CONDEMNED := {"old_table":[7,4],"old_chair_a":[6,5],"old_chair_b":[9,4],"old_cabinet":[2,4],"old_shelf":[9,2],"old_low_table":[3,7],"old_wardrobe":[14,7]}
+const CONDEMNED_SIZE := {"old_table":[2,1],"old_chair_a":[1,1],"old_chair_b":[1,1],"old_cabinet":[1,2],"old_shelf":[2,2],"old_low_table":[2,1],"old_wardrobe":[2,2]}
+const FURNITURE := {"bed":{"at":[13,2],"size":[2,3],"repair":"H04"},"sofa":{"at":[3,6],"size":[3,1],"repair":"H05"},"stove":{"at":[2,2],"size":[1,1],"repair":"H06"},"sink":{"at":[4,2],"size":[3,1],"repair":"H07"},"bench":{"at":[0,0],"size":[1,1],"repair":""}}
 const LETTER := "Olá, {name}! Seja bem-vindo a Boa Sorte. É uma alegria saber que a fazenda de seu avô Olegário vai receber cuidado novamente. Espero que você encontre aqui um bom lugar para viver e começar essa nova jornada. Enviei ferramentas, materiais para os primeiros consertos, 200 moedas e 20 sementes de milho. Assim que terminar a reforma da casa, passe na minha residência para conversarmos. Desejo trabalho proveitoso e muita sorte nesse começo. Um abraço, Jair, prefeito de Boa Sorte."
 const DIALOGUE := [
  "Lia: Você deve ser {name}. Sou Lia, dos correios. Trouxe uma carta do prefeito Jair e uma encomenda para você.",
@@ -56,7 +61,7 @@ var menu_preferences := {"uiScale":1.0,"effectsVolume":0.75,"highContrast":false
 var inventory_cursor := 0
 var editor_item := ""
 var editor_rotation := 0
-var build_preview_tile := Vector2i(11,11)
+var build_preview_tile := HOME_ENTRY
 var build_keyboard_preview := false
 var repair_target := Vector2i.ZERO
 var name_edit: LineEdit
@@ -100,7 +105,7 @@ func new_game(player_name: String) -> bool:
   say("Nome: use de 2 a 20 caracteres.")
   return false
  reset_pending_actions()
- s = {"schemaVersion":SAVE_SCHEMA,"name":player_name,"mapId":"FARM01","position":[59.5,12.9],"facing":[-1,0],"day":1,"minutes":480,"hp":100,"hpMax":100,"stamina":100,"staminaMax":100,"level":1,"xp":0,"coins":0,"inventory":{},"hotbar":TOOLS.duplicate(),"water":20,"repairs":{},"dirt":{},"condemned":{},"objects":{},"soil":{},"drops":{},"furniture":{},"mail":{"wood":20,"stone":12,"fiber":3,"scrap":3,"bench":1},"storage":{},"shipment":{},"fruitTaken":0,"arrivalGranted":false,"liaExited":false,"validSleepDay":0,"completed":false,"lateNoted":false,"nightTransactionId":0,"morningSeen":false,"preferences":menu_preferences.duplicate(true)}
+ s = {"schemaVersion":SAVE_SCHEMA,"homeLayoutVersion":HOME_LAYOUT_VERSION,"name":player_name,"mapId":"FARM01","position":[59.5,12.9],"facing":[-1,0],"day":1,"minutes":480,"hp":100,"hpMax":100,"stamina":100,"staminaMax":100,"level":1,"xp":0,"coins":0,"inventory":{},"hotbar":TOOLS.duplicate(),"water":20,"repairs":{},"dirt":{},"condemned":{},"objects":{},"soil":{},"drops":{},"furniture":{},"mail":{"wood":20,"stone":12,"fiber":3,"scrap":3,"bench":1},"storage":{},"shipment":{},"fruitTaken":0,"arrivalGranted":false,"liaExited":false,"validSleepDay":0,"completed":false,"lateNoted":false,"nightTransactionId":0,"morningSeen":false,"preferences":menu_preferences.duplicate(true)}
  for id in REPAIRS: s.repairs[id] = {"hitsDone":0,"paid":false,"completed":false}
  for id in DIRT: s.dirt[id] = false
  for id in CONDEMNED: s.condemned[id] = 2
@@ -256,13 +261,20 @@ func can_walk(p: Vector2i) -> bool:
    var ob = s.objects[id]
    if not ob.removed and tile_of(ob.at) == p: return false
   return true
- if p.x < 1 or p.x > 22 or p.y < 1 or p.y > 16: return false
- if p.x == 15 and (p.y < 7 or p.y > 9): return false
+ if not home_floor(p): return false
  for id in CONDEMNED:
-  if s.condemned[id] > 0 and tile_of(CONDEMNED[id]) == p: return false
+  if s.condemned[id] > 0 and condemned_covers(id,p): return false
  for id in s.furniture:
   if furniture_covers(id,p): return false
  return true
+
+func home_floor(p: Vector2i) -> bool:
+ return p.x >= 1 and p.x < HOME_SIZE.x-1 and p.y >= 2 and p.y < HOME_SIZE.y-1 and (p.x != 11 or p.y == 4 or p.y == 5)
+
+func condemned_covers(id: String,p: Vector2i) -> bool:
+ var at = tile_of(CONDEMNED[id])
+ var size = tile_of(CONDEMNED_SIZE[id])
+ return p.x >= at.x and p.x < at.x+size.x and p.y >= at.y and p.y < at.y+size.y
 
 func furniture_size(id: String, rot: int) -> Vector2i:
  var base = tile_of(FURNITURE[id].size)
@@ -353,7 +365,7 @@ func _unhandled_input(event: InputEvent) -> void:
     elif event.keycode in [KEY_S,KEY_DOWN]: offset = Vector2i.DOWN
     elif event.keycode in [KEY_A,KEY_LEFT]: offset = Vector2i.LEFT
     else: offset = Vector2i.RIGHT
-    build_preview_tile = Vector2i(clampi(build_preview_tile.x+offset.x,0,23),clampi(build_preview_tile.y+offset.y,0,17))
+    build_preview_tile = Vector2i(clampi(build_preview_tile.x+offset.x,0,HOME_SIZE.x-1),clampi(build_preview_tile.y+offset.y,0,HOME_SIZE.y-1))
     build_keyboard_preview = true
    elif event.keycode == KEY_ENTER and editor_item != "": place_furniture(editor_item,build_preview_tile,editor_rotation)
    elif event.keycode >= KEY_1 and event.keycode <= KEY_5:
@@ -703,7 +715,7 @@ func object_at(p: Vector2i) -> String:
 func condemned_at(p: Vector2i) -> String:
  if s.mapId != "HOME01": return ""
  for id in CONDEMNED:
-  if s.condemned[id] > 0 and tile_of(CONDEMNED[id]) == p: return id
+  if s.condemned[id] > 0 and condemned_covers(id,p): return id
  return ""
 func dirt_at(p: Vector2i) -> String:
  if s.mapId != "HOME01": return ""
@@ -723,7 +735,7 @@ func interact() -> void:
  var target = target_tile()
  if s.mapId == "FARM01":
   if p.distance_to(Vector2i(49,16)) <= 2 or target == Vector2i(49,16):
-   transition_to("HOME01",Vector2i(11,15)); return
+   transition_to("HOME01",HOME_ENTRY); return
   if p.distance_to(Vector2i(57,14)) <= 2:
    mode = "MODAL"; modal = "sales"; return
   if p.distance_to(Vector2i(60,14)) <= 2:
@@ -737,7 +749,7 @@ func interact() -> void:
    say("Esta saída ficará para depois."); return
   if p.x >= 8 and p.x <= 18 and p.y >= 8 and p.y <= 16: say("Esta construção ficará para depois."); return
  else:
-  if p.y >= 15 and p.x >= 9 and p.x <= 13:
+  if p.y >= HOME_ENTRY.y and p.x >= HOME_ENTRY.x and p.x <= HOME_ENTRY.x+1:
    transition_to("FARM01",Vector2i(49,17)); return
   if s.repairs.H04.completed and near_furniture("bed",p):
    mode = "MODAL"; modal = "sleep"; return
@@ -841,7 +853,9 @@ func close_night() -> void:
   s.nightTransactionId = night
   s.day += 1
   s.minutes = 360
-  if s.repairs.H04.completed and s.mapId == "HOME01": s.position = [19.5,11.9]
+  if s.repairs.H04.completed and s.mapId == "HOME01":
+   var wake = bed_wake_tile()
+   s.position = [wake.x+0.5,wake.y+0.5]
   else: s.mapId = "FARM01"; s.position = [49.5,17.9]
   if s.validSleepDay == night and not s.completed:
    s.completed = true
@@ -849,6 +863,20 @@ func close_night() -> void:
   else: say("Um novo dia. A estamina continua em %d." % s.stamina)
   save_game(slot)
  mode = "PLAY"
+
+func bed_wake_tile() -> Vector2i:
+ if not s.furniture.bed.placed: return HOME_ENTRY
+ var at = tile_of(s.furniture.bed.at)
+ var size = furniture_size("bed",int(s.furniture.bed.rotation))
+ var choices: Array[Vector2i] = []
+ for y in range(at.y-1,at.y+size.y+1):
+  for x in range(at.x-1,at.x+size.x+1):
+   var p = Vector2i(x,y)
+   if x != at.x-1 and x != at.x+size.x and y != at.y-1 and y != at.y+size.y: continue
+   if can_walk(p): choices.append(p)
+ if choices.is_empty(): return HOME_ENTRY
+ choices.sort_custom(func(a: Vector2i,b: Vector2i) -> bool: return a.distance_squared_to(HOME_WAKE) < b.distance_squared_to(HOME_WAKE))
+ return choices[0]
 
 func place_furniture(id: String,p: Vector2i,rot: int) -> bool:
  var reason = placement_error(id,p,rot)
@@ -867,19 +895,19 @@ func placement_error(id: String,p: Vector2i,rot: int) -> String:
  if requirement != "" and not s.repairs[requirement].completed: return "Repare este móvel primeiro."
  if id == "bench" and (s.mail.bench <= 0 or not house_ready()): return "Banco disponível após concluir a casa."
  var size = furniture_size(id,rot)
- if p.x < 1 or p.y < 1 or p.x+size.x > 23 or p.y+size.y > 17: return "Fora do piso interno."
- if id in ["stove","sink"] and (p.x+size.x > 14 or p.y > 6): return "Fogão e pia ficam na cozinha."
+ if p.x < 1 or p.y < 2 or p.x+size.x >= HOME_SIZE.x or p.y+size.y >= HOME_SIZE.y: return "Fora do piso interno."
+ if id in ["stove","sink"] and (p.x+size.x > 11 or p.y > 4): return "Fogão e pia ficam na cozinha."
  var occupied: Array[Vector2i] = []
  for y in range(p.y,p.y+size.y):
   for x in range(p.x,p.x+size.x):
    var t = Vector2i(x,y)
-   if x == 15 or y >= 15 and x >= 9 and x <= 13 or x == 14 and y >= 6 and y <= 10: return "Bloqueia uma passagem."
+   if not home_floor(t) or x == 11 or y == HOME_ENTRY.y and x >= HOME_ENTRY.x and x <= HOME_ENTRY.x+1 or x == 10 and y >= 4 and y <= 6 or x == 12 and y >= 4 and y <= 5: return "Bloqueia uma passagem."
    if condemned_at(t) != "" or dirt_at(t) != "": return "Limpe ou remova o objeto primeiro."
    for other in s.furniture:
     if other != id and furniture_covers(other,t): return "Outro móvel ocupa o espaço."
    occupied.append(t)
  # Breadth-first walk from door; require kitchen doorway and an adjacent bed tile.
- var open: Array[Vector2i] = [Vector2i(11,15)]
+ var open: Array[Vector2i] = [HOME_ENTRY]
  var seen: Dictionary = {}
  while not open.is_empty():
   var t = open.pop_front()
@@ -887,13 +915,14 @@ func placement_error(id: String,p: Vector2i,rot: int) -> String:
   seen[key(t)] = true
   for v in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
    var n = t+v
-   if n.x < 1 or n.x > 22 or n.y < 1 or n.y > 16 or n.x == 15 and (n.y < 7 or n.y > 9): continue
+   if not home_floor(n): continue
+   if condemned_at(n) != "" or dirt_at(n) != "": continue
    if n in occupied: continue
    var blocked := false
    for other in s.furniture:
     if other != id and furniture_covers(other,n): blocked = true
    if not blocked and not seen.has(key(n)): open.append(n)
- if not seen.has(key(Vector2i(15,8))) or not seen.has(key(Vector2i(3,7))): return "Bloqueia o quarto ou a cozinha."
+ if not seen.has(key(Vector2i(12,5))) or not seen.has(key(Vector2i(3,5))): return "Bloqueia o quarto ou a cozinha."
  var bed_at = p if id == "bed" else tile_of(s.furniture.bed.at)
  var bed_size = size if id == "bed" else furniture_size("bed",s.furniture.bed.rotation)
  var bed_access := false
@@ -933,6 +962,8 @@ func load_game(n: int) -> bool:
  if audio_player: audio_player.volume_db = linear_to_db(maxf(0.001,float(s.preferences.effectsVolume)))
  slot = n
  clock_accumulator = float(s.get("clockAccumulator",0))
+ var migrated = int(s.get("homeLayoutVersion",0)) < HOME_LAYOUT_VERSION
+ if migrated: migrate_home_layout()
  if name_edit: name_edit.hide()
  mode = "PLAY" if s.liaExited else "INTRO"
  if mode == "INTRO":
@@ -941,8 +972,116 @@ func load_game(n: int) -> bool:
   lia_x = 63.0
   lia_arriving = true
   lia_leaving = false
+ if migrated: save_game(n)
  queue_redraw()
  return true
+
+func migrate_home_layout() -> void:
+ var legacy_defaults = {"bed":Vector2i(19,7),"sofa":Vector2i(8,10),"stove":Vector2i(3,3),"sink":Vector2i(6,3)}
+ var old_furniture: Dictionary = s.furniture.duplicate(true)
+ for id in FURNITURE:
+  s.furniture[id] = {"at":FURNITURE[id].at.duplicate(),"rotation":int(old_furniture.get(id,{}).get("rotation",0)),"placed":false}
+ for id in ["bed","stove","sink","sofa","bench"]:
+  var old: Dictionary = old_furniture.get(id,{})
+  if not bool(old.get("placed",false)): continue
+  var old_at = tile_of(old.get("at",FURNITURE[id].at))
+  var desired = tile_of(FURNITURE[id].at) if legacy_defaults.has(id) and old_at == legacy_defaults[id] else project_legacy_home_tile(old_at)
+  var found = migration_furniture_position(id,desired,int(old.get("rotation",0)))
+  if found.x >= 0:
+   s.furniture[id].at = [found.x,found.y]
+   s.furniture[id].placed = true
+  elif id == "bench":
+   s.mail.bench = int(s.mail.get("bench",0))+1
+   say("Banco antigo guardado no correio para recolocação.")
+  else: say("Um móvel antigo ficou disponível no editor para recolocação.")
+ for id in s.drops:
+  var drop = s.drops[id]
+  if drop.mapId != "HOME01": continue
+  var drop_at = migration_free_tile(project_legacy_home_tile(tile_of(drop.at)))
+  if drop_at.x >= 0: drop.at = [drop_at.x,drop_at.y]
+  else:
+   s.storage[drop.item] = int(s.storage.get(drop.item,0))+int(drop.amount)
+   drop.mapId = "STORED"
+ if s.mapId == "HOME01":
+  var player_at = migration_free_tile(project_legacy_home_tile(tile_of(s.position)))
+  if player_at.x < 0: player_at = HOME_ENTRY
+  s.position = [player_at.x+0.5,player_at.y+0.5]
+ s.homeLayoutVersion = HOME_LAYOUT_VERSION
+
+func project_legacy_home_tile(p: Vector2i) -> Vector2i:
+ return Vector2i(clampi(roundi(1.0+(p.x-1)*14.0/21.0),1,HOME_SIZE.x-2),clampi(roundi(2.0+(p.y-1)*6.0/15.0),2,HOME_SIZE.y-2))
+
+func migration_furniture_position(id: String,desired: Vector2i,rotation: int) -> Vector2i:
+ var positions: Array[Vector2i] = []
+ for y in range(2,HOME_SIZE.y-1):
+  for x in range(1,HOME_SIZE.x-1): positions.append(Vector2i(x,y))
+ positions.sort_custom(func(a: Vector2i,b: Vector2i) -> bool: return a.distance_squared_to(desired) < b.distance_squared_to(desired) if a.distance_squared_to(desired) != b.distance_squared_to(desired) else a.y < b.y if a.y != b.y else a.x < b.x)
+ for p in positions:
+  if migration_furniture_fits(id,p,rotation): return p
+ return Vector2i(-1,-1)
+
+func migration_furniture_fits(id: String,p: Vector2i,rotation: int) -> bool:
+ var size = furniture_size(id,rotation)
+ if id in ["stove","sink"] and (p.x+size.x > 11 or p.y > 4): return false
+ for y in range(p.y,p.y+size.y):
+  for x in range(p.x,p.x+size.x):
+   var tile = Vector2i(x,y)
+   if not home_floor(tile) or x == 11 or y == HOME_ENTRY.y and x >= HOME_ENTRY.x and x <= HOME_ENTRY.x+1 or x == 10 and y >= 4 and y <= 6 or x == 12 and y >= 4 and y <= 5: return false
+   for condemned_id in CONDEMNED:
+    if int(s.condemned.get(condemned_id,0)) > 0 and condemned_covers(condemned_id,tile): return false
+   for dirt_id in DIRT:
+    if not bool(s.dirt.get(dirt_id,false)) and tile_of(DIRT[dirt_id]) == tile: return false
+   for other in s.furniture:
+    if other != id and furniture_covers(other,tile): return false
+ var previous = s.furniture[id].duplicate(true)
+ s.furniture[id] = {"at":[p.x,p.y],"rotation":rotation,"placed":true}
+ var seen = home_reachable_tiles()
+ var valid = seen.has(key(Vector2i(3,5))) and seen.has(key(Vector2i(12,5)))
+ if valid:
+  for repair_id in ["H02","H03","H04","H05","H06","H07"]:
+   if s.repairs[repair_id].completed: continue
+   var target = tile_of(REPAIRS[repair_id].at)
+   var adjacent = false
+   for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+    if seen.has(key(target+direction)): adjacent = true
+   if not adjacent: valid = false
+ if valid and s.furniture.bed.placed:
+  valid = false
+  var bed_at = tile_of(s.furniture.bed.at)
+  var bed_size = furniture_size("bed",int(s.furniture.bed.rotation))
+  for y in range(bed_at.y-1,bed_at.y+bed_size.y+1):
+   for x in range(bed_at.x-1,bed_at.x+bed_size.x+1):
+    if x == bed_at.x-1 or x == bed_at.x+bed_size.x or y == bed_at.y-1 or y == bed_at.y+bed_size.y:
+     if seen.has(key(Vector2i(x,y))): valid = true
+ s.furniture[id] = previous
+ return valid
+
+func home_reachable_tiles() -> Dictionary:
+ var open: Array[Vector2i] = [HOME_ENTRY]
+ var seen: Dictionary = {}
+ while not open.is_empty():
+  var p = open.pop_front()
+  if seen.has(key(p)) or not home_floor(p) or home_tile_blocked(p): continue
+  seen[key(p)] = true
+  for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]: open.append(p+direction)
+ return seen
+
+func migration_free_tile(desired: Vector2i) -> Vector2i:
+ var positions: Array[Vector2i] = []
+ for y in range(2,HOME_SIZE.y-1):
+  for x in range(1,HOME_SIZE.x-1): positions.append(Vector2i(x,y))
+ positions.sort_custom(func(a: Vector2i,b: Vector2i) -> bool: return a.distance_squared_to(desired) < b.distance_squared_to(desired) if a.distance_squared_to(desired) != b.distance_squared_to(desired) else a.y < b.y if a.y != b.y else a.x < b.x)
+ var reachable = home_reachable_tiles()
+ for p in positions:
+  if reachable.has(key(p)): return p
+ return Vector2i(-1,-1)
+
+func home_tile_blocked(p: Vector2i) -> bool:
+ for id in CONDEMNED:
+  if int(s.condemned.get(id,0)) > 0 and condemned_covers(id,p): return true
+ for id in s.furniture:
+  if furniture_covers(id,p): return true
+ return false
 func say(t: String) -> void:
  message = t
  message_timer = 3.4
@@ -975,14 +1114,16 @@ func asset(id: String, ground: Vector2) -> bool:
 
 # Temporary vector art. Gameplay uses IDs and footprints; PNG exports can replace drawing.
 func _draw() -> void:
- draw_rect(Rect2(Vector2.ZERO,Vector2(SIZE)),Color("243348"))
+ draw_rect(Rect2(Vector2.ZERO,Vector2(SIZE)),Color.BLACK if not s.is_empty() and s.mapId == "HOME01" else Color("243348"))
  if mode == "TITLE" or mode == "NAME": return
  if s.is_empty(): return
  var player = Vector2(s.position[0],s.position[1])*TILE
  camera_origin = (player-Vector2(SIZE)*0.5).round()
- var map_px = Vector2(64,48)*TILE if s.mapId == "FARM01" else Vector2(24,18)*TILE
- camera_origin.x = clampf(camera_origin.x,0,map_px.x-SIZE.x)
- camera_origin.y = clampf(camera_origin.y,0,map_px.y-SIZE.y)
+ if s.mapId == "FARM01":
+  var map_px = Vector2(64,48)*TILE
+  camera_origin.x = clampf(camera_origin.x,0,map_px.x-SIZE.x)
+  camera_origin.y = clampf(camera_origin.y,0,map_px.y-SIZE.y)
+ else: camera_origin = (Vector2(HOME_SIZE)*TILE-Vector2(SIZE))*0.5
  draw_set_transform(-camera_origin)
  if s.mapId == "FARM01": draw_farm()
  else: draw_home()
@@ -1106,23 +1247,23 @@ func draw_prop(ob: Dictionary,pos: Vector2) -> void:
  if ob.hits < ob.maxHits: draw_line(pos+Vector2(6,5),pos+Vector2(25,24),Color("f1dfb1"),2)
 
 func draw_home() -> void:
- for y in range(18):
-  for x in range(24):
-   var wall = x == 0 or x == 23 or y == 0 or y == 17 or x == 15 and (y < 7 or y > 9)
+ for y in range(HOME_SIZE.y):
+  for x in range(HOME_SIZE.x):
+   var wall = y < 2 or not home_floor(Vector2i(x,y)) and not (y == HOME_SIZE.y-1 and x >= HOME_ENTRY.x and x <= HOME_ENTRY.x+1)
    var c = Color("a36c3b") if s.repairs.H02.completed else Color("886644")
    if wall: c = Color("f1dfb1") if s.repairs.H02.completed else Color("b7a276")
    draw_rect(Rect2(x*TILE,y*TILE,TILE,TILE),c)
    var ground_id = "ground/wall_new" if wall and s.repairs.H02.completed else "ground/wall_old" if wall else "ground/floor_new" if s.repairs.H02.completed else "ground/floor_old"
    asset(ground_id,Vector2(x*TILE+16,y*TILE+32))
-   if x > 0 and x < 23 and y > 0 and y < 17 and c != Color("f1dfb1"): draw_rect(Rect2(x*TILE,y*TILE,TILE,TILE),Color("70482f",0.2),false,1)
- # H03 muda as duas janelas internas sem trocar o piso ou os móveis.
- for window_x in [10,19]:
-  var glass = Rect2(Vector2(window_x,2)*TILE,Vector2(40,36))
-  draw_rect(glass,Color("70482f"))
-  draw_rect(glass.grow(-4),Color("287fbd") if s.repairs.H03.completed else Color("65727c"))
-  if not s.repairs.H03.completed:
-   draw_line(glass.position+Vector2(5,5),glass.end-Vector2(5,5),Color("70482f"),4)
-   draw_line(glass.position+Vector2(5,glass.size.y-5),glass.position+Vector2(glass.size.x-5,5),Color("70482f"),4)
+   if home_floor(Vector2i(x,y)) and not s.repairs.H02.completed: draw_rect(Rect2(x*TILE,y*TILE,TILE,TILE),Color("70482f",0.2),false,1)
+ # North wall is two tiles high; H03 changes the windows independently of H02.
+ var wall_id = "interior/north_wall_new" if s.repairs.H02.completed else "interior/north_wall_old"
+ for x in range(HOME_SIZE.x): asset(wall_id,Vector2(x+0.5,2)*TILE)
+ var window_id = "interior/window_new" if s.repairs.H03.completed else "interior/window_old"
+ for window_x in [5,14]:
+  if not asset(window_id,Vector2(window_x,2)*TILE):
+   draw_rect(Rect2(Vector2(window_x-1,0)*TILE,Vector2(2,2)*TILE),Color("287fbd") if s.repairs.H03.completed else Color("65727c"))
+ draw_rect(Rect2(Vector2(HOME_ENTRY.x,HOME_SIZE.y-1)*TILE,Vector2(2,1)*TILE),Color("70482f"),false,2)
  for id in DIRT:
   if not s.dirt[id]:
    var pos = Vector2(tile_of(DIRT[id]))*TILE
@@ -1133,7 +1274,8 @@ func draw_home() -> void:
   if s.condemned[id] > 0:
    var pos = Vector2(tile_of(CONDEMNED[id]))*TILE
    var kind = ["table","chair","chair","cabinet","bookshelf","low_table","wardrobe"][CONDEMNED.keys().find(id)]
-   if not asset("furniture/"+kind,pos+Vector2(16,32)): draw_rect(Rect2(pos+Vector2(2,4),Vector2(28,25)),Color("70482f"))
+   var size = Vector2(tile_of(CONDEMNED_SIZE[id]))*TILE
+   if not asset("furniture/"+kind,pos+Vector2(size.x/2,size.y)): draw_rect(Rect2(pos+Vector2(2,4),size-Vector2(4,6)),Color("70482f"))
  for id in s.furniture:
   if not s.furniture[id].placed: continue
   var f = s.furniture[id]

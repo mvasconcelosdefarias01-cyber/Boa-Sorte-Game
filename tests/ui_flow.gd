@@ -103,7 +103,7 @@ func run() -> void:
  must(g.modal == "waste_confirm","descarte exige confirmação")
  g._unhandled_input(event(KEY_ESCAPE)); await process_frame
  must(g.modal == "sales","Esc cancela descarte")
- g.s.mapId = "HOME01"; g.s.position = [11.5,14.5]
+ g.s.mapId = "HOME01"; g.s.position = [8.5,8.5]
  g.mode = "BUILD"; g.modal = ""; g.ui.refresh(true); await process_frame
  must(find_button(g.ui.root_control,"Colocar") != null and find_button(g.ui.root_control,"Girar") != null,"editor possui botões de mouse")
  var editor_start: Vector2i = g.build_preview_tile

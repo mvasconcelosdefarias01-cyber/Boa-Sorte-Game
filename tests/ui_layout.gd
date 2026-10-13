@@ -6,6 +6,7 @@ func inspect(node: Node,issues: Array[String]) -> void:
  var ancestor = node.get_parent()
  while ancestor != null:
   if ancestor is ScrollContainer: clipped = true
+  if ancestor is Control and ancestor.clip_contents: clipped = true
   if panel == null and ancestor is PanelContainer: panel = ancestor
   ancestor = ancestor.get_parent()
  if (node is Button or node is Label or node is LineEdit) and not clipped:
@@ -18,6 +19,13 @@ func inspect(node: Node,issues: Array[String]) -> void:
     if not bounds.grow(0.5).encloses(r):
      issues.append("%s fora do painel %s %s" % [node.text if node is Label or node is Button else "campo",r,bounds])
  for child in node.get_children(): inspect(child,issues)
+func visible_rect(control: Control) -> Rect2:
+ var rect = control.get_global_rect()
+ var ancestor = control.get_parent()
+ while ancestor != null:
+  if ancestor is Control and ancestor.clip_contents: rect = rect.intersection(ancestor.get_global_rect())
+  ancestor = ancestor.get_parent()
+ return rect
 func run() -> void:
  var g = load("res://main.tscn").instantiate(); root.add_child(g)
  await process_frame
@@ -64,6 +72,24 @@ func run() -> void:
    total_issues += issues.size()
    print("LAYOUT %d%% %s/%s: %d externos" % [int(scale*100),pair[0],pair[1],issues.size()])
    for issue in issues: print(issue)
+ g.s.mapId = "HOME01"
+ g.s.position = [8.5,7.9]
+ var room = Rect2(48,20,544,320)
+ for scale in [1.0,1.25,1.5]:
+  g.s.preferences.uiScale = scale
+  g.mode = "PLAY"; g.modal = ""
+  g.ui.refresh(true)
+  await process_frame
+  var issues: Array[String] = []
+  inspect(g.ui.root_control,issues)
+  for control in [g.ui.clock_label,g.ui.coins_label,g.ui.health_label,g.ui.stamina_label,g.ui.status_label,g.ui.message_label]+g.ui.hotbar_buttons:
+   if visible_rect(control).intersects(room): issues.append("HUD cobre interior: "+str(visible_rect(control)))
+  for label in [g.ui.clock_label,g.ui.coins_label,g.ui.health_label,g.ui.stamina_label,g.ui.status_label]:
+   var width = label.get_theme_font("font").get_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.get_theme_font_size("font_size")).x
+   if width > label.size.x+1: issues.append("Texto cortado: "+label.text)
+  total_issues += issues.size()
+  print("LAYOUT HOME01 %d%%: %d problemas" % [int(scale*100),issues.size()])
+  for issue in issues: print(issue)
  g.audio_player.stop(); g.audio_player.stream = null; g.sounds.clear(); g.asset_textures.clear()
  g.queue_free(); g = null
  await process_frame

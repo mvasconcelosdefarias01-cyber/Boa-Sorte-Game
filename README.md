@@ -1,8 +1,8 @@
-# Boa Sorte — etapa 2: milho e ruína oeste
+# Boa Sorte — etapa 3: interior compacto
 
 ## Jogar no Windows 11
 
-Baixe [BoaSorte-Etapa02-Windows11.zip](https://raw.githubusercontent.com/mvasconcelosdefarias01-cyber/Boa-Sorte-Game/visual-ui-sample/dist/BoaSorte-Etapa02-Windows11.zip), escolha **Extrair Tudo** e abra `BoaSorte-Etapa02/BoaSorte.exe`. Não precisa instalar Godot. Esta etapa integra as cinco fases originais do milho e a ruína oeste do ZIP, mantendo as melhorias da etapa 1. Veja a sequência em [ETAPAS_AJUSTES.md](docs/ETAPAS_AJUSTES.md). Os pacotes anteriores continuam em `dist/`. O pacote foi exportado com Godot 4.6.3; testes headless passaram, mas a execução e a apresentação no Windows precisam do teste do jogador.
+Baixe [BoaSorte-Etapa03-Windows11.zip](https://raw.githubusercontent.com/mvasconcelosdefarias01-cyber/Boa-Sorte-Game/visual-ui-sample/dist/BoaSorte-Etapa03-Windows11.zip), escolha **Extrair Tudo** e abra `BoaSorte-Etapa03/BoaSorte.exe`. Não precisa instalar Godot. Esta etapa compacta o interior, enquadra a casa em fundo preto e posiciona as janelas nas paredes, com adaptação de partidas existentes e HUD interno compacto. Veja a sequência em [ETAPAS_AJUSTES.md](docs/ETAPAS_AJUSTES.md). Os pacotes anteriores continuam em `dist/`. O pacote foi exportado com Godot 4.6.3; testes headless passaram, mas a execução e a apresentação no Windows precisam do teste do jogador.
 
 Projeto Godot 4.6.3 2D da Fazenda do Avô Olegário. Abra `project.godot` no Godot e execute a cena principal (F6/F5), ou rode:
 

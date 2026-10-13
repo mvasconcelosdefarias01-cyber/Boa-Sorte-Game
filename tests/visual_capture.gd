@@ -94,7 +94,7 @@ func run() -> void:
  game.mode = "PLAY"
  game.modal = ""
  game.s.mapId = "HOME01"
- game.s.position = [11.5,14.5]
+ game.s.position = [8.5,7.9]
  await capture("08_interior_abandonado_720p")
  for id in ["H02","H03","H05"]: game.s.repairs[id].completed = true
  game.s.dirt.dirt_web = true
@@ -106,9 +106,9 @@ func run() -> void:
  await capture("08_interior_restaurado_720p")
  game.mode = "BUILD"
  game.editor_item = "bed"
- game.build_preview_tile = Vector2i(11,11)
+ game.build_preview_tile = Vector2i(13,5)
  await capture("09_editor_720p")
- game.build_preview_tile = Vector2i(15,9)
+ game.build_preview_tile = Vector2i(11,4)
  await capture("09_editor_bloqueado_720p")
  game.mode = "MODAL"
  game.modal = "sleep"

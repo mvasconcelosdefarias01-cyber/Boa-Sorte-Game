@@ -68,9 +68,9 @@ func run() -> void:
    if g.s.stamina < 2: g.s.stamina = 30
    check(act(g,"TOOL_AXE",pos),"demolição "+id)
  check(g.house_ready(),"casa requer todos os 20 grupos")
- check(g.placement_error("bench",Vector2i(15,8),0) != "","editor bloqueia passagem")
+ check(g.placement_error("bench",Vector2i(11,4),0) != "","editor bloqueia passagem")
  g.s.stamina = 20
- check(g.place_furniture("bench",Vector2i(5,12),0),"banco colocado")
+ check(g.place_furniture("bench",Vector2i(6,7),0),"banco colocado")
  check(g.s.furniture.bench.placed,"banco persistente")
  g.s.mapId = "FARM01"
  g.s.stamina = 0
@@ -101,7 +101,7 @@ func run() -> void:
  check(g.s.water == before,"rega repetida não gasta água")
  g.s.stamina = 13
  g.s.mapId = "HOME01"
- g.s.position = [19,11]
+ g.s.position = [12.5,5.5]
  check(g.save_game(1),"save gravado")
  var h = load("res://main.tscn").instantiate()
  root.add_child(h)
