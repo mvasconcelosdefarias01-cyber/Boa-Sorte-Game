@@ -989,7 +989,9 @@ func _draw() -> void:
  draw_drops()
  if mode == "INTRO" and not s.liaExited: draw_lia(Vector2(lia_x+0.5,12.9)*TILE)
  draw_actor(player)
- if s.mapId == "FARM01": draw_farm_props(false,player.y)
+ if s.mapId == "FARM01":
+  draw_farm_crops(false,player.y)
+  draw_farm_props(false,player.y)
  if mode == "PLAY" or mode == "BUILD":
   var t = target_tile() if mode == "PLAY" else build_preview_tile
   var valid = action_check(selected_item(),t) == "" if mode == "PLAY" and TOOLS.has(selected_item()) else editor_item != "" and placement_error(editor_item,t,editor_rotation) == "" if mode == "BUILD" else false
@@ -1022,15 +1024,16 @@ func draw_farm() -> void:
    else: asset("ground/grass",Vector2(p)*TILE+Vector2(16,32))
    if s.soil.has(key(p)):
     draw_rect(Rect2(Vector2(p)*TILE+Vector2(4,8),Vector2(24,15)),Color("70482f"),false,2)
-    if s.soil[key(p)].cropId == "crop_corn": draw_crop(p,s.soil[key(p)].cropAge)
- # Lake rim and ruins
- draw_rect(Rect2(8*TILE,8*TILE,10*TILE,8*TILE),Color("70482f"),false,7)
- if not asset("props/ruin",Vector2(13,15)*TILE): world_label("RUÍNAS",Vector2(10,10)*TILE,18,Color("f1dfb1"))
+ # The ruin sprite covers the reserved x8..17, y8..15 footprint.
+ if not asset("props/ruin",Vector2(13,16)*TILE):
+  draw_rect(Rect2(8*TILE,8*TILE,10*TILE,8*TILE),Color("70482f"),false,7)
+  world_label("RUÍNAS",Vector2(10,10)*TILE,18,Color("f1dfb1"))
  if not asset("buildings/house_H01_restored" if s.repairs.H01.completed else "buildings/house_H01_old",Vector2(49.5,16)*TILE):
   draw_rect(Rect2(44*TILE,7*TILE,12*TILE,9*TILE),Color("f1dfb1") if s.repairs.H01.completed else Color("b7a276"))
  asset("buildings/repair_H03_window_open" if s.repairs.H03.completed else "buildings/repair_H03_window_boarded",Vector2(53,14)*TILE)
  if not asset("props/sales_chest",Vector2(57.5,15)*TILE): draw_rect(Rect2(57*TILE,14*TILE,30,29),Color("70482f"))
  if not asset("props/mailbox",Vector2(60.5,15)*TILE): draw_rect(Rect2(60*TILE,14*TILE,29,29),Color("e6b539"))
+ draw_farm_crops(true,Vector2(s.position[0],s.position[1]).y*TILE)
  draw_farm_props(true,Vector2(s.position[0],s.position[1]).y*TILE)
  for p in [Vector2i(31,0),Vector2i(63,10),Vector2i(38,47)]:
   draw_rect(Rect2(Vector2(p)*TILE,Vector2(30,30)),Color("b85d43"),false,3)
@@ -1044,6 +1047,19 @@ func draw_farm_props(behind_actor: bool,actor_feet_y: float) -> void:
   var pos = Vector2(ob.at[0],ob.at[1])*TILE
   if pos.x < camera_origin.x-96 or pos.x > camera_origin.x+SIZE.x+96 or pos.y < camera_origin.y-128 or pos.y > camera_origin.y+SIZE.y+96: continue
   draw_prop(ob,pos)
+
+func draw_farm_crops(behind_actor: bool,actor_feet_y: float) -> void:
+ var visible: Array[Vector2i] = []
+ for id in s.soil:
+  var soil = s.soil[id]
+  if soil.cropId != "crop_corn": continue
+  var coords = id.split(",")
+  var p = Vector2i(int(coords[0]),int(coords[1]))
+  if (float(p.y+1)*TILE <= actor_feet_y) != behind_actor: continue
+  if p.x*TILE < camera_origin.x-64 or p.x*TILE > camera_origin.x+SIZE.x+64 or p.y*TILE < camera_origin.y-64 or p.y*TILE > camera_origin.y+SIZE.y+64: continue
+  visible.append(p)
+ visible.sort_custom(func(a: Vector2i,b: Vector2i) -> bool: return a.y < b.y if a.y != b.y else a.x < b.x)
+ for p in visible: draw_crop(p,s.soil[key(p)].cropAge)
 
 func draw_crop(p: Vector2i,age: int) -> void:
  if asset("crops/crop_corn_stage%d" % (age+1),Vector2(p)*TILE+Vector2(16,32)): return

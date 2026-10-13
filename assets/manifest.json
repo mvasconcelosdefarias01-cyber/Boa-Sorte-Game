@@ -1357,30 +1357,44 @@
     "props/ruin": {
       "path": "res://assets/sprites/props/ruin.png",
       "size": [
-        128,
-        96
+        320,
+        256
       ],
       "pivot": [
-        64,
-        96
+        160,
+        256
       ],
       "footprint": [
-        1,
-        1
+        10,
+        8
       ],
       "collider": [
-        32,
-        72,
-        64,
-        24
+        0,
+        0,
+        0,
+        0
       ],
       "use_area": [
-        -16,
-        -16,
-        160,
-        128
+        0,
+        0,
+        0,
+        0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage2/ruin.png",
+      "source_bounds": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "source_sha256": "f9437c017b3be6473396569e102399f50314c243a6f990dae201c82302c68831",
+      "sha256": "8654a29a77c7070a93ac04eeb86ed5783cd06cf244374632a3cad70192ddd36f",
+      "collision_note": "Visual only; reserve wall tiles in gameplay. Interior is transparent.",
+      "world_anchor": [
+        13,
+        16
+      ]
     },
     "ground/soil_untilled": {
       "path": "res://assets/sprites/ground/soil_untilled.png",
@@ -1492,7 +1506,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/corn.png",
+      "source_bounds": [
+        0,
+        470,
+        300,
+        630
+      ],
+      "source_sha256": "8de0d85bd16a191e917d7c1a0f33f42f7797dd2f0cab7ccb44c4ba10eceb2b15",
+      "sha256": "dc470499f64ecfa277ae098bd8f081204e408ca621f2e0d8e5ba71750fbc6524"
     },
     "crops/crop_corn_stage2": {
       "path": "res://assets/sprites/crops/crop_corn_stage2.png",
@@ -1520,17 +1543,26 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/corn.png",
+      "source_bounds": [
+        360,
+        340,
+        650,
+        630
+      ],
+      "source_sha256": "8de0d85bd16a191e917d7c1a0f33f42f7797dd2f0cab7ccb44c4ba10eceb2b15",
+      "sha256": "897fde816ef86f781bfaa0fd734bddd56a4476445d428f390312fcfe8cfa1285"
     },
     "crops/crop_corn_stage3": {
       "path": "res://assets/sprites/crops/crop_corn_stage3.png",
       "size": [
         32,
-        32
+        64
       ],
       "pivot": [
         16,
-        32
+        64
       ],
       "footprint": [
         1,
@@ -1548,17 +1580,26 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/corn.png",
+      "source_bounds": [
+        680,
+        130,
+        1060,
+        620
+      ],
+      "source_sha256": "8de0d85bd16a191e917d7c1a0f33f42f7797dd2f0cab7ccb44c4ba10eceb2b15",
+      "sha256": "12f2dee1a516e3f2d6d3f8ea3d8b796c78e09fb3b71a2eba8031c0b65987ceef"
     },
     "crops/crop_corn_stage4": {
       "path": "res://assets/sprites/crops/crop_corn_stage4.png",
       "size": [
         32,
-        32
+        64
       ],
       "pivot": [
         16,
-        32
+        64
       ],
       "footprint": [
         1,
@@ -1576,17 +1617,26 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/corn.png",
+      "source_bounds": [
+        1060,
+        0,
+        1460,
+        620
+      ],
+      "source_sha256": "8de0d85bd16a191e917d7c1a0f33f42f7797dd2f0cab7ccb44c4ba10eceb2b15",
+      "sha256": "9cadb9f649ecb54f0a8a9035221d1ed81c6f6b5e0527c4f39ca2342f48a2839a"
     },
     "crops/crop_corn_stage5": {
       "path": "res://assets/sprites/crops/crop_corn_stage5.png",
       "size": [
         32,
-        32
+        64
       ],
       "pivot": [
         16,
-        32
+        64
       ],
       "footprint": [
         1,
@@ -1604,7 +1654,16 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_items/corn.png",
+      "source_bounds": [
+        1460,
+        0,
+        1855,
+        620
+      ],
+      "source_sha256": "8de0d85bd16a191e917d7c1a0f33f42f7797dd2f0cab7ccb44c4ba10eceb2b15",
+      "sha256": "7c5c4ac8b9f5a9d7b6546c4c9a5a34052d434dc3b534d6de1d9745f6bde0fc83"
     },
     "furniture/bed_broken": {
       "path": "res://assets/sprites/furniture/bed_broken.png",
