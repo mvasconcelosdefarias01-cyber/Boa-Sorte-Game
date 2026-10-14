@@ -39,10 +39,13 @@ func run() -> void:
  g.s.repairs.H01.hitsDone = 2
  g.s.soil["20,12"] = {"tilled":true,"wateredDayId":1,"cropId":"crop_corn","cropAge":4}
  g.s.hp = 73; g.s.stamina = 61; g.s.minutes = 670
+ g.s.position = [63.5,10.9]
+ g.update_map_passage()
+ check(g.s.mapId == "FARM01" and not g.road_portal(),"antiga saida lateral desativada")
  var original = state(g)
  var child_count = root.get_child_count()
  for cycle in range(3):
-  g.s.position = [60.5,10.9]; g.transition_cooldown = 0
+  g.s.position = [60.5,17.9]; g.transition_cooldown = 0
   g.update_map_passage()
   walk(g,"ui_right",15)
   check(g.s.mapId == "ROAD01" and g.can_walk(g.tile_of(g.s.position)),"entrada segura pelo leste ciclo %d" % cycle)

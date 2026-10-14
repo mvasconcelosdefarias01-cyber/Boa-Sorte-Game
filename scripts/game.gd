@@ -4,7 +4,7 @@ const TILE := 32
 const SIZE := Vector2i(640, 360)
 const ROAD_MAP = preload("res://scripts/road_map.gd")
 const ROAD_ENTRY := Vector2i(1,12)
-const FARM_ROAD_ENTRY := Vector2i(62,10)
+const FARM_ROAD_ENTRY := Vector2i(62,17)
 const SAVE_SCHEMA := 1
 const HOME_LAYOUT_VERSION := 2
 const HOME_SIZE := Vector2i(17,10)
@@ -814,7 +814,7 @@ func transition_to(map_id: String,p: Vector2i) -> void:
 
 func road_portal() -> bool:
  var p = tile_of(s.position)
- if s.mapId == "FARM01": return p.x >= 61 and p.y >= 9 and p.y <= 12
+ if s.mapId == "FARM01": return p.x >= 61 and p.y >= 16 and p.y <= 18
  if s.mapId == "ROAD01": return p.x <= 2 and abs(p.y-road_map.center_row(p.x)) <= 4
  return false
 
@@ -1239,7 +1239,7 @@ func draw_farm() -> void:
   for x in range(maxi(0,first.x),mini(64,last.x)):
    var p = Vector2i(x,y)
    var c = Color("dfae55") if (x*17+y*13)%7 > 1 else Color("d5a751")
-   if (x >= 56 and y >= 9 and y <= 12) or (x >= 47 and x <= 59 and y >= 16 and y <= 18): c = Color("c99854")
+   if (x >= 56 and y >= 9 and y <= 12) or (x >= 47 and x <= 63 and y >= 16 and y <= 18): c = Color("c99854")
    if is_lake(p) and not lake_sprite_ready: c = Color("287fbd") if (x+y)%2 else Color("2c89be")
    if x >= 8 and x <= 17 and y >= 8 and y <= 15: c = Color("9b855c")
    if x >= 40 and x <= 44 and y >= 22 and y <= 25: c = Color("b99055")
@@ -1250,7 +1250,7 @@ func draw_farm() -> void:
     if not lake_sprite_ready: asset("ground/water",Vector2(p)*TILE+Vector2(16,32))
    elif s.soil.has(key(p)):
     asset("ground/soil_wet" if s.soil[key(p)].wateredDayId == s.day else "ground/soil_tilled",Vector2(p)*TILE+Vector2(16,32))
-   elif (x >= 56 and y >= 9 and y <= 12) or (x >= 47 and x <= 59 and y >= 16 and y <= 18): asset("ground/path",Vector2(p)*TILE+Vector2(16,32))
+   elif (x >= 56 and y >= 9 and y <= 12) or (x >= 47 and x <= 63 and y >= 16 and y <= 18): asset("ground/path",Vector2(p)*TILE+Vector2(16,32))
    elif (x >= 40 and x <= 44 and y >= 22 and y <= 25) or (x >= 8 and x <= 17 and y >= 8 and y <= 15): asset("ground/soil_untilled",Vector2(p)*TILE+Vector2(16,32))
    else:
     var sand_id = farm_sand_id(p)
@@ -1274,7 +1274,7 @@ func draw_farm() -> void:
  if not asset("props/mailbox",Vector2(60.5,15)*TILE): draw_rect(Rect2(60*TILE,14*TILE,29,29),Color("e6b539"))
  draw_farm_crops(true,Vector2(s.position[0],s.position[1]).y*TILE)
  draw_farm_props(true,Vector2(s.position[0],s.position[1]).y*TILE)
- for p in [Vector2i(31,0),Vector2i(63,10),Vector2i(38,47)]:
+ for p in [Vector2i(31,0),Vector2i(63,17),Vector2i(38,47)]:
   draw_rect(Rect2(Vector2(p)*TILE,Vector2(30,30)),Color("b85d43"),false,3)
 
 func terrain_hash(p: Vector2i) -> int:
@@ -1289,7 +1289,7 @@ func farm_grass_clump(p: Vector2i) -> bool:
  if p.x >= 43 and p.x <= 56 and p.y >= 5 and p.y <= 18: return false
  if p.x >= 39 and p.x <= 45 and p.y >= 21 and p.y <= 26: return false
  if is_lake(p) or lake_shore(p): return false
- if (p.x >= 56 and p.y >= 9 and p.y <= 12) or (p.x >= 47 and p.x <= 59 and p.y >= 16 and p.y <= 18): return false
+ if (p.x >= 56 and p.y >= 9 and p.y <= 12) or (p.x >= 47 and p.x <= 63 and p.y >= 16 and p.y <= 18): return false
  if p.x >= 8 and p.x <= 17 and p.y >= 8 and p.y <= 15: return false
  if lake_distance(p) <= 3:
   var lake_patches = [Vector2i(13,29),Vector2i(24,33),Vector2i(25,36),Vector2i(19,43),Vector2i(13,43),Vector2i(6,36)]
