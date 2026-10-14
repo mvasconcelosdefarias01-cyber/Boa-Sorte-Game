@@ -3,7 +3,7 @@ extends Node2D
 const TILE := 32
 const SIZE := Vector2i(640, 360)
 const ROAD_MAP = preload("res://scripts/road_map.gd")
-const ROAD_ENTRY := Vector2i(1,12)
+const ROAD_ENTRY := Vector2i(3,13)
 const FARM_ROAD_ENTRY := Vector2i(62,17)
 const SAVE_SCHEMA := 1
 const HOME_LAYOUT_VERSION := 2
@@ -1020,7 +1020,7 @@ func load_game(n: int) -> bool:
  clock_accumulator = float(s.get("clockAccumulator",0))
  var migrated = int(s.get("homeLayoutVersion",0)) < HOME_LAYOUT_VERSION
  if migrated: migrate_home_layout()
- if s.mapId == "ROAD01" and not can_walk(tile_of(s.position)):
+ if s.mapId == "ROAD01" and (not can_walk(tile_of(s.position)) or road_portal()):
   s.position = [ROAD_ENTRY.x+0.5,ROAD_ENTRY.y+0.9]
  arrival_latch = road_portal()
  update_camera()

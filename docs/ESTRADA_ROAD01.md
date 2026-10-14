@@ -11,7 +11,7 @@ Todos os PNGs anteriores foram comparados por SHA-256 e preservados. Nenhum asse
 ## Conexões
 
 - FARM01: passagem leste x61..63, y16..18, alinhada ao caminho em frente à casa. E interage na passagem; caminhar até x63 também aciona a saída.
-- Destino ROAD01: tile (1,12), livre de obstáculos, dentro da zona oeste.
+- Destino ROAD01: tile (3,13), livre de obstáculos, alinhado ao centro da estrada e fora do gatilho oeste.
 - Retorno ROAD01: E na zona oeste ou caminhar até x0; destino FARM01 (62,17), livre.
 - `arrival_latch` impede repetição enquanto o personagem não sair da zona de chegada. A trava é reconstruída ao carregar uma partida nessa zona; o cooldown existente continua em uso.
 - `transition_to` conserva o estado, cancela ações pendentes, atualiza posição/câmera e salva seguindo o padrão existente.
@@ -37,3 +37,5 @@ A câmera usa limites próprios de ROAD01 (1536×768 px) e os limites anteriores
 Pacote: `dist/BoaSorte-Estrada-Windows11.zip`, com executável e instruções. Não requer Godot instalado para jogar.
 
 Ajuste solicitado após teste: passagem e retorno movidos para a altura do caminho frontal (y17); caminho estendido até a borda leste. Demais elementos preservados.
+
+Correção do retorno: chegada ROAD01 fora do gatilho permite retornar diretamente à esquerda, sem andar antes na direção oposta. Saves antigos dentro da passagem são reposicionados no novo ponto seguro. Teste de retorno direto e após recarga passou; destino na fazenda continua (62,17).

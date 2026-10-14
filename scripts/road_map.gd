@@ -1,7 +1,7 @@
 extends RefCounted
 ## Static scenery: no resource IDs or mutable farm state are shared with this map.
 const SIZE := Vector2i(48,24)
-const ENTRY := Vector2i(1,12)
+const ENTRY := Vector2i(3,13)
 var props: Array[Dictionary] = []
 var blocked: Dictionary = {}
 

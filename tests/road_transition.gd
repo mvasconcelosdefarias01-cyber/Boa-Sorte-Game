@@ -49,13 +49,14 @@ func run() -> void:
   g.update_map_passage()
   walk(g,"ui_right",15)
   check(g.s.mapId == "ROAD01" and g.can_walk(g.tile_of(g.s.position)),"entrada segura pelo leste ciclo %d" % cycle)
-  check(g.arrival_latch,"chegada desarma gatilho")
+  check(not g.road_portal(),"chegada fora do gatilho, alinhada a estrada")
+  g.update_map_passage()
+  check(g.s.mapId == "ROAD01","chegada nao retorna sozinha")
   g.transition_cooldown = 0
-  walk(g,"ui_left",5)
-  g.interact()
-  check(g.s.mapId == "ROAD01","sem retorno imediato sobre chegada")
-  walk(g,"ui_right",20)
-  check(not g.arrival_latch,"reativa ao sair da zona")
+  walk(g,"ui_left",24)
+  check(g.s.mapId == "FARM01" and g.tile_of(g.s.position).y == 17,"retorno direto a esquerda alinhado ao caminho frontal")
+  g.transition_to("ROAD01",g.ROAD_ENTRY)
+  g.transition_cooldown = 0
   check(reachable(g,Vector2i(3,12),Vector2i(45,g.road_map.center_row(45))),"rota livre ate bloqueio")
   for x in range(3,46):
    for dy in range(-2,3):
@@ -85,7 +86,11 @@ func run() -> void:
  g.s.position = [38,46]; g.interact()
  check(g.s.mapId == "FARM01","saida sul preservada")
  g.transition_to("ROAD01",g.ROAD_ENTRY)
- check(g.save_game(3) and g.load_game(3) and g.arrival_latch,"recarga sobre zona de chegada mantem trava")
+ g.s.position = [0.5,12.9]
+ check(g.save_game(3) and g.load_game(3) and not g.road_portal(),"save antigo na passagem reposicionado com seguranca")
+ g.transition_cooldown = 0
+ walk(g,"ui_left",24)
+ check(g.s.mapId == "FARM01" and g.tile_of(g.s.position).y == 17,"retorno funciona apos recarga de save antigo")
  for ob in g.road_map.props: check(g.asset_textures.has(g.prop_asset_id(ob)),"sprite existente: "+g.prop_asset_id(ob))
  print("ROAD QA failures=",failures)
  quit(1 if failures else 0)
