@@ -232,7 +232,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        65,
+        0,
+        230,
+        300
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "3ed7f0250fc67ed49accfd75b0968cb9964936143a0c9761afba51235bcf97af",
+      "source_note": "Sheet row 1 assigned to umbu; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "flora/object_tree_umbu_stage2": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stage2.png",
@@ -260,7 +278,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        235,
+        0,
+        455,
+        300
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "8550fe341171acefc54e2af889fb3dae276b00176e33b42f917a66ccff831153",
+      "source_note": "Sheet row 1 assigned to umbu; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_umbu_stage3": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stage3.png",
@@ -288,17 +324,35 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        465,
+        0,
+        750,
+        300
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "1bd526392c50a8def630b9069021f007ca0cf12325b8bbcc01dbaf4321c509d4",
+      "source_note": "Sheet row 1 assigned to umbu; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_umbu_stage4": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stage4.png",
       "size": [
-        96,
-        128
+        144,
+        144
       ],
       "pivot": [
-        48,
-        128
+        72,
+        144
       ],
       "footprint": [
         2,
@@ -316,7 +370,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        760,
+        0,
+        1160,
+        300
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "ff9c5b97db3ab3867ffe32b3183f3ae81a1de4c23631f55df0b3656c48cd18fa",
+      "source_note": "Sheet row 1 assigned to umbu; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        5,
+        4
+      ]
     },
     "flora/object_tree_umbu_stump": {
       "path": "res://assets/sprites/flora/object_tree_umbu_stump.png",
@@ -344,7 +416,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        1170,
+        0,
+        1402,
+        300
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "34f21b6fcec5e3688660fe743ac8039c1092164fdad1eb6fba5ffabd3ff5ef44",
+      "source_note": "Sheet row 1 assigned to umbu; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "flora/object_tree_juazeiro_stage1": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage1.png",
@@ -372,7 +462,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        65,
+        300,
+        230,
+        555
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "19227f35feeb812f2d1a5513d417630f57c8ecd46d8b299026efbd9aacb96835",
+      "source_note": "Sheet row 2 assigned to juazeiro; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "flora/object_tree_juazeiro_stage2": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage2.png",
@@ -400,7 +508,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        235,
+        300,
+        455,
+        555
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "4a49d7e1f1cdc2b7b1b94b605f34d964852f1656b22f01eb7f43471058386ff7",
+      "source_note": "Sheet row 2 assigned to juazeiro; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_juazeiro_stage3": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage3.png",
@@ -428,17 +554,35 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        465,
+        300,
+        750,
+        555
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "073cfe12bdc5e413758e975046370557049383ab129ea568005a52759280b188",
+      "source_note": "Sheet row 2 assigned to juazeiro; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_juazeiro_stage4": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stage4.png",
       "size": [
-        96,
-        128
+        144,
+        144
       ],
       "pivot": [
-        48,
-        128
+        72,
+        144
       ],
       "footprint": [
         2,
@@ -456,7 +600,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        760,
+        300,
+        1160,
+        555
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "945e292c08a58468158df3cf396d0b2fe1dc6a65a836edeb7d87fdef86ab716b",
+      "source_note": "Sheet row 2 assigned to juazeiro; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        5,
+        4
+      ]
     },
     "flora/object_tree_juazeiro_stump": {
       "path": "res://assets/sprites/flora/object_tree_juazeiro_stump.png",
@@ -484,7 +646,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        1170,
+        300,
+        1402,
+        555
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "9b7c0291f37c61cd7be3da952c901de4ee18d80c6ae44760c274663bd39ba544",
+      "source_note": "Sheet row 2 assigned to juazeiro; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "flora/object_tree_catingueira_stage1": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage1.png",
@@ -512,7 +692,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        65,
+        565,
+        230,
+        825
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "84c84588642cb6c138c785ef2f3c53952e7aa222f45a5b8df2afe1b842cf3e61",
+      "source_note": "Sheet row 3 assigned to catingueira; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "flora/object_tree_catingueira_stage2": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage2.png",
@@ -540,7 +738,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        235,
+        565,
+        455,
+        825
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "3d0bfff3267929af76400f7ec3f74cfc0e83839e59bd7262591d58ca93394cbd",
+      "source_note": "Sheet row 3 assigned to catingueira; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_catingueira_stage3": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage3.png",
@@ -568,17 +784,35 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        465,
+        565,
+        750,
+        825
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "ca5ba88f6872d23ffa60babdeee0124d67babfa4ca2f4197730a0dc86338fc86",
+      "source_note": "Sheet row 3 assigned to catingueira; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_catingueira_stage4": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stage4.png",
       "size": [
-        96,
-        128
+        144,
+        144
       ],
       "pivot": [
-        48,
-        128
+        72,
+        144
       ],
       "footprint": [
         2,
@@ -596,7 +830,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        760,
+        565,
+        1160,
+        825
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "75fcdb777ad2a3c09dc3db6aea2170c98fe76c36980e41a6b172e10d78b1392f",
+      "source_note": "Sheet row 3 assigned to catingueira; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        5,
+        4
+      ]
     },
     "flora/object_tree_catingueira_stump": {
       "path": "res://assets/sprites/flora/object_tree_catingueira_stump.png",
@@ -624,7 +876,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        1170,
+        565,
+        1402,
+        825
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "fd9aed89cac09f7523cffac4173ddb9a40407d6dce03402ca080b5103a2f324e",
+      "source_note": "Sheet row 3 assigned to catingueira; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "flora/object_tree_jurema_stage1": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage1.png",
@@ -652,7 +922,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        65,
+        835,
+        230,
+        1122
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "2b98ca092dd5205b899ebb8c979f3532d1fc813baf23b2b66b510491d4497bc3",
+      "source_note": "Sheet row 4 assigned to jurema; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "flora/object_tree_jurema_stage2": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage2.png",
@@ -680,7 +968,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        235,
+        835,
+        455,
+        1122
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "8f5e34fcb5d4e183437f480e31c3ac9a2f7851089c1677ca2fdfa42894d0572c",
+      "source_note": "Sheet row 4 assigned to jurema; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_jurema_stage3": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage3.png",
@@ -708,17 +1014,35 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        465,
+        835,
+        750,
+        1122
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "d08ffd5ea77758ba174516f65defce178413d16f48d3b9d0628422ffc7d6883f",
+      "source_note": "Sheet row 4 assigned to jurema; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        2,
+        2
+      ]
     },
     "flora/object_tree_jurema_stage4": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stage4.png",
       "size": [
-        96,
-        128
+        144,
+        144
       ],
       "pivot": [
-        48,
-        128
+        72,
+        144
       ],
       "footprint": [
         2,
@@ -736,7 +1060,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        760,
+        835,
+        1160,
+        1122
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "510bb54c531aaa55fc8c011589dc6cb03538047add31c0273fd02dc5c46dde39",
+      "source_note": "Sheet row 4 assigned to jurema; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        5,
+        3
+      ]
     },
     "flora/object_tree_jurema_stump": {
       "path": "res://assets/sprites/flora/object_tree_jurema_stump.png",
@@ -764,7 +1106,25 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/trees.png",
+      "source_bounds": [
+        1170,
+        835,
+        1402,
+        1122
+      ],
+      "source_sha256": "c8876e93f24590afd07c5283d8a34b0eb3fecbd9a182c15d4d9ce5a965354b24",
+      "sha256": "b40cd34b05ae446778828ca95cb56a9ec8932998740306430f326861ecc54e65",
+      "source_note": "Sheet row 4 assigned to jurema; size is visual, collision remains gameplay tile.",
+      "collisionFootprint": [
+        1,
+        1
+      ],
+      "visualFootprint": [
+        1,
+        1
+      ]
     },
     "props/bush_1": {
       "path": "res://assets/sprites/props/bush_1.png",
@@ -781,10 +1141,10 @@
         1
       ],
       "collider": [
-        8,
-        24,
-        16,
-        8
+        0,
+        0,
+        0,
+        0
       ],
       "use_area": [
         -16,
@@ -792,7 +1152,17 @@
         64,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/farm_concept.png",
+      "source_bounds": [
+        142,
+        105,
+        198,
+        146
+      ],
+      "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
+      "sha256": "0749f99220352a07c4880fee2ea2b0b37da3082a31965989479ff06c2bbc729e",
+      "source_note": "Foliage-only technical cutout from RGB exterior concept; no dedicated bush sheet exists."
     },
     "props/bush_2": {
       "path": "res://assets/sprites/props/bush_2.png",
@@ -809,10 +1179,10 @@
         1
       ],
       "collider": [
-        8,
-        24,
-        16,
-        8
+        0,
+        0,
+        0,
+        0
       ],
       "use_area": [
         -16,
@@ -820,7 +1190,17 @@
         64,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/farm_concept.png",
+      "source_bounds": [
+        304,
+        98,
+        362,
+        140
+      ],
+      "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
+      "sha256": "0f96a2543794ef834e08796c4eb528964b6bc0123d03396f19a98f86da4d0081",
+      "source_note": "Foliage-only technical cutout from RGB exterior concept; no dedicated bush sheet exists."
     },
     "props/bush_3": {
       "path": "res://assets/sprites/props/bush_3.png",
@@ -837,10 +1217,10 @@
         1
       ],
       "collider": [
-        8,
-        24,
-        16,
-        8
+        0,
+        0,
+        0,
+        0
       ],
       "use_area": [
         -16,
@@ -848,7 +1228,17 @@
         64,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/farm_concept.png",
+      "source_bounds": [
+        400,
+        107,
+        465,
+        151
+      ],
+      "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
+      "sha256": "e093be40ef6377ec73f58b634143e0a2056d867c55dce8473b3b8e773857411b",
+      "source_note": "Foliage-only technical cutout from RGB exterior concept; no dedicated bush sheet exists."
     },
     "props/mandacaru": {
       "path": "res://assets/sprites/props/mandacaru.png",
@@ -876,7 +1266,16 @@
         80,
         112
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/cacti.png",
+      "source_bounds": [
+        80,
+        60,
+        515,
+        620
+      ],
+      "source_sha256": "fc8b649fc6f7b381758092d94996be585d38fdb1b0c007bd9573a593363ddd75",
+      "sha256": "784952ad2b6cba01a8ab7d41ef17615ee9013da51d8a06110582226b90e0b799"
     },
     "props/palma": {
       "path": "res://assets/sprites/props/palma.png",
@@ -904,7 +1303,16 @@
         96,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/cacti.png",
+      "source_bounds": [
+        90,
+        640,
+        450,
+        1010
+      ],
+      "source_sha256": "fc8b649fc6f7b381758092d94996be585d38fdb1b0c007bd9573a593363ddd75",
+      "sha256": "8f4ac7e94427a0c85fea8da8da573d425e116fed58b98367e13a926b95fcd3b4"
     },
     "props/rock_small_1": {
       "path": "res://assets/sprites/props/rock_small_1.png",
@@ -932,7 +1340,16 @@
         64,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        65,
+        65,
+        535,
+        290
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "89627404a702933de1836a9b6aad76233e8c77954fdb72526ee8c5caa008404a"
     },
     "props/rock_small_2": {
       "path": "res://assets/sprites/props/rock_small_2.png",
@@ -960,7 +1377,16 @@
         64,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        540,
+        65,
+        1025,
+        290
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "28ce1658ad96af906b528ecc75fc4749ca7069d2b3a21fbc65a7a3f7f82b7eb7"
     },
     "props/rock_medium_1": {
       "path": "res://assets/sprites/props/rock_medium_1.png",
@@ -988,7 +1414,16 @@
         96,
         80
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        65,
+        295,
+        535,
+        575
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "db1195cec30e9508705ac1a91d5002cd605f97f5b96a485ae161bf9e4b34edb6"
     },
     "props/rock_medium_2": {
       "path": "res://assets/sprites/props/rock_medium_2.png",
@@ -1016,7 +1451,16 @@
         96,
         80
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        540,
+        295,
+        1025,
+        575
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "5b81c4d620193509c242515c8081c855461725d588b0ae3104bfa424c71c3d25"
     },
     "props/rock_large_1": {
       "path": "res://assets/sprites/props/rock_large_1.png",
@@ -1044,7 +1488,16 @@
         96,
         96
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        65,
+        585,
+        535,
+        970
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "3213a0a1294713634083f3d92cb4289833a0bfaf9843e7ee94bb9f5be104f95d"
     },
     "props/rock_large_2": {
       "path": "res://assets/sprites/props/rock_large_2.png",
@@ -1072,7 +1525,16 @@
         96,
         96
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        540,
+        585,
+        1025,
+        970
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "5f65a7277b8f626fd6281d79f9a5c5d511d8a373e4edd9299c38569b027dc329"
     },
     "props/stick": {
       "path": "res://assets/sprites/props/stick.png",
@@ -1100,7 +1562,16 @@
         64,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/wood.png",
+      "source_bounds": [
+        0,
+        0,
+        724,
+        543
+      ],
+      "source_sha256": "f7d2ea589e0078d1f451a43670abe2a079dcd15c0da3909da326e2a46376558f",
+      "sha256": "bb0eb222900c82158c762212f08558b7eb237244f837d470ca14bef020da7370"
     },
     "props/log": {
       "path": "res://assets/sprites/props/log.png",
@@ -1128,7 +1599,16 @@
         96,
         64
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/wood.png",
+      "source_bounds": [
+        0,
+        543,
+        724,
+        1086
+      ],
+      "source_sha256": "f7d2ea589e0078d1f451a43670abe2a079dcd15c0da3909da326e2a46376558f",
+      "sha256": "d77605e55052699e83c0550a9ccfe521bdf475bab78712c8b856d9dd37875edc"
     },
     "props/trash_can_1": {
       "path": "res://assets/sprites/props/trash_can_1.png",
@@ -3562,7 +4042,17 @@
         0,
         0
       ],
-      "status": "prototype_procedural"
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/farm_concept.png",
+      "source_bounds": [
+        1016,
+        328,
+        1048,
+        360
+      ],
+      "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
+      "sha256": "c865a98ce261d3b0c30f6def108d1cabfc1b1d9d9bf41b160c2a418e94e365d5",
+      "source_note": "Neutral dry sand, despite legacy ID ground/grass."
     },
     "ground/path": {
       "path": "res://assets/sprites/ground/path.png",
@@ -4580,6 +5070,758 @@
           2
         ]
       ]
+    },
+    "props/rock_small_3": {
+      "path": "res://assets/sprites/props/rock_small_3.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        1030,
+        65,
+        1500,
+        290
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "72a4bd21375534e1f4825fcf999341f3d5173e8b14d72faea1ed0dfcde5978e8",
+      "source_note": "State 3 is a brief break effect, not a persistent obstacle."
+    },
+    "props/rock_medium_3": {
+      "path": "res://assets/sprites/props/rock_medium_3.png",
+      "size": [
+        64,
+        48
+      ],
+      "pivot": [
+        32,
+        48
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        36,
+        32,
+        12
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        80
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        1030,
+        295,
+        1500,
+        575
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "b9793dd56ba48f84e2c16e94a00883d6ffe9110b3d4189cc71da3f0c78db8df6",
+      "source_note": "State 3 is a brief break effect, not a persistent obstacle."
+    },
+    "props/rock_large_3": {
+      "path": "res://assets/sprites/props/rock_large_3.png",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        64
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        48,
+        32,
+        16
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        96
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        1030,
+        585,
+        1500,
+        970
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "584abc71eb6b1d2ff2120314c95fe0bd93bcdf296713e92799000089489ea2e0",
+      "source_note": "State 3 is a brief break effect, not a persistent obstacle."
+    },
+    "props/mandacaru_2": {
+      "path": "res://assets/sprites/props/mandacaru_2.png",
+      "size": [
+        48,
+        80
+      ],
+      "pivot": [
+        24,
+        80
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        12,
+        60,
+        24,
+        20
+      ],
+      "use_area": [
+        -16,
+        -16,
+        80,
+        112
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/cacti.png",
+      "source_bounds": [
+        520,
+        60,
+        1010,
+        620
+      ],
+      "source_sha256": "fc8b649fc6f7b381758092d94996be585d38fdb1b0c007bd9573a593363ddd75",
+      "sha256": "57970207221d8ad81d507d41db4d23f2e3d43f4660c2559b19ee14200f5fe767"
+    },
+    "props/mandacaru_3": {
+      "path": "res://assets/sprites/props/mandacaru_3.png",
+      "size": [
+        48,
+        80
+      ],
+      "pivot": [
+        24,
+        80
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        12,
+        60,
+        24,
+        20
+      ],
+      "use_area": [
+        -16,
+        -16,
+        80,
+        112
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/cacti.png",
+      "source_bounds": [
+        1000,
+        60,
+        1536,
+        620
+      ],
+      "source_sha256": "fc8b649fc6f7b381758092d94996be585d38fdb1b0c007bd9573a593363ddd75",
+      "sha256": "8e0c1b67ef8495415afe5deb049b2f8526669e3e27eaedec6ef97ebbd7c7887c"
+    },
+    "props/palma_2": {
+      "path": "res://assets/sprites/props/palma_2.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        24,
+        32,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/cacti.png",
+      "source_bounds": [
+        470,
+        640,
+        900,
+        1010
+      ],
+      "source_sha256": "fc8b649fc6f7b381758092d94996be585d38fdb1b0c007bd9573a593363ddd75",
+      "sha256": "f54a76d28096812a495c1801d44417f141b4e431fdfbf1944cba48445126e038"
+    },
+    "props/palma_3": {
+      "path": "res://assets/sprites/props/palma_3.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        24,
+        32,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/cacti.png",
+      "source_bounds": [
+        900,
+        640,
+        1510,
+        1010
+      ],
+      "source_sha256": "fc8b649fc6f7b381758092d94996be585d38fdb1b0c007bd9573a593363ddd75",
+      "sha256": "b76be41e80f0375126ffd4e3c99e75eca047b909acda579d3d590771f1c1038b"
+    },
+    "props/stick_1": {
+      "path": "res://assets/sprites/props/stick_1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/wood.png",
+      "source_bounds": [
+        0,
+        0,
+        724,
+        543
+      ],
+      "source_sha256": "f7d2ea589e0078d1f451a43670abe2a079dcd15c0da3909da326e2a46376558f",
+      "sha256": "bb0eb222900c82158c762212f08558b7eb237244f837d470ca14bef020da7370"
+    },
+    "props/stick_2": {
+      "path": "res://assets/sprites/props/stick_2.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/wood.png",
+      "source_bounds": [
+        724,
+        0,
+        1448,
+        543
+      ],
+      "source_sha256": "f7d2ea589e0078d1f451a43670abe2a079dcd15c0da3909da326e2a46376558f",
+      "sha256": "320f8c3c91c8a83b5764ea36e3afae1d50eb8d88806a362c74458d5dc5012c21"
+    },
+    "props/log_1": {
+      "path": "res://assets/sprites/props/log_1.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        24,
+        32,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/wood.png",
+      "source_bounds": [
+        0,
+        543,
+        724,
+        1086
+      ],
+      "source_sha256": "f7d2ea589e0078d1f451a43670abe2a079dcd15c0da3909da326e2a46376558f",
+      "sha256": "d77605e55052699e83c0550a9ccfe521bdf475bab78712c8b856d9dd37875edc"
+    },
+    "props/log_2": {
+      "path": "res://assets/sprites/props/log_2.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        16,
+        24,
+        32,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        96,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/wood.png",
+      "source_bounds": [
+        724,
+        543,
+        1448,
+        1086
+      ],
+      "source_sha256": "f7d2ea589e0078d1f451a43670abe2a079dcd15c0da3909da326e2a46376558f",
+      "sha256": "6fcf50b6c0d5ffd01bc606a73104aa402216074694ff14ab77ee28a89665d64c"
+    },
+    "props/grass_clump_1": {
+      "path": "res://assets/sprites/props/grass_clump_1.png",
+      "size": [
+        32,
+        24
+      ],
+      "pivot": [
+        16,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/grass.png",
+      "source_bounds": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "source_sha256": "7d3289f1bf219d08228c20b6e33c43395c00a9e375ae8f97163c799ee810f93c",
+      "sha256": "47393d2e4be5f265ba44b6a541b863cb72310858b52cb8722561d1c9f8e0e2c9",
+      "source_note": "Decorative alpha overlay; no blocking collision."
+    },
+    "props/grass_clump_2": {
+      "path": "res://assets/sprites/props/grass_clump_2.png",
+      "size": [
+        48,
+        28
+      ],
+      "pivot": [
+        24,
+        28
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/grass.png",
+      "source_bounds": [
+        512,
+        0,
+        950,
+        512
+      ],
+      "source_sha256": "7d3289f1bf219d08228c20b6e33c43395c00a9e375ae8f97163c799ee810f93c",
+      "sha256": "9096065ec38f02f6542cdcff30ab3c03dea12fe3fe5725083a9fa254573f92be",
+      "source_note": "Decorative alpha overlay; no blocking collision."
+    },
+    "props/grass_clump_3": {
+      "path": "res://assets/sprites/props/grass_clump_3.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/grass.png",
+      "source_bounds": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "source_sha256": "7d3289f1bf219d08228c20b6e33c43395c00a9e375ae8f97163c799ee810f93c",
+      "sha256": "d051c7e4ff9a9b502bbcc7d86cea10f814fce37282e07aa6ed74e5e10dbfe347",
+      "source_note": "Decorative alpha overlay; no blocking collision."
+    },
+    "props/grass_clump_4": {
+      "path": "res://assets/sprites/props/grass_clump_4.png",
+      "size": [
+        32,
+        24
+      ],
+      "pivot": [
+        16,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/grass.png",
+      "source_bounds": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "source_sha256": "7d3289f1bf219d08228c20b6e33c43395c00a9e375ae8f97163c799ee810f93c",
+      "sha256": "e7e3e4c902b7c91afdb8e38fb5cf76715dbafa3de83d529b006df97c11fd1ccb",
+      "source_note": "Decorative alpha overlay; no blocking collision."
+    },
+    "props/grass_clump_5": {
+      "path": "res://assets/sprites/props/grass_clump_5.png",
+      "size": [
+        48,
+        28
+      ],
+      "pivot": [
+        24,
+        28
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/grass.png",
+      "source_bounds": [
+        512,
+        512,
+        950,
+        1024
+      ],
+      "source_sha256": "7d3289f1bf219d08228c20b6e33c43395c00a9e375ae8f97163c799ee810f93c",
+      "sha256": "0c4068af7b9a61ce40ae0b089ab7a3284675f803f2ff4158f3a27446beaeae90",
+      "source_note": "Decorative alpha overlay; no blocking collision."
+    },
+    "props/grass_clump_6": {
+      "path": "res://assets/sprites/props/grass_clump_6.png",
+      "size": [
+        64,
+        32
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/grass.png",
+      "source_bounds": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "source_sha256": "7d3289f1bf219d08228c20b6e33c43395c00a9e375ae8f97163c799ee810f93c",
+      "sha256": "f8a04bc13c067af6f1d1efbbfd34a6b75363636fd191262760a54307231ec8e2",
+      "source_note": "Decorative alpha overlay; no blocking collision."
+    },
+    "ground/sand_variant_1": {
+      "path": "res://assets/sprites/ground/sand_variant_1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/farm_concept.png",
+      "source_bounds": [
+        856,
+        936,
+        888,
+        968
+      ],
+      "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
+      "sha256": "eadc29f85ba4db5face4ce4410f7603b75910f73b32080b86426c7be6ae97f8d",
+      "source_note": "Center variation on common dry-sand edge; no interactive object baked in."
+    },
+    "ground/sand_variant_2": {
+      "path": "res://assets/sprites/ground/sand_variant_2.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/farm_concept.png",
+      "source_bounds": [
+        488,
+        496,
+        520,
+        528
+      ],
+      "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
+      "sha256": "052bc0677c5a055bd87e9019f5b364824ae151bf6631472158eddb2c28a184a5",
+      "source_note": "Center variation on common dry-sand edge; no interactive object baked in."
+    },
+    "ground/sand_variant_3": {
+      "path": "res://assets/sprites/ground/sand_variant_3.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_original_png_normalized",
+      "source": "sources/reference_stage4/farm_concept.png",
+      "source_bounds": [
+        304,
+        408,
+        336,
+        440
+      ],
+      "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
+      "sha256": "14a52f1a6d61493575ba4c65cf7370b3ab3062d58c1941e9babba2107ab7c2be",
+      "source_note": "Center variation on common dry-sand edge; no interactive object baked in."
     }
   },
   "audio": {

@@ -75,6 +75,7 @@ var elapsed := 0.0
 var moving_this_frame := false
 var world_mouse_held := false
 var pointer_over_ui := false
+var impact_effects: Array[Dictionary] = []
 
 func _ready() -> void:
  font = ThemeDB.fallback_font
@@ -98,6 +99,7 @@ func reset_pending_actions() -> void:
  food_pending = ""
  auto_save_accumulator = 0.0
  move_weight_accumulator = 0.0
+ impact_effects.clear()
 
 func new_game(player_name: String) -> bool:
  player_name = player_name.strip_edges()
@@ -172,6 +174,9 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
  elapsed += delta
+ for i in range(impact_effects.size()-1,-1,-1):
+  impact_effects[i].time -= delta
+  if impact_effects[i].time <= 0: impact_effects.remove_at(i)
  if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT): world_mouse_held = false
  transition_cooldown = maxf(0.0,transition_cooldown-delta)
  if mode != "PLAY": moving_this_frame = false
@@ -543,6 +548,8 @@ func resolve_action(tool: String, p: Vector2i) -> bool:
   if ob.kind.begins_with("trash"): cost = 1
   ob.hits -= 1
   if ob.hits <= 0:
+   if ob.kind.begins_with("stone"):
+    impact_effects.append({"id":"props/rock_%s_3" % ob.kind.trim_prefix("stone_"),"at":[p.x,p.y],"time":0.32})
    if ob.kind == "tree" and ob.stage == 3:
     ob.kind = "stump"; ob.hits = 2; ob.maxHits = 2
     drop_object(id,"tree_adult",p)
@@ -1133,6 +1140,7 @@ func _draw() -> void:
  if s.mapId == "FARM01":
   draw_farm_crops(false,player.y)
   draw_farm_props(false,player.y)
+  draw_impact_effects()
  if mode == "PLAY" or mode == "BUILD":
   var t = target_tile() if mode == "PLAY" else build_preview_tile
   var valid = action_check(selected_item(),t) == "" if mode == "PLAY" and TOOLS.has(selected_item()) else editor_item != "" and placement_error(editor_item,t,editor_rotation) == "" if mode == "BUILD" else false
@@ -1146,6 +1154,9 @@ func _draw() -> void:
 func draw_farm() -> void:
  var first = Vector2i(floori(camera_origin.x/TILE),floori(camera_origin.y/TILE))
  var last = first+Vector2i(21,13)
+ var occupied: Dictionary = {}
+ for id in s.objects:
+  if not s.objects[id].removed: occupied[key(tile_of(s.objects[id].at))] = true
  for y in range(maxi(0,first.y),mini(48,last.y)):
   for x in range(maxi(0,first.x),mini(64,last.x)):
    var p = Vector2i(x,y)
@@ -1162,7 +1173,10 @@ func draw_farm() -> void:
     asset("ground/soil_wet" if s.soil[key(p)].wateredDayId == s.day else "ground/soil_tilled",Vector2(p)*TILE+Vector2(16,32))
    elif (x >= 56 and y >= 9 and y <= 12) or (x >= 47 and x <= 59 and y >= 16 and y <= 18): asset("ground/path",Vector2(p)*TILE+Vector2(16,32))
    elif (x >= 40 and x <= 44 and y >= 22 and y <= 25) or (x >= 8 and x <= 17 and y >= 8 and y <= 15): asset("ground/soil_untilled",Vector2(p)*TILE+Vector2(16,32))
-   else: asset("ground/grass",Vector2(p)*TILE+Vector2(16,32))
+   else:
+    var sand_id = farm_sand_id(p)
+    asset(sand_id,Vector2(p)*TILE+Vector2(16,32))
+    if not occupied.has(key(p)) and farm_grass_clump(p): asset("props/grass_clump_%d" % (terrain_hash(p)%6+1),Vector2(p)*TILE+Vector2(16,32))
    if s.soil.has(key(p)):
     draw_rect(Rect2(Vector2(p)*TILE+Vector2(4,8),Vector2(24,15)),Color("70482f"),false,2)
  # The ruin sprite covers the reserved x8..17, y8..15 footprint.
@@ -1179,15 +1193,45 @@ func draw_farm() -> void:
  for p in [Vector2i(31,0),Vector2i(63,10),Vector2i(38,47)]:
   draw_rect(Rect2(Vector2(p)*TILE,Vector2(30,30)),Color("b85d43"),false,3)
 
+func terrain_hash(p: Vector2i) -> int:
+ return posmod(p.x*92821+p.y*68917+p.x*p.y*257,997)
+
+func farm_sand_id(p: Vector2i) -> String:
+ var patch = posmod(floori(p.x/4.0)*37+floori(p.y/4.0)*53,17)
+ if patch < 5 and terrain_hash(p)%7 < 5: return "ground/sand_variant_%d" % (terrain_hash(p)%3+1)
+ return "ground/grass"
+
+func farm_grass_clump(p: Vector2i) -> bool:
+ if p.x >= 43 and p.x <= 56 and p.y >= 5 and p.y <= 18: return false
+ if p.x >= 39 and p.x <= 45 and p.y >= 21 and p.y <= 26: return false
+ if p.x >= 7 and p.x <= 24 and p.y >= 30 and p.y <= 42: return false
+ var cluster = posmod(floori(p.x/3.0)*71+floori(p.y/3.0)*113,13)
+ return cluster < 3 and terrain_hash(p)%3 == 0
+
 func draw_farm_props(behind_actor: bool,actor_feet_y: float) -> void:
+ var visible: Array[String] = []
  for id in s.objects:
   var ob = s.objects[id]
   if ob.removed: continue
   var behind = (float(ob.at[1])+1.0)*TILE <= actor_feet_y
   if behind != behind_actor: continue
   var pos = Vector2(ob.at[0],ob.at[1])*TILE
-  if pos.x < camera_origin.x-96 or pos.x > camera_origin.x+SIZE.x+96 or pos.y < camera_origin.y-128 or pos.y > camera_origin.y+SIZE.y+96: continue
-  draw_prop(ob,pos)
+  if not prop_visible(prop_asset_id(ob),pos): continue
+  visible.append(id)
+ visible.sort_custom(func(a: String,b: String) -> bool: return int(s.objects[a].at[1]) < int(s.objects[b].at[1]) if int(s.objects[a].at[1]) != int(s.objects[b].at[1]) else a < b)
+ for id in visible: draw_prop(s.objects[id],Vector2(s.objects[id].at[0],s.objects[id].at[1])*TILE)
+
+func prop_visible(id: String,pos: Vector2) -> bool:
+ var size = asset_manifest.get(id,{}).get("size",[96,128])
+ var pivot = asset_manifest.get(id,{}).get("pivot",[48,128])
+ var anchor = pos+Vector2(16,32)
+ var bounds = Rect2(anchor-Vector2(pivot[0],pivot[1]),Vector2(size[0],size[1]))
+ return bounds.intersects(Rect2(camera_origin,Vector2(SIZE)))
+
+func draw_impact_effects() -> void:
+ for effect in impact_effects:
+  var p = tile_of(effect.at)
+  asset(str(effect.id),Vector2(p)*TILE+Vector2(16,32))
 
 func draw_farm_crops(behind_actor: bool,actor_feet_y: float) -> void:
  var visible: Array[Vector2i] = []
@@ -1209,24 +1253,30 @@ func draw_crop(p: Vector2i,age: int) -> void:
  draw_line(center,center+Vector2(0,-height),Color("245e46"),3)
  draw_circle(center+Vector2(0,-height),3+age,Color("4f7838"))
 
-func draw_prop(ob: Dictionary,pos: Vector2) -> void:
+func prop_asset_id(ob: Dictionary) -> String:
  var kind: String = ob.kind
- var id := ""
  match kind:
   "tree","stump":
    var species = ["umbu","juazeiro","catingueira","jurema"][int(ob.get("variant",0))%4]
-   id = "flora/object_tree_%s_%s" % [species,"stump" if kind == "stump" else "stage%d" % (int(ob.stage)+1)]
-  "bush": id = "props/bush_%d" % (int(ob.maxHits)%3+1)
-  "mandacaru": id = "props/mandacaru"
-  "cactus": id = "props/palma"
-  "stone_small": id = "props/rock_small_1"
-  "stone_medium": id = "props/rock_medium_1"
-  "stone_large": id = "props/rock_large_1"
-  "stick","log": id = "props/%s" % kind
-  "trash_metal": id = "icons/scrap"
-  "trash_plastic": id = "icons/trash"
+   return "flora/object_tree_%s_%s" % [species,"stump" if kind == "stump" else "stage%d" % (int(ob.stage)+1)]
+  "bush": return "props/bush_%d" % (int(ob.get("variant",0))%3+1)
+  "mandacaru","cactus":
+   var base = "mandacaru" if kind == "mandacaru" else "palma"
+   var variant = int(ob.get("variant",0))%3+1
+   return "props/%s%s" % [base,"" if variant == 1 else "_%d" % variant]
+  "stone_small","stone_medium","stone_large":
+   var rock_size = kind.trim_prefix("stone_")
+   return "props/rock_%s_%d" % [rock_size,1 if int(ob.hits) == int(ob.maxHits) else 2]
+  "stick","log": return "props/%s%s" % [kind,"" if int(ob.get("variant",0))%2 == 0 else "_2"]
+  "trash_metal": return "icons/scrap"
+  "trash_plastic": return "icons/trash"
+ return ""
+
+func draw_prop(ob: Dictionary,pos: Vector2) -> void:
+ var kind: String = ob.kind
+ var id = prop_asset_id(ob)
  if id != "" and asset(id,pos+Vector2(16,32)):
-  if ob.hits < ob.maxHits: draw_line(pos+Vector2(6,5),pos+Vector2(25,24),Color("f1dfb1"),2)
+  if ob.hits < ob.maxHits and not kind.begins_with("stone"): draw_line(pos+Vector2(6,5),pos+Vector2(25,24),Color("f1dfb1"),2)
   return
  if kind == "tree" or kind == "stump":
   var stage: int = ob.stage

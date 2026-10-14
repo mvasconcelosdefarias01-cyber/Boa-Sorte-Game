@@ -6,8 +6,8 @@ Elementos aprovados: protagonista, Lia, seis ferramentas, móveis preservados e 
 | --- | --- | --- |
 | 1 | Ícones de itens na mochila, quantidades/seleção e imagens dos recursos coletáveis | Aprovada pelo jogador |
 | 2 | Fases visuais do milho e ruína oeste do ZIP | Aprovada pelo jogador |
-| 3 | Interior mais compacto, margem preta, paredes e janelas elevadas | Implementada; aguardando teste no Windows |
-| 4 | Pedras, madeira, cactos, árvores, arbustos, capim e terreno coerentes | Pendente |
+| 3 | Interior mais compacto, margem preta, paredes e janelas elevadas | Aprovada pelo jogador |
+| 4 | Pedras, madeira, cactos, árvores, arbustos, capim e terreno coerentes | Implementada; aguardando teste no Windows |
 | 5 | Lago irregular com bordas, transição para solo e vegetação marginal | Pendente |
 
 A ordem prioriza substituições locais antes de geometria, colisões e composição de mapas. Cada etapa gera um ZIP Windows independente para teste antes da próxima. O ZIP reenviado é idêntico ao anterior (24 PNGs); as fontes já extraídas foram reutilizadas após comparação SHA-256. As capturas fornecidas mostram mochila textual sem imagens, milho/vegetação simplificados, ruína pequena, lago retangular e interior com janelas no chão.
@@ -35,3 +35,11 @@ Interior HOME01 reduzido de 24×18 para 17×10 tiles, centralizado sobre fundo p
 Saves anteriores recebem versão de layout e adaptação de posições; móveis e drops são preservados, buscando posições livres e acesso à cama. Quando necessário, o móvel fica disponível para recolocação no editor (banco no correio). Estamina continua recuperando somente por alimentos.
 
 Pacote: `dist/BoaSorte-Etapa03-Windows11.zip`. Verificados por testes: ciclo de reforma/cultivo/sono, migração de save real da etapa 2, cama girada, banco sem duplicação, recursos no chão, caminhos aos reparos e ao quarto, entrada/saída e despertar sem recuperar estamina, UI e layouts em 100/125/150%, carregamento de 140 PNGs e 10 WAVs. Apresentação em execução no Windows permanece para teste do jogador.
+
+## Entrega da etapa 4
+
+FARM01 recebe quatro espécies de árvores em quatro fases e tocos, pedras intactas/rachadas/fragmentadas, cactos, gravetos, troncos, arbustos e seis tufos de capim derivados das referências. A areia seca tem variações discretas e distribuição determinística de capim; os objetos removíveis continuam separados do terreno. O lago permanece para a etapa 5.
+
+A altura das árvores adultas foi ajustada usando canvas de 144×144 para conservar a proporção original e presença ao lado do protagonista; o tronco mantém colisão de um tile. Fragmentos de pedra são efeito curto do golpe final. IDs, posições, golpes, recursos e saves continuam com as regras anteriores. Contrato/fonte dos recortes em `docs/EXTERIOR_ETAPA04.md` e manifest.
+
+Pacote: `dist/BoaSorte-Etapa04-Windows11.zip`. Passaram: validação de 160 PNGs e 10 WAVs, ciclo completo de gameplay/save, teste específico de variantes/ferramentas/dano de pedras, regressão do interior e carregamento do pacote exportado. A prancha estática em escala 1× foi revisada após corrigir bordas da areia e recortes vizinhos do capim. Arte aprovada e lago mantêm os hashes anteriores. Oclusão das copas, leitura das palmas e terreno em movimento no Windows precisam do teste do jogador.
