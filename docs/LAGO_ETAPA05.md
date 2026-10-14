@@ -25,3 +25,7 @@ O teste encontrou 481 posições potenciais de grama no mapa, contra 217 na fór
 - `tests/lake_stage5.gd`: 123 tiles bloqueados, 37 margens caminháveis aptas a reabastecimento, grama fora da água/horta, recarga, save/reload e falta de estamina.
 - `tests/qa.gd`: ciclo lógico de abertura, reforma, cultivo e manhã seguinte; dormir não recupera estamina.
 - A execução gráfica foi negada pelo controle de permissões em etapas anteriores. Não foi repetida. Headless não valida aparência em movimento; apresentação e animação no Windows permanecem para teste humano.
+
+## Revisão 5B — borda
+
+Rochas e juncos refinados via ImageGen, em `assets/sources/imagegen/lake_border_refined.png`. Integração por `assets/import_lake_border.py` depois do importador original. Os 112284 pixels azuis originais foram restaurados exatamente; frames, máscara, colisão e gameplay não mudaram. Novo sprite inspecionado estaticamente; aparência em execução no Windows aguarda teste humano. Pacote `BoaSorte-Etapa05B-Windows11.zip`.

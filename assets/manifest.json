@@ -5850,15 +5850,15 @@
         0
       ],
       "status": "prototype_imagegen_inline_derived",
-      "source": "sources/imagegen/lake_source.png",
-      "source_sha256": "99b6183f0b80aea32c1008ad7f657d58adc0b9d585965754d990e48f4a8cd87b",
+      "source": "sources/imagegen/lake_border_refined.png",
+      "source_sha256": "3f63163c211073f4ff85d81272a4e823d100a706ac071c0a0befd1be2aa6dd6a",
       "source_bounds": [
-        61,
-        80,
-        1477,
-        974
+        0,
+        0,
+        1476,
+        1065
       ],
-      "sha256": "715b591da7004f9761d70b284485b3fbd558c2f87e89ced41f9347ed9077398b",
+      "sha256": "bc8f35688b10d1316b23a5c9f47b02f7c769ec9be25df075a23b08d8c15f82dc",
       "world_top_left_tile": [
         7,
         30
@@ -5867,7 +5867,7 @@
         16,
         43
       ],
-      "provenance": "ImageGen adaptation of user inline lake image; not an exact crop"
+      "provenance": "ImageGen shoreline refinement; original approved blue water pixels restored exactly"
     },
     "environment/lake_water_mask": {
       "path": "res://assets/sprites/environment/lake_water_mask.png",
