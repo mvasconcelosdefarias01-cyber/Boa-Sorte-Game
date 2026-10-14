@@ -5822,6 +5822,236 @@
       "source_sha256": "50a5cb3cf6ad239d165e85efdb96bc1f7fafdffa8768b18632ca89120f2b6969",
       "sha256": "14a52f1a6d61493575ba4c65cf7370b3ab3062d58c1941e9babba2107ab7c2be",
       "source_note": "Center variation on common dry-sand edge; no interactive object baked in."
+    },
+    "environment/lake_base": {
+      "path": "res://assets/sprites/environment/lake_base.png",
+      "size": [
+        576,
+        416
+      ],
+      "pivot": [
+        288,
+        416
+      ],
+      "footprint": [
+        18,
+        13
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_imagegen_inline_derived",
+      "source": "sources/imagegen/lake_source.png",
+      "source_sha256": "99b6183f0b80aea32c1008ad7f657d58adc0b9d585965754d990e48f4a8cd87b",
+      "source_bounds": [
+        61,
+        80,
+        1477,
+        974
+      ],
+      "sha256": "715b591da7004f9761d70b284485b3fbd558c2f87e89ced41f9347ed9077398b",
+      "world_top_left_tile": [
+        7,
+        30
+      ],
+      "world_anchor_tile": [
+        16,
+        43
+      ],
+      "provenance": "ImageGen adaptation of user inline lake image; not an exact crop"
+    },
+    "environment/lake_water_mask": {
+      "path": "res://assets/sprites/environment/lake_water_mask.png",
+      "size": [
+        576,
+        416
+      ],
+      "pivot": [
+        288,
+        416
+      ],
+      "footprint": [
+        18,
+        13
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "derived_runtime_mask",
+      "source": "sources/imagegen/lake_source.png",
+      "source_sha256": "99b6183f0b80aea32c1008ad7f657d58adc0b9d585965754d990e48f4a8cd87b",
+      "source_bounds": [
+        61,
+        80,
+        1477,
+        974
+      ],
+      "sha256": "7b7d938088516ae0d27c2ffb12c162c321695c59f7b45ff905400a0b31782cd8",
+      "world_top_left_tile": [
+        7,
+        30
+      ],
+      "world_anchor_tile": [
+        16,
+        43
+      ],
+      "provenance": "ImageGen adaptation of user inline lake image; not an exact crop"
+    },
+    "environment/lake_water_0": {
+      "path": "res://assets/sprites/environment/lake_water_0.png",
+      "size": [
+        576,
+        416
+      ],
+      "pivot": [
+        288,
+        416
+      ],
+      "footprint": [
+        18,
+        13
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_masked_water_animation",
+      "source": "sources/imagegen/lake_source.png",
+      "source_sha256": "99b6183f0b80aea32c1008ad7f657d58adc0b9d585965754d990e48f4a8cd87b",
+      "source_bounds": [
+        61,
+        80,
+        1477,
+        974
+      ],
+      "sha256": "bf0847a007cf9f6617c56e29513c26a3f0d458651fa533f413ee63f08180c149",
+      "world_top_left_tile": [
+        7,
+        30
+      ],
+      "world_anchor_tile": [
+        16,
+        43
+      ],
+      "provenance": "ImageGen adaptation of user inline lake image; not an exact crop"
+    },
+    "environment/lake_water_1": {
+      "path": "res://assets/sprites/environment/lake_water_1.png",
+      "size": [
+        576,
+        416
+      ],
+      "pivot": [
+        288,
+        416
+      ],
+      "footprint": [
+        18,
+        13
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_masked_water_animation",
+      "source": "sources/imagegen/lake_source.png",
+      "source_sha256": "99b6183f0b80aea32c1008ad7f657d58adc0b9d585965754d990e48f4a8cd87b",
+      "source_bounds": [
+        61,
+        80,
+        1477,
+        974
+      ],
+      "sha256": "becf3a9e3cb653534431b20ede0f51f01f66bc0b0c66d26a6d7f572b086adf69",
+      "world_top_left_tile": [
+        7,
+        30
+      ],
+      "world_anchor_tile": [
+        16,
+        43
+      ],
+      "provenance": "ImageGen adaptation of user inline lake image; not an exact crop"
+    },
+    "environment/lake_water_2": {
+      "path": "res://assets/sprites/environment/lake_water_2.png",
+      "size": [
+        576,
+        416
+      ],
+      "pivot": [
+        288,
+        416
+      ],
+      "footprint": [
+        18,
+        13
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "status": "prototype_masked_water_animation",
+      "source": "sources/imagegen/lake_source.png",
+      "source_sha256": "99b6183f0b80aea32c1008ad7f657d58adc0b9d585965754d990e48f4a8cd87b",
+      "source_bounds": [
+        61,
+        80,
+        1477,
+        974
+      ],
+      "sha256": "a0e8daf08972becd56bd5e69e1f8b887140a4a7ef8aeec31e8e6eed26ac8a20e",
+      "world_top_left_tile": [
+        7,
+        30
+      ],
+      "world_anchor_tile": [
+        16,
+        43
+      ],
+      "provenance": "ImageGen adaptation of user inline lake image; not an exact crop"
     }
   },
   "audio": {
@@ -5921,5 +6151,80 @@
     "TOOL_HAMMER": "icons/hammer",
     "SEED_CORN": "icons/corn_seed",
     "ITEM_CORN": "icons/corn"
+  },
+  "lake": {
+    "origin_tile": [
+      7,
+      30
+    ],
+    "size_px": [
+      576,
+      416
+    ],
+    "pivot": [
+      288,
+      416
+    ],
+    "render_anchor_tile": [
+      16,
+      43
+    ],
+    "collision_rows_world_x_inclusive": [
+      [
+        12,
+        14
+      ],
+      [
+        11,
+        17
+      ],
+      [
+        9,
+        20
+      ],
+      [
+        9,
+        22
+      ],
+      [
+        8,
+        23
+      ],
+      [
+        8,
+        23
+      ],
+      [
+        8,
+        23
+      ],
+      [
+        9,
+        22
+      ],
+      [
+        10,
+        21
+      ],
+      [
+        12,
+        20
+      ],
+      [
+        13,
+        16
+      ]
+    ],
+    "collision_first_world_y": 31,
+    "collision_tile_count": 123,
+    "water_mask_asset": "environment/lake_water_mask",
+    "base_asset": "environment/lake_base",
+    "animation_assets": [
+      "environment/lake_water_0",
+      "environment/lake_water_1",
+      "environment/lake_water_2"
+    ],
+    "animation_fps": 2,
+    "shore_collision": "walkable outside collision rows; static border included in lake_base"
   }
 }

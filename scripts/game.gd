@@ -7,6 +7,10 @@ const HOME_LAYOUT_VERSION := 2
 const HOME_SIZE := Vector2i(17,10)
 const HOME_ENTRY := Vector2i(8,8)
 const HOME_WAKE := Vector2i(13,5)
+const LAKE_TOP := 31
+const LAKE_LEFT := [12,11,9,9,8,8,8,9,10,12,13]
+const LAKE_RIGHT := [14,17,20,22,23,23,23,22,21,20,16]
+const LAKE_ANCHOR := Vector2(16,43)
 const TOOLS := ["TOOL_AXE", "TOOL_PICK", "TOOL_HOE", "TOOL_SCYTHE", "TOOL_WATER", "TOOL_HAMMER", "SEED_CORN", "HAND"]
 const TOOL_NAMES := ["Machado", "Picareta", "Enxada", "Foice", "Regador", "Martelo", "Milho", "Mão"]
 const FOOD := {"coffee":60, "bar":40, "fruit":20}
@@ -705,13 +709,21 @@ func award_xp(amount: int) -> void:
 
 func tillable(p: Vector2i) -> bool:
  if s.mapId != "FARM01" or p.x < 1 or p.x > 62 or p.y < 1 or p.y > 46: return false
- if is_lake(p) or p.x >= 44 and p.x <= 55 and p.y >= 7 and p.y <= 15: return false
+ if is_lake(p) or lake_shore(p) or p.x >= 44 and p.x <= 55 and p.y >= 7 and p.y <= 15: return false
  if p.x >= 8 and p.x <= 17 and p.y >= 8 and p.y <= 15: return false
  if p.x >= 57 and p.y >= 9 and p.y <= 12: return false
  if object_at(p) != "": return false
  return true
 
-func is_lake(p: Vector2i) -> bool: return p.x >= 8 and p.x <= 23 and p.y >= 31 and p.y <= 41
+func is_lake(p: Vector2i) -> bool:
+ var row = p.y-LAKE_TOP
+ return row >= 0 and row < LAKE_LEFT.size() and p.x >= LAKE_LEFT[row] and p.x <= LAKE_RIGHT[row]
+
+func lake_shore(p: Vector2i) -> bool:
+ if is_lake(p): return false
+ for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+  if is_lake(p+direction): return true
+ return false
 func key(p: Vector2i) -> String: return "%d,%d" % [p.x,p.y]
 func tile_of(a: Variant) -> Vector2i: return Vector2i(int(a[0]),int(a[1]))
 func object_at(p: Vector2i) -> String:
@@ -764,7 +776,7 @@ func interact() -> void:
  say("Nada para interagir aqui.")
 
 func near_lake(p: Vector2i) -> bool:
- return p.x >= 7 and p.x <= 24 and p.y >= 30 and p.y <= 42 and not is_lake(p)
+ return s.mapId == "FARM01" and can_walk(p) and lake_shore(p)
 func near_furniture(id: String,p: Vector2i) -> bool:
  if not s.furniture[id].placed: return false
  var at = tile_of(s.furniture[id].at)
@@ -1155,6 +1167,8 @@ func draw_farm() -> void:
  var first = Vector2i(floori(camera_origin.x/TILE),floori(camera_origin.y/TILE))
  var last = first+Vector2i(21,13)
  var occupied: Dictionary = {}
+ var grass_tiles: Array[Vector2i] = []
+ var lake_sprite_ready = asset_textures.has("environment/lake_base")
  for id in s.objects:
   if not s.objects[id].removed: occupied[key(tile_of(s.objects[id].at))] = true
  for y in range(maxi(0,first.y),mini(48,last.y)):
@@ -1162,13 +1176,14 @@ func draw_farm() -> void:
    var p = Vector2i(x,y)
    var c = Color("dfae55") if (x*17+y*13)%7 > 1 else Color("d5a751")
    if (x >= 56 and y >= 9 and y <= 12) or (x >= 47 and x <= 59 and y >= 16 and y <= 18): c = Color("c99854")
-   if is_lake(p): c = Color("287fbd") if (x+y)%2 else Color("2c89be")
+   if is_lake(p) and not lake_sprite_ready: c = Color("287fbd") if (x+y)%2 else Color("2c89be")
    if x >= 8 and x <= 17 and y >= 8 and y <= 15: c = Color("9b855c")
    if x >= 40 and x <= 44 and y >= 22 and y <= 25: c = Color("b99055")
    if s.soil.has(key(p)):
     c = Color("795335") if s.soil[key(p)].wateredDayId != s.day else Color("a36c3b")
    draw_rect(Rect2(Vector2(p)*TILE,Vector2(TILE,TILE)),c)
-   if is_lake(p): asset("ground/water",Vector2(p)*TILE+Vector2(16,32))
+   if is_lake(p):
+    if not lake_sprite_ready: asset("ground/water",Vector2(p)*TILE+Vector2(16,32))
    elif s.soil.has(key(p)):
     asset("ground/soil_wet" if s.soil[key(p)].wateredDayId == s.day else "ground/soil_tilled",Vector2(p)*TILE+Vector2(16,32))
    elif (x >= 56 and y >= 9 and y <= 12) or (x >= 47 and x <= 59 and y >= 16 and y <= 18): asset("ground/path",Vector2(p)*TILE+Vector2(16,32))
@@ -1176,9 +1191,14 @@ func draw_farm() -> void:
    else:
     var sand_id = farm_sand_id(p)
     asset(sand_id,Vector2(p)*TILE+Vector2(16,32))
-    if not occupied.has(key(p)) and farm_grass_clump(p): asset("props/grass_clump_%d" % (terrain_hash(p)%6+1),Vector2(p)*TILE+Vector2(16,32))
+    if not occupied.has(key(p)) and farm_grass_clump(p): grass_tiles.append(p)
    if s.soil.has(key(p)):
     draw_rect(Rect2(Vector2(p)*TILE+Vector2(4,8),Vector2(24,15)),Color("70482f"),false,2)
+ if lake_sprite_ready:
+  asset("environment/lake_base",LAKE_ANCHOR*TILE)
+  asset("environment/lake_water_%d" % (int(elapsed*2.0)%3),LAKE_ANCHOR*TILE)
+ for p in grass_tiles:
+  asset("props/grass_clump_%d" % (terrain_hash(p)%6+1),Vector2(p)*TILE+Vector2(16,32))
  # The ruin sprite covers the reserved x8..17, y8..15 footprint.
  if not asset("props/ruin",Vector2(13,16)*TILE):
   draw_rect(Rect2(8*TILE,8*TILE,10*TILE,8*TILE),Color("70482f"),false,7)
@@ -1204,9 +1224,25 @@ func farm_sand_id(p: Vector2i) -> String:
 func farm_grass_clump(p: Vector2i) -> bool:
  if p.x >= 43 and p.x <= 56 and p.y >= 5 and p.y <= 18: return false
  if p.x >= 39 and p.x <= 45 and p.y >= 21 and p.y <= 26: return false
- if p.x >= 7 and p.x <= 24 and p.y >= 30 and p.y <= 42: return false
+ if is_lake(p) or lake_shore(p): return false
+ if (p.x >= 56 and p.y >= 9 and p.y <= 12) or (p.x >= 47 and p.x <= 59 and p.y >= 16 and p.y <= 18): return false
+ if p.x >= 8 and p.x <= 17 and p.y >= 8 and p.y <= 15: return false
+ if lake_distance(p) <= 3:
+  var lake_patches = [Vector2i(13,29),Vector2i(24,33),Vector2i(25,36),Vector2i(19,43),Vector2i(13,43),Vector2i(6,36)]
+  var offsets = [Vector2i.ZERO,Vector2i(1,0),Vector2i(0,1),Vector2i(-1,0),Vector2i(1,1)]
+  for i in lake_patches.size():
+   for j in range(3+i%3):
+    if p == lake_patches[i]+offsets[j]: return true
+  return false
  var cluster = posmod(floori(p.x/3.0)*71+floori(p.y/3.0)*113,13)
- return cluster < 3 and terrain_hash(p)%3 == 0
+ return cluster < 4 and terrain_hash(p)%3 < 2
+
+func lake_distance(p: Vector2i) -> int:
+ var distance := 1000
+ for row in LAKE_LEFT.size():
+  var nearest_x = clampi(p.x,LAKE_LEFT[row],LAKE_RIGHT[row])
+  distance = mini(distance,absi(p.y-(LAKE_TOP+row))+absi(p.x-nearest_x))
+ return distance
 
 func draw_farm_props(behind_actor: bool,actor_feet_y: float) -> void:
  var visible: Array[String] = []
