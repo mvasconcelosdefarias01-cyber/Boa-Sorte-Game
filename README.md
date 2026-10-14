@@ -1,8 +1,8 @@
-# Boa Sorte — etapa 5B: bordas do lago
+# Boa Sorte — estrada para a futura cidade
 
 ## Jogar no Windows 11
 
-Baixe [BoaSorte-Etapa05B-Windows11.zip](https://raw.githubusercontent.com/mvasconcelosdefarias01-cyber/Boa-Sorte-Game/visual-ui-sample/dist/BoaSorte-Etapa05B-Windows11.zip), escolha **Extrair Tudo** e abra `BoaSorte-Etapa05B/BoaSorte.exe`. Não precisa instalar Godot. Esta etapa aumenta a grama em pequenos gramados, principalmente perto do lago, e integra um lago irregular derivado da nova referência, com reflexos animados discretos. As melhorias das etapas anteriores continuam incluídas. Veja a sequência em [ETAPAS_AJUSTES.md](docs/ETAPAS_AJUSTES.md). Os pacotes anteriores continuam em `dist/`. O pacote foi exportado com Godot 4.6.3; testes headless passaram, mas a execução e a apresentação no Windows precisam do teste do jogador.
+Baixe [BoaSorte-Estrada-Windows11.zip](https://raw.githubusercontent.com/mvasconcelosdefarias01-cyber/Boa-Sorte-Game/visual-ui-sample/dist/BoaSorte-Estrada-Windows11.zip), escolha **Extrair Tudo** e abra `BoaSorte-Estrada/BoaSorte.exe`. Não precisa instalar Godot. Esta versão conecta a passagem leste da fazenda a uma estrada explorável, com retorno pela esquerda e continuação futura bloqueada à direita. Veja [ESTRADA_ROAD01.md](docs/ESTRADA_ROAD01.md) para arquitetura, verificações e limites. As melhorias das etapas anteriores continuam incluídas. Veja a sequência em [ETAPAS_AJUSTES.md](docs/ETAPAS_AJUSTES.md). Os pacotes anteriores continuam em `dist/`. O pacote foi exportado com Godot 4.6.3; testes headless passaram, mas a execução e a apresentação no Windows precisam do teste do jogador.
 
 Projeto Godot 4.6.3 2D da Fazenda do Avô Olegário. Abra `project.godot` no Godot e execute a cena principal (F6/F5), ou rode:
 
