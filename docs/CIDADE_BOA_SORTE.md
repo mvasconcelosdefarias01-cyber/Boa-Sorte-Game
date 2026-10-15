@@ -39,3 +39,7 @@ Verificações finais: 196 entradas PNG e 10 WAVs validadas; todos os PNGs anter
 ## Escala da casa da fazenda
 
 A pedido do jogador, as duas fachadas da fazenda são desenhadas a 1/3 da escala anterior, largura128px (4 tiles), mantendo a proporção original, filtro nearest e pixels de origem. A janela H03 acompanha a mesma transformação. A porta permanece ancorada em (49.5,16), e a colisão passa ao retângulo (48,13,4,3). Os PNGs e a arte da cidade não foram alterados. QA de reforma, entrada/saída e save passou. Apresentação no Windows aguarda revisão humana.
+
+### Refinamento das proporções após teste
+
+A escala da casa passou de 1/3 para 0,5625: 216×162 px, com a porta ancorada no mesmo lugar. Protagonista e Lia usam escala0,875 (quadros28×56 px), incluindo ferramentas, comida e animações, sem mudar alcance ou velocidade. Colisão da casa(47,12,6,4); saves na área ampliada são reposicionados no acesso livre(49.5,17.9). Os sprites originais permanecem preservados. QA e carregamento do pacote verificados; proporção visual em execução ainda depende do teste no Windows.

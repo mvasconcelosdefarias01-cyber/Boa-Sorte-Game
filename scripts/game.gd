@@ -8,8 +8,9 @@ const CITY_ENTRY := Vector2i(3,13)
 const ROAD_CITY_ENTRY := Vector2i(44,13)
 const ROAD_ENTRY := Vector2i(3,13)
 const FARM_ROAD_ENTRY := Vector2i(62,17)
-const FARM_HOUSE_SCALE := 1.0/3.0
-const FARM_HOUSE_FOOTPRINT := Rect2i(48,13,4,3)
+const FARM_HOUSE_SCALE := 0.5625
+const ACTOR_SCALE := 0.875
+const FARM_HOUSE_FOOTPRINT := Rect2i(47,12,6,4)
 const SAVE_SCHEMA := 1
 const HOME_LAYOUT_VERSION := 2
 const HOME_SIZE := Vector2i(17,10)
@@ -1035,6 +1036,8 @@ func load_game(n: int) -> bool:
  clock_accumulator = float(s.get("clockAccumulator",0))
  var migrated = int(s.get("homeLayoutVersion",0)) < HOME_LAYOUT_VERSION
  if migrated: migrate_home_layout()
+ if s.mapId == "FARM01" and FARM_HOUSE_FOOTPRINT.has_point(tile_of(s.position)):
+  s.position = [49.5,17.9]
  if s.mapId == "ROAD01" and (not can_walk(tile_of(s.position)) or road_portal()):
   s.position = [ROAD_ENTRY.x+0.5,ROAD_ENTRY.y+0.9]
  if s.mapId == "CITY01" and (not can_walk(tile_of(s.position)) or road_portal()):
@@ -1484,6 +1487,11 @@ func draw_drops() -> void:
   if int(d.amount) > 1: world_label(str(d.amount),pos+Vector2(7,11),10,Color("f1dfb1"))
 
 func draw_actor(pos: Vector2) -> void:
+ draw_set_transform(-camera_origin+pos,0.0,Vector2.ONE*ACTOR_SCALE)
+ draw_actor_unscaled(Vector2.ZERO)
+ draw_set_transform(-camera_origin)
+
+func draw_actor_unscaled(pos: Vector2) -> void:
  if food_timer > 0 and reference_action_ready("actors/action_eat") and draw_food_sheet(pos,tile_of(s.facing)): return
  if action_timer > 0 and not pending.is_empty():
   var action_id = {"TOOL_AXE":"axe","TOOL_PICK":"pick","TOOL_HOE":"hoe","TOOL_SCYTHE":"scythe","TOOL_WATER":"water","TOOL_HAMMER":"hammer","SEED_CORN":"sow","HAND":"clean"}.get(pending.tool,"")
@@ -1525,6 +1533,11 @@ func draw_actor_action_overlay(pos: Vector2) -> void:
   var texture: Texture2D = asset_textures[tool_icon]
   draw_texture(texture,tip-texture.get_size()*0.5)
 func draw_lia(pos: Vector2) -> void:
+ draw_set_transform(-camera_origin+pos,0.0,Vector2.ONE*ACTOR_SCALE)
+ draw_lia_unscaled(Vector2.ZERO)
+ draw_set_transform(-camera_origin)
+
+func draw_lia_unscaled(pos: Vector2) -> void:
  if draw_actor_sheet("actors/actor_lia",pos,Vector2i.RIGHT if lia_leaving else Vector2i.LEFT,lia_arriving or lia_leaving): return
  draw_ellipse_shadow(pos)
  draw_rect(Rect2(pos+Vector2(-6,-30),Vector2(12,18)),Color("294f8f"))
