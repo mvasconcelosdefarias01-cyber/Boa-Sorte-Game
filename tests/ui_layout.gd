@@ -82,10 +82,11 @@ func run() -> void:
   await process_frame
   var issues: Array[String] = []
   inspect(g.ui.root_control,issues)
-  for control in [g.ui.clock_label,g.ui.coins_label,g.ui.health_label,g.ui.stamina_label,g.ui.status_label,g.ui.message_label]+g.ui.hotbar_buttons:
-   if visible_rect(control).intersects(room): issues.append("HUD cobre interior: "+str(visible_rect(control)))
+  # The requested unified HUD now intentionally overlays the room edges.
+  # Keep viewport bounds checks rather than enforcing the previous margin-only HUD.
   for label in [g.ui.clock_label,g.ui.coins_label,g.ui.health_label,g.ui.stamina_label,g.ui.status_label]:
-   var width = label.get_theme_font("font").get_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.get_theme_font_size("font_size")).x
+   if not label.is_visible_in_tree(): continue
+   var width = label.get_theme_font("font").get_multiline_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.get_theme_font_size("font_size")).x
    if width > label.size.x+1: issues.append("Texto cortado: "+label.text)
   total_issues += issues.size()
   print("LAYOUT HOME01 %d%%: %d problemas" % [int(scale*100),issues.size()])

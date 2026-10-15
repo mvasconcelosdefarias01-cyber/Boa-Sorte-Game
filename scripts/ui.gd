@@ -314,167 +314,113 @@ func make_intro() -> void:
  buttons.add_child(button("Pular apresentação",func(): game.skip_intro()))
  buttons.get_child(0).grab_focus.call_deferred()
 
+func hud_frame() -> StyleBoxFlat:
+ var frame = box(Color("f7d794"),Color("754124"))
+ frame.set_corner_radius_all(0)
+ frame.set_border_width_all(3)
+ frame.shadow_color = Color("3b241b",0.45)
+ frame.shadow_size = 2
+ frame.shadow_offset = Vector2(1,2)
+ return frame
+
+func hud_panel(at: Vector2,dimensions: Vector2) -> PanelContainer:
+ var panel = PanelContainer.new()
+ panel.position = at
+ panel.size = dimensions
+ panel.add_theme_stylebox_override("panel",hud_frame())
+ panel.mouse_filter = Control.MOUSE_FILTER_STOP
+ hud.add_child(panel)
+ return panel
+
 func make_hud() -> void:
  hud = Control.new()
  hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
  hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
  root_control.add_child(hud)
- var left = PanelContainer.new()
- left.position = Vector2(4,4)
- left.size = Vector2(188,69)
- style(left)
- hud.add_child(left)
- var quest = vbox(left,1)
- title_label = text("Um novo começo",11)
- status_label = text("",10)
- quest.add_child(title_label); quest.add_child(status_label)
- var right = PanelContainer.new()
- right.position = Vector2(421,4)
- right.size = Vector2(215,76)
- style(right)
- hud.add_child(right)
- var stats = vbox(right,1)
- clock_label = text("",10)
- stats.add_child(clock_label)
- coins_label = text("",10)
- stats.add_child(coins_label)
- var hp_row = hbox(stats,3)
- health_label = text("",10)
- health_label.custom_minimum_size.x = 105
- health_bar = progress()
- health_bar.custom_minimum_size = Vector2(55,9)
- hp_row.add_child(health_label); hp_row.add_child(health_bar)
- var sta = hbox(stats,3)
- stamina_label = text("",10)
- stamina_label.custom_minimum_size.x = 130
- stamina_bar = progress()
- stamina_bar.custom_minimum_size = Vector2(55,9)
- sta.add_child(stamina_label); sta.add_child(stamina_bar)
- var bottom = PanelContainer.new()
- bottom.position = Vector2(126,307)
- bottom.size = Vector2(388,49)
- style(bottom)
- hud.add_child(bottom)
+ # Quest details live in the journal, leaving the world unobscured.
+ title_label = text("",10); title_label.hide(); hud.add_child(title_label)
+ status_label = text("",10); status_label.hide(); hud.add_child(status_label)
+ var quest = button("!",func():
+  journal_page = 0
+  game.mode = "MODAL"
+  game.modal = "journal"
+ )
+ quest.name = "QuestButton"
+ quest.position = Vector2(434,8)
+ quest.size = Vector2(32,32)
+ quest.tooltip_text = "Missões · J"
+ quest.add_theme_stylebox_override("normal",hud_frame())
+ quest.add_theme_font_size_override("font_size",22)
+ hud.add_child(quest)
+ var clock = hud_panel(Vector2(472,4),Vector2(164,55))
+ clock_label = text("",12)
+ clock_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+ clock_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ clock.add_child(clock_label)
+ var money = hud_panel(Vector2(490,61),Vector2(146,29))
+ coins_label = text("",12)
+ coins_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+ coins_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ coins_label.add_theme_color_override("font_color",Color("8c441c"))
+ money.add_child(coins_label)
+ var vitals = hud_panel(Vector2(579,251),Vector2(57,105))
+ var columns = hbox(vitals,7)
+ for kind in ["V","E"]:
+  var column = vbox(columns,2)
+  var label = text(kind,10)
+  label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+  label.autowrap_mode = TextServer.AUTOWRAP_OFF
+  column.add_child(label)
+  var bar = progress()
+  bar.fill_mode = ProgressBar.FILL_BOTTOM_TO_TOP
+  bar.custom_minimum_size = Vector2(17,68)
+  var background = box(Color("5f3b28"),Color("422d22"))
+  background.set_corner_radius_all(0); background.set_border_width_all(1)
+  var fill = box(Color("a8d86b") if kind == "V" else Color("f5cc4e"),Color("d6ef9a") if kind == "V" else Color("ffe58c"))
+  fill.set_corner_radius_all(0); fill.set_border_width_all(1)
+  bar.add_theme_stylebox_override("background",background)
+  bar.add_theme_stylebox_override("fill",fill)
+  column.add_child(bar)
+  if kind == "V": health_label = label; health_bar = bar
+  else: stamina_label = label; stamina_bar = bar
+ var bottom = hud_panel(Vector2(137,309),Vector2(366,47))
  var hot = hbox(bottom,2)
- hotbar_buttons.clear()
- hotbar_icons.clear()
- hotbar_counts.clear()
+ hotbar_buttons.clear(); hotbar_icons.clear(); hotbar_counts.clear()
  for i in range(8):
   var index = i
-  var b = button("",func(): game.selected = index)
-  b.custom_minimum_size = Vector2(44,35)
-  var number = text(str(i+1),10)
-  number.position = Vector2(2,1)
-  number.size = Vector2(11,16)
+  var b = button("",func(): game.selected = index,false)
+  b.custom_minimum_size = Vector2(42,35)
+  var number = text(str(i+1),9)
+  number.position = Vector2(3,0); number.size = Vector2(10,14)
   number.autowrap_mode = TextServer.AUTOWRAP_OFF
   b.add_child(number)
   var icon = TextureRect.new()
-  icon.position = Vector2(12,3)
-  icon.size = Vector2(24,24)
+  icon.position = Vector2(10,4); icon.size = Vector2(25,25)
   icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
   icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
   icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
   b.add_child(icon)
   var amount = text("",9)
-  amount.position = Vector2(23,20)
-  amount.size = Vector2(20,16)
+  amount.position = Vector2(20,17); amount.size = Vector2(20,15)
+  amount.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
   amount.autowrap_mode = TextServer.AUTOWRAP_OFF
+  amount.add_theme_color_override("font_shadow_color",Color("ffe8b8"))
+  amount.add_theme_constant_override("shadow_offset_x",1)
+  amount.add_theme_constant_override("shadow_offset_y",1)
   b.add_child(amount)
   hot.add_child(b)
-  hotbar_buttons.append(b)
-  hotbar_icons.append(icon)
-  hotbar_counts.append(amount)
- var weight = PanelContainer.new()
- weight.position = Vector2(516,313)
- weight.size = Vector2(120,30)
- style(weight)
- hud.add_child(weight)
- weight_label = text("",10)
- weight.add_child(weight_label)
- var notice = PanelContainer.new()
- notice.position = Vector2(198,4)
- notice.size = Vector2(222,30)
- style(notice)
- hud.add_child(notice)
- message_label = text("",11)
+  hotbar_buttons.append(b); hotbar_icons.append(icon); hotbar_counts.append(amount)
+ weight_label = text("",9)
+ weight_label.position = Vector2(141,289); weight_label.size = Vector2(360,18)
+ weight_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+ hud.add_child(weight_label)
+ var notice = hud_panel(Vector2(176,8),Vector2(250,36))
+ message_label = text("",10)
  notice.add_child(message_label)
  notice.visible = false
 
 func make_home_hud() -> void:
- hud = Control.new()
- hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
- hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
- root_control.add_child(hud)
- home_top_band = Control.new()
- home_top_band.position = Vector2.ZERO
- home_top_band.size = Vector2(640,20)
- home_top_band.clip_contents = true
- home_top_band.mouse_filter = Control.MOUSE_FILTER_IGNORE
- hud.add_child(home_top_band)
- home_bottom_band = Control.new()
- home_bottom_band.position = Vector2(0,340)
- home_bottom_band.size = Vector2(640,20)
- home_bottom_band.clip_contents = true
- home_bottom_band.mouse_filter = Control.MOUSE_FILTER_IGNORE
- hud.add_child(home_bottom_band)
- title_label = text("",10)
- title_label.visible = false
- hud.add_child(title_label)
- status_label = text("",9)
- status_label.position = Vector2(54,0)
- status_label.size = Vector2(581,18)
- status_label.autowrap_mode = TextServer.AUTOWRAP_OFF
- status_label.add_theme_color_override("font_color",cream)
- home_bottom_band.add_child(status_label)
- clock_label = home_stat_label(52,120)
- coins_label = home_stat_label(174,104)
- health_label = home_stat_label(282,151)
- stamina_label = home_stat_label(438,198)
- health_bar = progress()
- health_bar.visible = false
- hud.add_child(health_bar)
- stamina_bar = progress()
- stamina_bar.visible = false
- hud.add_child(stamina_bar)
- weight_label = text("",10)
- weight_label.visible = false
- hud.add_child(weight_label)
- hotbar_buttons.clear()
- hotbar_icons.clear()
- hotbar_counts.clear()
- for i in range(8):
-  var index = i
-  var b = button("",func(): game.selected = index)
-  b.position = Vector2(4,25+i*35)
-  b.size = Vector2(40,34)
-  b.tooltip_text = "Ferramenta %d" % (i+1)
-  hud.add_child(b)
-  var number = text(str(i+1),9)
-  number.position = Vector2(0,0)
-  number.size = Vector2(11,14)
-  number.autowrap_mode = TextServer.AUTOWRAP_OFF
-  b.add_child(number)
-  var icon = TextureRect.new()
-  icon.position = Vector2(9,5)
-  icon.size = Vector2(24,24)
-  icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-  icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-  icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-  b.add_child(icon)
-  var count = text("",9)
-  count.position = Vector2(24,20)
-  count.size = Vector2(16,13)
-  count.autowrap_mode = TextServer.AUTOWRAP_OFF
-  b.add_child(count)
-  hotbar_buttons.append(b)
-  hotbar_icons.append(icon)
-  hotbar_counts.append(count)
- message_label = text("",9)
- message_label.position = Vector2(54,0)
- message_label.size = Vector2(581,18)
- message_label.autowrap_mode = TextServer.AUTOWRAP_OFF
- message_label.add_theme_color_override("font_color",cream)
- home_bottom_band.add_child(message_label)
+ make_hud()
 
 func home_stat_label(x: float,w: float) -> Label:
  var label = text("",10)
@@ -498,28 +444,33 @@ func update_hud() -> void:
  var sleep_status = "concluído" if game.s.completed else "pronto" if game.house_ready() and game.watered_corn_count() >= 20 else "pendente"
  status_label.text = "Casa %d/20 · Milho %d/20 · Dormir: %s" % [game.house_count(),game.watered_corn_count(),sleep_status] if game.s.mapId == "HOME01" else "Casa %d/20  Milho %d/20\nDormir: %s" % [game.house_count(),game.watered_corn_count(),sleep_status]
  var period = "manhã" if game.s.minutes < 720 else "tarde" if game.s.minutes < 1080 else "noite"
- clock_label.text = "Dia %d · %02d:%02d" % [game.s.day,int(game.s.minutes/60),int(game.s.minutes)%60] if game.s.mapId == "HOME01" else "Dia %d · %02d:%02d · %s" % [game.s.day,int(game.s.minutes/60),int(game.s.minutes)%60,period]
- coins_label.text = "%d moedas" % game.s.coins
+ clock_label.text = "Dia %d · %s\n%02d:%02d" % [game.s.day,period,int(game.s.minutes/60),int(game.s.minutes)%60]
+ coins_label.text = "%d G" % game.s.coins
+ coins_label.tooltip_text = "%d moedas" % game.s.coins
  weight_label.text = "Peso %.1f/40" % game.carried_weight()
- health_label.text = "Vida %d/%d" % [game.s.hp,game.s.hpMax]
- stamina_label.text = "Estamina %d/%d" % [game.s.stamina,game.s.staminaMax]
+ health_label.text = "V"
+ health_bar.tooltip_text = "Vida %d/%d" % [game.s.hp,game.s.hpMax]
+ stamina_label.text = "E"
+ stamina_bar.tooltip_text = "Estamina %d/%d" % [game.s.stamina,game.s.staminaMax]
  health_bar.max_value = game.s.hpMax; health_bar.value = game.s.hp
  stamina_bar.max_value = game.s.staminaMax; stamina_bar.value = game.s.stamina
  for i in range(8):
   var id = str(game.s.hotbar[i])
   var count = ""
-  if id == "TOOL_WATER": count = str(game.s.water)
-  elif id == "SEED_CORN" or game.FOOD.has(id): count = str(game.s.inventory.get(id,0))
+  if id == "TOOL_WATER": count = str(int(game.s.water))
+  elif id == "SEED_CORN" or game.FOOD.has(id): count = str(int(game.s.inventory.get(id,0)))
   hotbar_counts[i].text = count
   hotbar_buttons[i].tooltip_text = "%d · %s%s" % [i+1,display_name(id)," · "+count if count != "" else ""]
   hotbar_icons[i].texture = game.asset_textures.get(game.icon_id(id),null)
-  hotbar_buttons[i].modulate = Color.WHITE if i == game.selected else Color("d3c0a1")
+  if int(hotbar_buttons[i].get_meta("hud_selected",-1)) != int(i == game.selected):
+   var slot_style = box(Color("ffe6a8") if i == game.selected else Color("d8ab6b"),Color("b44f2e") if i == game.selected else Color("946139"))
+   slot_style.set_corner_radius_all(0)
+   slot_style.set_border_width_all(3 if i == game.selected else 1)
+   hotbar_buttons[i].add_theme_stylebox_override("normal",slot_style)
+   hotbar_buttons[i].set_meta("hud_selected",int(i == game.selected))
  if message_label:
   message_label.text = game.message
-  if game.s.mapId == "HOME01":
-   message_label.visible = game.message_timer > 0
-   status_label.visible = game.message_timer <= 0
-  else: message_label.get_parent().visible = game.message_timer > 0
+  message_label.get_parent().visible = game.message_timer > 0
 
 func display_name(id: String) -> String:
  var tools = {"TOOL_AXE":"Machado","TOOL_PICK":"Picareta","TOOL_HOE":"Enxada","TOOL_SCYTHE":"Foice","TOOL_WATER":"Regador","TOOL_HAMMER":"Martelo","SEED_CORN":"Sementes de milho","HAND":"Mão livre"}
@@ -595,7 +546,24 @@ func make_modal() -> void:
    var stock = hbox(v)
    for id in ["wood","stone","fiber","scrap","corn"]:
     var item = id
-    stock.add_child(button(game.short_name(item),func(): sales_selected = item))
+    var item_button = button("",func(): sales_selected = item)
+    item_button.name = "Sales_"+item
+    item_button.custom_minimum_size = Vector2(88,63)
+    item_button.tooltip_text = "%s · Mochila: %d · Enviado: %d" % [display_name(item),int(game.s.inventory.get(item,0)),int(game.s.shipment.get(item,0))]
+    var icon = TextureRect.new()
+    icon.texture = game.asset_textures.get(game.icon_id(item),null)
+    icon.position = Vector2(30,3); icon.size = Vector2(28,28)
+    icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+    icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+    icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    item_button.add_child(icon)
+    var caption = text(game.short_name(item)+" · "+str(int(game.s.shipment.get(item,0))),10)
+    caption.position = Vector2(3,34); caption.size = Vector2(82,23)
+    caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    caption.autowrap_mode = TextServer.AUTOWRAP_OFF
+    item_button.add_child(caption)
+    if item == sales_selected: item_button.add_theme_stylebox_override("normal",box(ochre,Color("b44f2e")))
+    stock.add_child(item_button)
    v.add_child(text("Selecionado: "+game.short_name(sales_selected),12))
    var actions = hbox(v)
    actions.add_child(button("Enviar 1",func(): game.ship_one(sales_selected)))
