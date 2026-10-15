@@ -230,6 +230,9 @@ func _process(delta: float) -> void:
  elif mode == "INTRO":
   if lia_arriving:
    lia_x -= delta * 3.2
+   # A brief front-facing pose bridges the half-turn toward Lia.
+   if lia_x <= 61.6: s.facing = [1,0]
+   elif lia_x <= 62.2: s.facing = [0,1]
    if lia_x <= 61.0:
     lia_x = 61.0
     lia_arriving = false
@@ -242,6 +245,8 @@ func _process(delta: float) -> void:
     mode = "PLAY"
     save_game(slot)
     say("Um novo começo: restaure a casa e plante 20 milhos.")
+  else:
+   s.facing = [1,0]
  elif mode == "BUILD":
   var mouse = get_viewport().get_mouse_position()
   if not build_keyboard_preview and mouse.x > 175 and mouse.y > 80 and mouse.y < 308: build_preview_tile = screen_tile(mouse)
@@ -412,6 +417,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func advance_intro() -> void:
  if lia_leaving or lia_arriving: return
+ s.facing = [1,0]
  if dialog_index == 1 and not intro_letter_seen:
   intro_letter_seen = true
   return

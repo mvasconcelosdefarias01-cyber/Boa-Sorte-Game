@@ -7,6 +7,10 @@ func run():
  g.set_process(false)
  assert(g.new_game("Ana"))
  assert(g.s.position==[59.5,17.9] and g.can_walk(g.tile_of(g.s.position)))
+ g._process(0.3)
+ assert(g.s.facing==[0,1])
+ g._process(0.2)
+ assert(g.s.facing==[1,0])
  g._process(1.0)
  assert(not g.lia_arriving and g.lia_x==61.0)
  for scale in [1.0,1.25,1.5]:
