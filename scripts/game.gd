@@ -124,7 +124,7 @@ func new_game(player_name: String) -> bool:
   return false
  reset_pending_actions()
  arrival_latch = false
- s = {"schemaVersion":SAVE_SCHEMA,"homeLayoutVersion":HOME_LAYOUT_VERSION,"name":player_name,"mapId":"FARM01","position":[59.5,12.9],"facing":[-1,0],"day":1,"minutes":480,"hp":100,"hpMax":100,"stamina":100,"staminaMax":100,"level":1,"xp":0,"coins":0,"inventory":{},"hotbar":TOOLS.duplicate(),"water":20,"repairs":{},"dirt":{},"condemned":{},"objects":{},"soil":{},"drops":{},"furniture":{},"mail":{"wood":20,"stone":12,"fiber":3,"scrap":3,"bench":1},"storage":{},"shipment":{},"fruitTaken":0,"arrivalGranted":false,"liaExited":false,"validSleepDay":0,"completed":false,"lateNoted":false,"nightTransactionId":0,"morningSeen":false,"preferences":menu_preferences.duplicate(true)}
+ s = {"schemaVersion":SAVE_SCHEMA,"homeLayoutVersion":HOME_LAYOUT_VERSION,"name":player_name,"mapId":"FARM01","position":[59.5,17.9],"facing":[-1,0],"day":1,"minutes":480,"hp":100,"hpMax":100,"stamina":100,"staminaMax":100,"level":1,"xp":0,"coins":0,"inventory":{},"hotbar":TOOLS.duplicate(),"water":20,"repairs":{},"dirt":{},"condemned":{},"objects":{},"soil":{},"drops":{},"furniture":{},"mail":{"wood":20,"stone":12,"fiber":3,"scrap":3,"bench":1},"storage":{},"shipment":{},"fruitTaken":0,"arrivalGranted":false,"liaExited":false,"validSleepDay":0,"completed":false,"lateNoted":false,"nightTransactionId":0,"morningSeen":false,"preferences":menu_preferences.duplicate(true)}
  for id in REPAIRS: s.repairs[id] = {"hitsDone":0,"paid":false,"completed":false}
  for id in DIRT: s.dirt[id] = false
  for id in CONDEMNED: s.condemned[id] = 2
@@ -1047,6 +1047,7 @@ func load_game(n: int) -> bool:
  if name_edit: name_edit.hide()
  mode = "PLAY" if s.liaExited else "INTRO"
  if mode == "INTRO":
+  s.position = [59.5,17.9]
   dialog_index = 0
   intro_letter_seen = false
   lia_x = 63.0
@@ -1206,7 +1207,7 @@ func _draw() -> void:
  elif s.mapId == "CITY01": draw_city()
  else: draw_home()
  draw_drops()
- if mode == "INTRO" and not s.liaExited: draw_lia(Vector2(lia_x+0.5,12.9)*TILE)
+ if mode == "INTRO" and not s.liaExited: draw_lia(Vector2(lia_x+0.5,17.9)*TILE)
  draw_actor(player)
  if s.mapId == "FARM01":
   draw_farm_crops(false,player.y)

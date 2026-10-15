@@ -280,37 +280,36 @@ func make_name() -> void:
  name_field.grab_focus.call_deferred()
 
 func make_intro() -> void:
- var panel = build_panel(34,128,572,222)
+ var letter_open = game.dialog_index == 1 and not game.intro_letter_seen and not game.lia_arriving and not game.lia_leaving
+ var panel_height = 160.0 if letter_open else 102.0+52.0*(ui_scale()-1.0)
+ var panel = build_panel(70,352-panel_height,500,panel_height)
+ panel.name = "IntroDialogue"
+ panel.set_meta("intro_dialogue",true)
  var v = vbox(panel,3)
+ var scroll = ScrollContainer.new()
+ scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+ scroll.custom_minimum_size = Vector2(0,108 if letter_open else 52*ui_scale())
+ scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+ v.add_child(scroll)
+ var body = vbox(scroll,2)
+ body.custom_minimum_size.x = 460
+ var heading = "Lia e %s" % game.s.name
+ var speech = ""
  if game.lia_arriving:
-  v.add_child(text("Lia se aproxima pela estrada à direita...",15))
+  heading = "Chegada"
+  speech = "Lia se aproxima pela estrada da cidade..."
  elif game.lia_leaving:
-  v.add_child(text("Lia segue viagem pela estrada à direita...",15))
- elif game.dialog_index == 1 and not game.intro_letter_seen:
-  panel.position = Vector2(46,26)
-  panel.size = Vector2(548,314)
-  v.add_child(text("Carta do prefeito Jair",18))
-  var scroll = ScrollContainer.new()
-  scroll.custom_minimum_size = Vector2(0,245)
-  v.add_child(scroll)
-  var l = text(game.LETTER.replace("{name}",game.s.name),13)
-  l.custom_minimum_size = Vector2(480,0)
-  scroll.add_child(l)
- else:
-  var row = hbox(v)
-  row.add_child(actor_preview("actor_lia"))
-  var dialogue = vbox(row,3)
-  dialogue.custom_minimum_size.x = 470
-  dialogue.add_child(text("Lia e %s" % game.s.name,16))
-  if game.dialog_index < game.DIALOGUE.size():
-   var scroll = ScrollContainer.new()
-   scroll.custom_minimum_size = Vector2(0,104)
-   dialogue.add_child(scroll)
-   var speech = text(game.DIALOGUE[game.dialog_index].replace("{name}",game.s.name),13)
-   speech.custom_minimum_size.x = 450
-   scroll.add_child(speech)
+  heading = "Até breve!"
+  speech = "Lia volta pela estrada que leva a Boa Sorte."
+ elif letter_open:
+  heading = "Carta do prefeito Jair"
+  speech = game.LETTER.replace("{name}",game.s.name)
+ elif game.dialog_index < game.DIALOGUE.size():
+  speech = game.DIALOGUE[game.dialog_index].replace("{name}",game.s.name)
+ body.add_child(text(heading,12))
+ body.add_child(text(speech,12))
  var buttons = hbox(v)
- buttons.add_child(button("Fechar carta" if game.dialog_index == 1 and not game.intro_letter_seen else "Continuar",func(): game.advance_intro()))
+ buttons.add_child(button("Fechar carta" if letter_open else "Continuar",func(): game.advance_intro()))
  buttons.add_child(button("Pular apresentação",func(): game.skip_intro()))
  buttons.get_child(0).grab_focus.call_deferred()
 
