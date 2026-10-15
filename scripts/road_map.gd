@@ -12,6 +12,7 @@ func _init() -> void:
    var h = posmod(x*92821+y*68917+x*y*257,997)
    var edge = y == 0 or y == SIZE.y-1 or x == 0 or x >= SIZE.x-2
    if x <= 3 and abs(y-center_row(x)) <= 4: continue
+   if x >= SIZE.x-4 and abs(y-center_row(x)) <= 2: continue
    if x >= SIZE.x-2:
     add_prop(p,"log" if abs(y-center_row(x)) <= 3 else "stone_large",h)
    elif edge:

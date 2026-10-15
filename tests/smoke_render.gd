@@ -51,5 +51,7 @@ func run() -> void:
  await process_frame
  g.transition_to("ROAD01",g.ROAD_ENTRY)
  await process_frame
- print("Cenas FARM01/HOME01/ROAD01 e %d PNGs, %d WAVs carregados; captura de framebuffer requer display gráfico." % [g.asset_textures.size(),g.sounds.size()])
+ g.transition_to("CITY01",g.CITY_ENTRY)
+ await process_frame
+ print("Cenas FARM01/HOME01/ROAD01/CITY01 e %d PNGs, %d WAVs carregados; captura de framebuffer requer display gráfico." % [g.asset_textures.size(),g.sounds.size()])
  quit(0)

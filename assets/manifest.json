@@ -6052,6 +6052,1363 @@
         43
       ],
       "provenance": "ImageGen adaptation of user inline lake image; not an exact crop"
+    },
+    "city/correios": {
+      "path": "res://assets/sprites/city/correios.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_a.png",
+      "source_bounds": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "source_alpha_bounds": [
+        36,
+        98,
+        467,
+        478
+      ],
+      "source_sha256": "7b615de109ada539fe041f6ab98eae9796a496c9b64894d40005ad5784278d6c",
+      "sha256": "20d22a6a9f22dc2c3e0ad1317a66c78d399ce0f425f636fd6994c03a35063f8a",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/banco": {
+      "path": "res://assets/sprites/city/banco.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_a.png",
+      "source_bounds": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "source_alpha_bounds": [
+        37,
+        93,
+        464,
+        471
+      ],
+      "source_sha256": "7b615de109ada539fe041f6ab98eae9796a496c9b64894d40005ad5784278d6c",
+      "sha256": "59372ac448e0c2346cc858da288ef8cad7e36b5c0dfaa53b2a30b9c81939d690",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/prefeitura": {
+      "path": "res://assets/sprites/city/prefeitura.png",
+      "size": [
+        256,
+        224
+      ],
+      "pivot": [
+        128,
+        224
+      ],
+      "footprint": [
+        8,
+        5
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_a.png",
+      "source_bounds": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "source_alpha_bounds": [
+        5,
+        54,
+        494,
+        476
+      ],
+      "source_sha256": "7b615de109ada539fe041f6ab98eae9796a496c9b64894d40005ad5784278d6c",
+      "sha256": "991e3ec40a2279eea6bde58b4e52589b07cd8fe55fda1069a72a0fb8799788ff",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/mercado": {
+      "path": "res://assets/sprites/city/mercado.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_a.png",
+      "source_bounds": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "source_alpha_bounds": [
+        35,
+        43,
+        478,
+        428
+      ],
+      "source_sha256": "7b615de109ada539fe041f6ab98eae9796a496c9b64894d40005ad5784278d6c",
+      "sha256": "d9ecc31dbf684b5f3946f38c6b2617cc39e8a0e462aee1e1c116405060981ce7",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/armazem": {
+      "path": "res://assets/sprites/city/armazem.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_a.png",
+      "source_bounds": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "source_alpha_bounds": [
+        38,
+        41,
+        469,
+        424
+      ],
+      "source_sha256": "7b615de109ada539fe041f6ab98eae9796a496c9b64894d40005ad5784278d6c",
+      "sha256": "3c101947b64c47c89bca9276c082c4f9fd2a2e9b5b187a45efd967442a70b916",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/loja": {
+      "path": "res://assets/sprites/city/loja.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_a.png",
+      "source_bounds": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "source_alpha_bounds": [
+        10,
+        51,
+        482,
+        420
+      ],
+      "source_sha256": "7b615de109ada539fe041f6ab98eae9796a496c9b64894d40005ad5784278d6c",
+      "sha256": "78e693c1bd84d2e44ddc80539be4fae4e9c5013f3c3ef7920d0a73cc2a6c287a",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/bar": {
+      "path": "res://assets/sprites/city/bar.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_b.png",
+      "source_bounds": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "source_alpha_bounds": [
+        11,
+        120,
+        502,
+        512
+      ],
+      "source_sha256": "0fef5a99bca2e9c0e5f9504b8f969a405d6453636254007d9afeae6b70b6b955",
+      "sha256": "bc445d68431698c3bb31a0d3651a0cdd2bfe3f47d5afcf9fea75a9816f0c63a2",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/museu": {
+      "path": "res://assets/sprites/city/museu.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_b.png",
+      "source_bounds": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "source_alpha_bounds": [
+        18,
+        102,
+        512,
+        512
+      ],
+      "source_sha256": "0fef5a99bca2e9c0e5f9504b8f969a405d6453636254007d9afeae6b70b6b955",
+      "sha256": "fba2721d1ed27ccdcfc086e26c89dd16a04f54dd7bd8a40641a7363915379240",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/igreja": {
+      "path": "res://assets/sprites/city/igreja.png",
+      "size": [
+        320,
+        320
+      ],
+      "pivot": [
+        160,
+        320
+      ],
+      "footprint": [
+        10,
+        7
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_b.png",
+      "source_bounds": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "source_alpha_bounds": [
+        0,
+        13,
+        501,
+        512
+      ],
+      "source_sha256": "0fef5a99bca2e9c0e5f9504b8f969a405d6453636254007d9afeae6b70b6b955",
+      "sha256": "97f74c04c686a6c77a1dea595b5c57ce8c034915563d83924c5d5ff5ad47782e",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/restaurante": {
+      "path": "res://assets/sprites/city/restaurante.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_b.png",
+      "source_bounds": [
+        0,
+        542,
+        512,
+        1024
+      ],
+      "source_alpha_bounds": [
+        18,
+        27,
+        499,
+        431
+      ],
+      "source_sha256": "0fef5a99bca2e9c0e5f9504b8f969a405d6453636254007d9afeae6b70b6b955",
+      "sha256": "617a10a94484b62743256535eecab3fa4d6cd140c78c1a419278693af1b2993b",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/oficina": {
+      "path": "res://assets/sprites/city/oficina.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_b.png",
+      "source_bounds": [
+        512,
+        542,
+        1024,
+        1024
+      ],
+      "source_alpha_bounds": [
+        23,
+        24,
+        484,
+        425
+      ],
+      "source_sha256": "0fef5a99bca2e9c0e5f9504b8f969a405d6453636254007d9afeae6b70b6b955",
+      "sha256": "4ff4f3031864c5b352582dce51d5d55c553a00169c41e8a981e8a597b79ecc21",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/hospital": {
+      "path": "res://assets/sprites/city/hospital.png",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        192
+      ],
+      "footprint": [
+        6,
+        4
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/shops_b.png",
+      "source_bounds": [
+        1024,
+        542,
+        1536,
+        1024
+      ],
+      "source_alpha_bounds": [
+        2,
+        20,
+        503,
+        428
+      ],
+      "source_sha256": "0fef5a99bca2e9c0e5f9504b8f969a405d6453636254007d9afeae6b70b6b955",
+      "sha256": "3980a51b35cc7d408464b1524dc7fa3f0e97dfbd390e54b0da7c4da415cb99c5",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_01": {
+      "path": "res://assets/sprites/city/casa_01.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        0,
+        0,
+        362,
+        362
+      ],
+      "source_alpha_bounds": [
+        15,
+        29,
+        362,
+        345
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "f9ffc4286466879980f397d3d648e39f2cfc77cbc81f45ede3ccc6d617f2c046",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_02": {
+      "path": "res://assets/sprites/city/casa_02.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        362,
+        0,
+        724,
+        362
+      ],
+      "source_alpha_bounds": [
+        0,
+        32,
+        362,
+        345
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "6adcd4599ae7226251d518098259bf013c1c2f8849600b8730040cd874096a7e",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_03": {
+      "path": "res://assets/sprites/city/casa_03.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        724,
+        0,
+        1086,
+        362
+      ],
+      "source_alpha_bounds": [
+        0,
+        20,
+        358,
+        343
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "547dd43826db7d5e9b65cc11d959bb1011693ea3900d50e47f2aced41f09a64d",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_04": {
+      "path": "res://assets/sprites/city/casa_04.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        1086,
+        0,
+        1448,
+        362
+      ],
+      "source_alpha_bounds": [
+        22,
+        34,
+        357,
+        347
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "f5f7bcb1d6ac986d38bcfe2b07ab29d507b9bca464213357e5f84591ab2033f7",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_05": {
+      "path": "res://assets/sprites/city/casa_05.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        0,
+        362,
+        362,
+        724
+      ],
+      "source_alpha_bounds": [
+        18,
+        8,
+        362,
+        362
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "5534687be55df09779554fc491a4b38fd45ca5254cb88979226f04f8c91910a9",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_06": {
+      "path": "res://assets/sprites/city/casa_06.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        362,
+        362,
+        724,
+        724
+      ],
+      "source_alpha_bounds": [
+        0,
+        16,
+        359,
+        362
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "e187c3bdc674308f2edd9967e6476a7e2181111723ad55adbb507e5bba72f6d6",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_07": {
+      "path": "res://assets/sprites/city/casa_07.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        724,
+        362,
+        1086,
+        724
+      ],
+      "source_alpha_bounds": [
+        16,
+        18,
+        350,
+        362
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "3a3aa9f6c4a7f24a4144ac34a0a462a6215a3948efb51ab435691c0b4214390d",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_08": {
+      "path": "res://assets/sprites/city/casa_08.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        1086,
+        362,
+        1448,
+        724
+      ],
+      "source_alpha_bounds": [
+        10,
+        17,
+        346,
+        362
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "43536cd1c21fa5dfba59436c7cd9f5d96fdec1deee96cb7f1acb4ded7943146f",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_09": {
+      "path": "res://assets/sprites/city/casa_09.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        0,
+        724,
+        362,
+        1086
+      ],
+      "source_alpha_bounds": [
+        14,
+        0,
+        362,
+        301
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "76c48500a3a7ae9adf8491fc9c92983cc59270c24189205840d40a20d2f5941f",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_10": {
+      "path": "res://assets/sprites/city/casa_10.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        362,
+        724,
+        724,
+        1086
+      ],
+      "source_alpha_bounds": [
+        0,
+        0,
+        362,
+        300
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "ebc43d9112936d6dab094f84b46d2ab566917f0127a6231511ef96597b46265a",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_11": {
+      "path": "res://assets/sprites/city/casa_11.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        724,
+        724,
+        1086,
+        1086
+      ],
+      "source_alpha_bounds": [
+        0,
+        0,
+        346,
+        301
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "aaf20ab162ecb89afa1a070bf49b17c6ea5ce050e0c1be019fb58fa9343df79c",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/casa_12": {
+      "path": "res://assets/sprites/city/casa_12.png",
+      "size": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        160
+      ],
+      "footprint": [
+        4,
+        3
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/houses.png",
+      "source_bounds": [
+        1086,
+        724,
+        1448,
+        1086
+      ],
+      "source_alpha_bounds": [
+        3,
+        0,
+        356,
+        304
+      ],
+      "source_sha256": "b2cbb5086ffa42d8f51abfeab062a9cf93bc88410991fc635fa339ca984616df",
+      "sha256": "f3ff4b982f124d9a4bf5d6ef2622e43b14a07b48a7b86458bf289b84f9fbb76a",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/bridge": {
+      "path": "res://assets/sprites/city/bridge.png",
+      "size": [
+        384,
+        160
+      ],
+      "pivot": [
+        192,
+        160
+      ],
+      "footprint": [
+        12,
+        5
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/environment.png",
+      "source_bounds": [
+        25,
+        90,
+        760,
+        490
+      ],
+      "source_alpha_bounds": [
+        10,
+        56,
+        729,
+        372
+      ],
+      "source_sha256": "dc684785071dd137ea3625c05965c927bdfd656f30951d7bb5554c82a8c6393d",
+      "sha256": "8ea88121b149fc9eb9bb367258be9a171c2df62ecb6a82263c94de2080d584eb",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/fountain": {
+      "path": "res://assets/sprites/city/fountain.png",
+      "size": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        96
+      ],
+      "footprint": [
+        3,
+        2
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/environment.png",
+      "source_bounds": [
+        770,
+        95,
+        1165,
+        495
+      ],
+      "source_alpha_bounds": [
+        7,
+        23,
+        380,
+        388
+      ],
+      "source_sha256": "dc684785071dd137ea3625c05965c927bdfd656f30951d7bb5554c82a8c6393d",
+      "sha256": "7c81d78cb33d2963dc696688c38fe87be7d1be14644e222c5674f0c7c3705345",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/bench": {
+      "path": "res://assets/sprites/city/bench.png",
+      "size": [
+        96,
+        64
+      ],
+      "pivot": [
+        48,
+        64
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/environment.png",
+      "source_bounds": [
+        1170,
+        160,
+        1530,
+        480
+      ],
+      "source_alpha_bounds": [
+        11,
+        34,
+        336,
+        286
+      ],
+      "source_sha256": "dc684785071dd137ea3625c05965c927bdfd656f30951d7bb5554c82a8c6393d",
+      "sha256": "a0fdcea7cf7b18cfd4ed90553b4a02734998905d62719e5348466b235adddeee",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/cobblestone": {
+      "path": "res://assets/sprites/city/cobblestone.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/environment.png",
+      "source_bounds": [
+        75,
+        538,
+        489,
+        945
+      ],
+      "source_alpha_bounds": [
+        0,
+        0,
+        414,
+        407
+      ],
+      "source_sha256": "dc684785071dd137ea3625c05965c927bdfd656f30951d7bb5554c82a8c6393d",
+      "sha256": "40380b3c772e76cba5f92e75ecea42bd2cc128a2065fa4b9ee08b9d6dc662150",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/river_water": {
+      "path": "res://assets/sprites/city/river_water.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/environment.png",
+      "source_bounds": [
+        570,
+        539,
+        971,
+        944
+      ],
+      "source_alpha_bounds": [
+        0,
+        0,
+        401,
+        405
+      ],
+      "source_sha256": "dc684785071dd137ea3625c05965c927bdfd656f30951d7bb5554c82a8c6393d",
+      "sha256": "f34aefd46d1fd65bc901737202092b29cb6714a2a702c9eca37c6ea71797d24a",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/fence": {
+      "path": "res://assets/sprites/city/fence.png",
+      "size": [
+        96,
+        48
+      ],
+      "pivot": [
+        48,
+        48
+      ],
+      "footprint": [
+        3,
+        1
+      ],
+      "collider": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "use_area": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "source": "sources/city/environment.png",
+      "source_bounds": [
+        1000,
+        630,
+        1510,
+        875
+      ],
+      "source_alpha_bounds": [
+        11,
+        7,
+        489,
+        227
+      ],
+      "source_sha256": "dc684785071dd137ea3625c05965c927bdfd656f30951d7bb5554c82a8c6393d",
+      "sha256": "520574e74c0763771940587054901b0107c490ed5907b381d4331ddf5675ff11",
+      "status": "prototype_imagegen_reference_derived",
+      "provenance": "Independent sprite generated from approved town reference; nearest normalization"
+    },
+    "city/river_bank": {
+      "path": "res://assets/sprites/props/rock_small_1.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "collider": [
+        8,
+        24,
+        16,
+        8
+      ],
+      "use_area": [
+        -16,
+        -16,
+        64,
+        64
+      ],
+      "status": "reused_approved_city_bank",
+      "source": "sources/reference_stage4/rocks.png",
+      "source_bounds": [
+        65,
+        65,
+        535,
+        290
+      ],
+      "source_sha256": "dbda3aec7fd38e5ca8fa825feca290b4c5912707f60ab1391a3ff9c7c0ec5c4a",
+      "sha256": "89627404a702933de1836a9b6aad76233e8c77954fdb72526ee8c5caa008404a"
     }
   },
   "audio": {

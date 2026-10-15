@@ -61,10 +61,10 @@ func run() -> void:
   for x in range(3,46):
    for dy in range(-2,3):
     check(g.can_walk(Vector2i(x,g.road_map.center_row(x)+dy)),"corredor %d,%d" % [x,dy])
-  g.s.position = [45.8,g.road_map.center_row(45)+0.9]
-  walk(g,"ui_right",20)
-  check(g.s.mapId == "ROAD01" and g.s.position[0] < 46,"barreira leste impede passagem")
-  for y in range(24): check(not g.can_walk(Vector2i(46,y)),"sem contorno da barreira %d" % y)
+  # The east connection is now covered by city_transition.gd.
+  for y in range(24):
+   if abs(y-g.road_map.center_row(46)) > 2:
+    check(not g.can_walk(Vector2i(46,y)),"margem leste continua bloqueada %d" % y)
   g.s.position = [19.5,12.9]
   for tool in ["HAND","TOOL_WATER","SEED_CORN","TOOL_HAMMER","TOOL_AXE"]:
    check(not g.resolve_action(tool,Vector2i(20,12)),"acao nao modifica fazenda: "+tool)

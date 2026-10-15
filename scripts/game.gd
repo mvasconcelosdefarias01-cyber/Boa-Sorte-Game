@@ -3,6 +3,9 @@ extends Node2D
 const TILE := 32
 const SIZE := Vector2i(640, 360)
 const ROAD_MAP = preload("res://scripts/road_map.gd")
+const CITY_MAP = preload("res://scripts/city_map.gd")
+const CITY_ENTRY := Vector2i(3,13)
+const ROAD_CITY_ENTRY := Vector2i(44,13)
 const ROAD_ENTRY := Vector2i(3,13)
 const FARM_ROAD_ENTRY := Vector2i(62,17)
 const SAVE_SCHEMA := 1
@@ -61,6 +64,7 @@ var move_weight_accumulator := 0.0
 var transition_cooldown := 0.0
 var arrival_latch := false
 var road_map = ROAD_MAP.new()
+var city_map = CITY_MAP.new()
 var lia_x := 63.0
 var lia_arriving := false
 var lia_leaving := false
@@ -270,6 +274,7 @@ func process_movement(delta: float) -> void:
 
 func can_walk(p: Vector2i) -> bool:
  if s.mapId == "ROAD01": return road_map.can_walk(p)
+ if s.mapId == "CITY01": return city_map.can_walk(p)
  if s.mapId == "FARM01":
   if p.x < 0 or p.x >= 64 or p.y < 0 or p.y >= 48: return false
   if is_lake(p) or (p.x >= 8 and p.x <= 17 and p.y >= 8 and p.y <= 15): return false
@@ -471,7 +476,7 @@ func furniture_name(id: String) -> String:
  return str({"bed":"Cama","sofa":"Sofá","stove":"Fogão","sink":"Pia","bench":"Banco"}.get(id,id))
 
 func action_check(tool: String, p: Vector2i) -> String:
- if s.mapId == "ROAD01": return "Aqui é a estrada. Cuide da sua fazenda ao voltar."
+ if s.mapId in ["ROAD01","CITY01"]: return "Cuide da sua fazenda ao voltar."
  if s.mapId != "FARM01" and tool in ["SEED_CORN","TOOL_WATER"]: return "Cultive na fazenda."
  if abs(p.x-floori(s.position[0]))+abs(p.y-floori(s.position[1])) != 1: return "Alvo fora de alcance."
  var cost = {"TOOL_AXE":2,"TOOL_PICK":2,"TOOL_HOE":2,"TOOL_SCYTHE":1,"TOOL_WATER":2,"TOOL_HAMMER":2,"SEED_CORN":1,"HAND":0}[tool]
@@ -783,9 +788,14 @@ func interact() -> void:
   if p.x >= 8 and p.x <= 18 and p.y >= 8 and p.y <= 16: say("Esta construção ficará para depois."); return
  elif s.mapId == "ROAD01":
   if road_portal():
-   if not arrival_latch: transition_to("FARM01",FARM_ROAD_ENTRY)
+   if not arrival_latch:
+    if p.x <= 2: transition_to("FARM01",FARM_ROAD_ENTRY)
+    else: transition_to("CITY01",CITY_ENTRY)
    return
-  if p.x >= ROAD_MAP.SIZE.x-4: say("A estrada termina nos troncos por enquanto."); return
+ elif s.mapId == "CITY01":
+  if road_portal():
+   if not arrival_latch: transition_to("ROAD01",ROAD_CITY_ENTRY)
+   return
  elif s.mapId == "HOME01":
   if p.y >= HOME_ENTRY.y and p.x >= HOME_ENTRY.x and p.x <= HOME_ENTRY.x+1:
    transition_to("FARM01",Vector2i(49,17)); return
@@ -815,7 +825,8 @@ func transition_to(map_id: String,p: Vector2i) -> void:
 func road_portal() -> bool:
  var p = tile_of(s.position)
  if s.mapId == "FARM01": return p.x >= 61 and p.y >= 16 and p.y <= 18
- if s.mapId == "ROAD01": return p.x <= 2 and abs(p.y-road_map.center_row(p.x)) <= 4
+ if s.mapId == "ROAD01": return (p.x <= 2 and abs(p.y-road_map.center_row(p.x)) <= 4) or (p.x >= 46 and abs(p.y-road_map.center_row(p.x)) <= 2)
+ if s.mapId == "CITY01": return p.x <= 2 and abs(p.y-13) <= 2
  return false
 
 func update_map_passage() -> void:
@@ -826,6 +837,8 @@ func update_map_passage() -> void:
  var p = tile_of(s.position)
  if s.mapId == "FARM01" and p.x >= 63: transition_to("ROAD01",ROAD_ENTRY)
  elif s.mapId == "ROAD01" and p.x == 0: transition_to("FARM01",FARM_ROAD_ENTRY)
+ elif s.mapId == "ROAD01" and p.x == 47: transition_to("CITY01",CITY_ENTRY)
+ elif s.mapId == "CITY01" and p.x == 0: transition_to("ROAD01",ROAD_CITY_ENTRY)
 
 func take_fruit() -> void:
  var allowed = s.fruitTaken < 4 or (s.stamina < s.staminaMax*0.2 and int(s.inventory.get("coffee",0))+int(s.inventory.get("bar",0))+int(s.inventory.get("fruit",0)) == 0)
@@ -1022,6 +1035,8 @@ func load_game(n: int) -> bool:
  if migrated: migrate_home_layout()
  if s.mapId == "ROAD01" and (not can_walk(tile_of(s.position)) or road_portal()):
   s.position = [ROAD_ENTRY.x+0.5,ROAD_ENTRY.y+0.9]
+ if s.mapId == "CITY01" and (not can_walk(tile_of(s.position)) or road_portal()):
+  s.position = [CITY_ENTRY.x+0.5,CITY_ENTRY.y+0.9]
  arrival_latch = road_portal()
  update_camera()
  if name_edit: name_edit.hide()
@@ -1182,6 +1197,7 @@ func _draw() -> void:
  draw_set_transform(-camera_origin)
  if s.mapId == "FARM01": draw_farm()
  elif s.mapId == "ROAD01": draw_road()
+ elif s.mapId == "CITY01": draw_city()
  else: draw_home()
  draw_drops()
  if mode == "INTRO" and not s.liaExited: draw_lia(Vector2(lia_x+0.5,12.9)*TILE)
@@ -1191,6 +1207,7 @@ func _draw() -> void:
   draw_farm_props(false,player.y)
   draw_impact_effects()
  elif s.mapId == "ROAD01": draw_road_props(false,player.y)
+ elif s.mapId == "CITY01": draw_city_objects(false,player.y)
  if mode == "PLAY" or mode == "BUILD":
   var t = target_tile() if mode == "PLAY" else build_preview_tile
   var valid = action_check(selected_item(),t) == "" if mode == "PLAY" and TOOLS.has(selected_item()) else editor_item != "" and placement_error(editor_item,t,editor_rotation) == "" if mode == "BUILD" else false
@@ -1205,6 +1222,11 @@ func update_camera() -> void:
  var player = Vector2(s.position[0],s.position[1])*TILE
  if s.mapId == "HOME01":
   camera_origin = (Vector2(HOME_SIZE)*TILE-Vector2(SIZE))*0.5
+  return
+ if s.mapId == "CITY01":
+  camera_origin = (player-Vector2(SIZE)*0.5).round()
+  camera_origin.x = clampf(camera_origin.x,CITY_MAP.BOUNDS.position.x*TILE,CITY_MAP.BOUNDS.end.x*TILE-SIZE.x)
+  camera_origin.y = clampf(camera_origin.y,CITY_MAP.BOUNDS.position.y*TILE,CITY_MAP.BOUNDS.end.y*TILE-SIZE.y)
   return
  var map_size = ROAD_MAP.SIZE if s.mapId == "ROAD01" else Vector2i(64,48)
  camera_origin = (player-Vector2(SIZE)*0.5).round()
@@ -1568,3 +1590,30 @@ func icon_id(id: String) -> String:
  return "icons/"+str(names.get(id,"valid"))
 func world_label(t: String,p: Vector2,size: int = 14,c: Color = Color("243348")) -> void:
  draw_string(font,p,t,HORIZONTAL_ALIGNMENT_LEFT,-1,size,c)
+
+func draw_city() -> void:
+ var first = Vector2i(floori(camera_origin.x/TILE),floori(camera_origin.y/TILE))
+ for y in range(maxi(CITY_MAP.BOUNDS.position.y,first.y),mini(CITY_MAP.BOUNDS.end.y,first.y+13)):
+  for x in range(maxi(0,first.x),mini(CITY_MAP.BOUNDS.end.x,first.x+21)):
+   var p = Vector2i(x,y)
+   var id = city_map.ground_asset_id(p,farm_sand_id(p))
+   asset(id,Vector2(p)*TILE+Vector2(16,32))
+   if not city_map.is_path(p) and not city_map.is_river(p) and not city_map.blocked.has(p) and not city_map.near_building(p) and terrain_hash(p)%5 < 2:
+    asset("props/grass_clump_%d" % (terrain_hash(p)%6+1),Vector2(p)*TILE+Vector2(16,32))
+ asset("city/bridge",Vector2(CITY_MAP.BRIDGE_ANCHOR)*TILE)
+ draw_city_objects(true,float(s.position[1])*TILE)
+
+func draw_city_objects(behind_actor: bool,actor_feet_y: float) -> void:
+ var objects: Array[Dictionary] = []
+ for ob in city_map.props:
+  objects.append({"y":(float(ob.at[1])+1.0)*TILE,"prop":ob})
+ for b in city_map.buildings+city_map.landmarks:
+  objects.append({"y":float(b.at.y)*TILE,"building":b})
+ objects.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return a.y < b.y)
+ for ob in objects:
+  if (ob.y <= actor_feet_y) != behind_actor: continue
+  if ob.has("prop"):
+   var pos = Vector2(ob.prop.at[0],ob.prop.at[1])*TILE
+   if prop_visible(prop_asset_id(ob.prop),pos): draw_prop(ob.prop,pos)
+  else:
+   asset(ob.building.id,Vector2(ob.building.at)*TILE)
