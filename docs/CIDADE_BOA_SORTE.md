@@ -35,3 +35,7 @@ A montagem estática foi comparada visualmente à referência. O mapa inicial fo
 Limites visuais: a composição é uma adaptação na grade navegável; o rio tem margens retas, e jardins/varandas não são cópias pixel a pixel da referência. Aparência em movimento e oclusão ainda exigem revisão humana. Somente exteriores e conexão oeste estão ativos.
 
 Verificações finais: 196 entradas PNG e 10 WAVs validadas; todos os PNGs anteriores preservados por SHA-256; CITY QA=0 falhas, ROAD QA=0 falhas e ciclo QA completo. A prévia `PREVIA-ESTATICA.png` no pacote é uma montagem dos mesmos sprites/posições, não uma captura de execução.
+
+## Escala da casa da fazenda
+
+A pedido do jogador, as duas fachadas da fazenda são desenhadas a 1/3 da escala anterior, largura128px (4 tiles), mantendo a proporção original, filtro nearest e pixels de origem. A janela H03 acompanha a mesma transformação. A porta permanece ancorada em (49.5,16), e a colisão passa ao retângulo (48,13,4,3). Os PNGs e a arte da cidade não foram alterados. QA de reforma, entrada/saída e save passou. Apresentação no Windows aguarda revisão humana.

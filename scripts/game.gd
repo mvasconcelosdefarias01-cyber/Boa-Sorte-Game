@@ -8,6 +8,8 @@ const CITY_ENTRY := Vector2i(3,13)
 const ROAD_CITY_ENTRY := Vector2i(44,13)
 const ROAD_ENTRY := Vector2i(3,13)
 const FARM_ROAD_ENTRY := Vector2i(62,17)
+const FARM_HOUSE_SCALE := 1.0/3.0
+const FARM_HOUSE_FOOTPRINT := Rect2i(48,13,4,3)
 const SAVE_SCHEMA := 1
 const HOME_LAYOUT_VERSION := 2
 const HOME_SIZE := Vector2i(17,10)
@@ -278,7 +280,7 @@ func can_walk(p: Vector2i) -> bool:
  if s.mapId == "FARM01":
   if p.x < 0 or p.x >= 64 or p.y < 0 or p.y >= 48: return false
   if is_lake(p) or (p.x >= 8 and p.x <= 17 and p.y >= 8 and p.y <= 15): return false
-  if p.x >= 44 and p.x <= 55 and p.y >= 7 and p.y <= 15: return false
+  if FARM_HOUSE_FOOTPRINT.has_point(p): return false
   for id in s.objects:
    var ob = s.objects[id]
    if not ob.removed and tile_of(ob.at) == p: return false
@@ -724,7 +726,7 @@ func award_xp(amount: int) -> void:
 
 func tillable(p: Vector2i) -> bool:
  if s.mapId != "FARM01" or p.x < 1 or p.x > 62 or p.y < 1 or p.y > 46: return false
- if is_lake(p) or lake_shore(p) or p.x >= 44 and p.x <= 55 and p.y >= 7 and p.y <= 15: return false
+ if is_lake(p) or lake_shore(p) or FARM_HOUSE_FOOTPRINT.has_point(p): return false
  if p.x >= 8 and p.x <= 17 and p.y >= 8 and p.y <= 15: return false
  if p.x >= 57 and p.y >= 9 and p.y <= 12: return false
  if object_at(p) != "": return false
@@ -1180,11 +1182,12 @@ func play_sound(id: String) -> void:
  audio_player.stream = sounds[id]
  audio_player.play()
 
-func asset(id: String, ground: Vector2) -> bool:
+func asset(id: String, ground: Vector2, sprite_scale: float = 1.0) -> bool:
  if not asset_textures.has(id): return false
  var tex: Texture2D = asset_textures[id]
  var pivot = asset_manifest[id].get("pivot", [tex.get_width()/2,tex.get_height()])
- draw_texture(tex,ground-Vector2(pivot[0],pivot[1]))
+ if sprite_scale == 1.0: draw_texture(tex,ground-Vector2(pivot[0],pivot[1]))
+ else: draw_texture_rect(tex,Rect2((ground-Vector2(pivot[0],pivot[1])*sprite_scale).round(),Vector2(tex.get_size())*sprite_scale),false)
  return true
 
 # Temporary vector art. Gameplay uses IDs and footprints; PNG exports can replace drawing.
@@ -1289,9 +1292,9 @@ func draw_farm() -> void:
  if not asset("props/ruin",Vector2(13,16)*TILE):
   draw_rect(Rect2(8*TILE,8*TILE,10*TILE,8*TILE),Color("70482f"),false,7)
   world_label("RUÍNAS",Vector2(10,10)*TILE,18,Color("f1dfb1"))
- if not asset("buildings/house_H01_restored" if s.repairs.H01.completed else "buildings/house_H01_old",Vector2(49.5,16)*TILE):
-  draw_rect(Rect2(44*TILE,7*TILE,12*TILE,9*TILE),Color("f1dfb1") if s.repairs.H01.completed else Color("b7a276"))
- asset("buildings/repair_H03_window_open" if s.repairs.H03.completed else "buildings/repair_H03_window_boarded",Vector2(53,14)*TILE)
+ if not asset("buildings/house_H01_restored" if s.repairs.H01.completed else "buildings/house_H01_old",Vector2(49.5,16)*TILE,FARM_HOUSE_SCALE):
+  draw_rect(Rect2(Vector2(FARM_HOUSE_FOOTPRINT.position)*TILE,Vector2(FARM_HOUSE_FOOTPRINT.size)*TILE),Color("f1dfb1") if s.repairs.H01.completed else Color("b7a276"))
+ asset("buildings/repair_H03_window_open" if s.repairs.H03.completed else "buildings/repair_H03_window_boarded",(Vector2(49.5,16)+(Vector2(53,14)-Vector2(49.5,16))*FARM_HOUSE_SCALE)*TILE,FARM_HOUSE_SCALE)
  if not asset("props/sales_chest",Vector2(57.5,15)*TILE): draw_rect(Rect2(57*TILE,14*TILE,30,29),Color("70482f"))
  if not asset("props/mailbox",Vector2(60.5,15)*TILE): draw_rect(Rect2(60*TILE,14*TILE,29,29),Color("e6b539"))
  draw_farm_crops(true,Vector2(s.position[0],s.position[1]).y*TILE)
